@@ -1,0 +1,113 @@
+snippet     if
+abbr        if end
+    if ${1:condition}
+        ${2}
+    end
+
+snippet     def
+abbr        def end
+    def ${1:func_name}
+        ${2}
+    end
+
+snippet     do
+abbr        do end
+    do
+        ${1}
+    end
+
+snippet     dovar
+abbr        do |var| end
+    do |${1:var}|
+        ${2}
+    end
+
+snippet     block
+abbr        { |var| }
+    {
+        ${1}
+    }
+
+snippet     blockvar
+abbr        { |var| }
+    { |${1:var}|
+        ${2}
+    }
+
+snippet     edn
+abbr        => end?
+    end
+
+snippet     urlencode
+    # coding: utf-8
+    require 'erb'
+    puts ERB::Util.url_encode '${1}'
+
+snippet     en
+    #encoding: utf-8
+
+snippet     validates_uniqueness
+abbr        validates :${1:field_name},:uniqueness => true
+  validates :${1:field_name},:uniqueness => true${2}
+
+snippet     validates_uniqueness_not_case_sensitive
+abbr        validates :${1:field_name},:uniqueness => {:case_sensitive => false}
+  validates :${1:field_name},:uniqueness => {:case_sensitive => false}${2}
+
+snippet     validates_presence
+abbr        validates :${1:field_name},:presence => true
+  validates :${1:field_name},:presence => true${2}
+
+snippet     validates_numericality
+abbr        validates :${1:field_name},:numericality => params
+  validates :${1:field_name},:numericality => {
+    :only_integer => true,
+    :greater_than => 0,
+    :greater_than_or_equal_to => 0,
+    :equal_to => 0,
+    :less_than => 0,
+    :less_than_equal_to => 0,
+    :odd => true,
+    :even => true
+  }${1}
+
+snippet     validates_length
+abbr        validates :${1:field_name},:length => params
+prev_word   '^'
+  validates :${1:field_name},:length => {
+    :minimum => 0,
+    :maximum => 0,
+    :in => 0..5,
+    :is => 0,
+    :too_long => "must have at least %{count} words",
+    :too_short => "must have at most %{count} words",
+    :wrong_length => "is not ${count}"
+  }
+
+snippet     params
+abbr        params[:${1:id}]
+  params[:${1:id}]${2}
+
+snippet     flash
+abbr        flash[:${1:id}]
+  flash[:${1:key}] = ${2}
+
+snippet     before_filter
+abbr        before_filter :${1:method_name},:only => [:index,:new,:create,:show,:destroy]
+  before_filter :${1:method_name},:only => [:index,:new,:create,:show,:destroy]
+
+snippet     skip_filter
+abbr        skip_filter :${1:method_name},:only => [:index,:new,:create,:show,:destroy]
+  skip_filter :${1:method_name},:only => [:index,:new,:create,:show,:destroy]
+
+snippet     render_partial
+abbr        render :partial => "${1:partial_name}"
+  render :partial => "${1:partial_name}"${2:}
+
+snippet     redirect_to
+abbr        redirect_to ${1:action_controller_url}
+  redirect_to ${1:action_controller_url}
+
+snippet     logger
+abbr        logger.${1:debug}
+  logger.${1:debug}
