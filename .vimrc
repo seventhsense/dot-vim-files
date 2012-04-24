@@ -4,6 +4,8 @@ set nocompatible
 set t_Co=256 
 "ステータスライン表示
 set laststatus=2
+"ステータスライン表示
+set showtabline=2
 "タブの代わりに空白文字を挿入する
 set expandtab
 "" 検索時に大文字小文字を無視 (noignorecase:無視しない)
@@ -60,6 +62,8 @@ set mouse=a
 set ttymouse=xterm2
 ""バックアップ
 set backupdir=$HOME/.backup
+""空行追加
+nnoremap O :<C-u>call append(expand('.'), '')<Cr>j
 
 
 filetype plugin indent off     " required!
@@ -109,6 +113,8 @@ NeoBundle "tsaleh/vim-matchit"
 NeoBundle 'desert256.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'closetag.vim'
+NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundle 'vim-jp/vimdoc-ja'
 " ...
 filetype plugin indent on     " required!
 "
@@ -216,30 +222,6 @@ endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
-
-"" unite
-" 入力モードで開始
-let g:unite_enable_start_insert=1
-
-"mru,reg,buf
-noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-noremap :ur :<C-u>Unite register -buffer-name=register<CR>
-noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
-
-"file current_dir
-noremap :ufc :<C-u>Unite file -buffer-name=file<CR>
-noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
-
-"file file_current_dir
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
-
-" c-jはescとする
-au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
-
-" ESCキーを2回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 "" surround
 "------------------------------------
@@ -370,7 +352,41 @@ autocmd BufReadPost *_spec.rb call RSpecQuickrun()
 
 ""set autochdir
 
+"" unite
+" 入力モードで開始
+let g:unite_enable_start_insert=1
+
+"mru,reg,buf
+noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+noremap :ur :<C-u>Unite register -buffer-name=register<CR>
+noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
+
+"file current_dir
+noremap :ufc :<C-u>Unite file -buffer-name=file<CR>
+noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
+
+"file file_current_dir
+noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+""line
+noremap :ul :<C-u>Unite line<CR>
+noremap :; :<C-u>Unite line<CR>
+
+" c-jはescとする
+au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
+
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+
 ""unite-outline
 noremap :uo :<C-u>Unite outline<CR>
 noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
+noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
 
+""unite-rails
+noremap :rc :<C-u>Unite rails/controller<CR>
+noremap :rm :<C-u>Unite rails/model<CR>
+noremap :rv :<C-u>Unite rails/view<CR>
+noremap :rh :<C-u>Unite rails/helper<CR>

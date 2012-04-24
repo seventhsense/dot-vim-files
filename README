@@ -1,6 +1,11 @@
 My vim files
 
 1 Install plugin
+    mkdir -p ~/.vim/bundle
+    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    Launch `vim`, run `:NeoBundleInstall`, or `:Unite neobundle/install:!`(required unite.vim)
+    
+    ref https://github.com/Shougo/neobundle.vim
 2 make for vimproc
 3 install ctags
 4 mkdir .backup
