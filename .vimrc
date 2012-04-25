@@ -63,7 +63,8 @@ set ttymouse=xterm2
 ""バックアップ
 set backupdir=$HOME/.backup
 ""空行追加
-nnoremap O :<C-u>call append(expand('.'), '')<Cr>j
+nnoremap o :<C-u>call append(expand('.'), '')<Cr>j
+
 
 
 filetype plugin indent off     " required!
@@ -74,7 +75,7 @@ if has('vim_starting')
 endif
 " let NeoBundle manage NeoBundle
 " required! 
-"NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neobundle.vim'
 " recommended to install
 NeoBundle 'Shougo/vimproc'
 " after install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
@@ -115,6 +116,7 @@ NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'closetag.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'h1mesuke/vim-alignta'
 " ...
 filetype plugin indent on     " required!
 "
@@ -221,6 +223,12 @@ if !exists('g:neocomplcache_omni_patterns')
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+""ZenCoding
+let g:user_zen_settings = {
+            \ 'lang': 'ja'
+            \}
+let g:use_zen_complete_tag = 1
 
 
 "" surround
@@ -390,3 +398,11 @@ noremap :rc :<C-u>Unite rails/controller<CR>
 noremap :rm :<C-u>Unite rails/model<CR>
 noremap :rv :<C-u>Unite rails/view<CR>
 noremap :rh :<C-u>Unite rails/helper<CR>
+
+""Align
+let g:Align_xstrlen = 3
+
+" yankring_historyのディレクトリ設定
+let g:yankring_history_dir = expand('$HOME')
+let g:yankring_history_file = '.yankring_history'"
+

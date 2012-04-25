@@ -9,3 +9,5 @@ My vim files
 2 make for vimproc
 3 install ctags
 4 mkdir .backup
+5 for ruby and rails
+    cp *.snip ~/.vim/snippets/
