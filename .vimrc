@@ -119,6 +119,11 @@ NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'groenewege/vim-less'
 ""NeoBundle 'vim-scripts/css_color.vim'
+NeoBundle 'taka84u9/vim-ref-ri'
+NeoBundle 'pasela/unite-webcolorname'
+"NeoBundle 'fuenor/qfixhowm'
+"NeoBundle 'howm-calendar.vim'
+""
 " ...
 filetype plugin indent on     " required!
 "
