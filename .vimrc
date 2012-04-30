@@ -63,7 +63,7 @@ set ttymouse=xterm2
 ""バックアップ
 set backupdir=$HOME/.backup
 ""空行追加
-nnoremap o :<C-u>call append(expand('.'), '')<Cr>j
+""nnoremap o :<C-u>call append(expand('.'), '')<Cr>j
 
 
 
@@ -117,6 +117,8 @@ NeoBundle 'closetag.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'h1mesuke/vim-alignta'
+NeoBundle 'groenewege/vim-less'
+""NeoBundle 'vim-scripts/css_color.vim'
 " ...
 filetype plugin indent on     " required!
 "
@@ -130,6 +132,7 @@ colorscheme desert256
 
 "------------------------------------
 " neocomplecache.vim
+
 "------------------------------------
 " " AutoComplPopを無効にする
 " let g:acp_enableAtStartup = 0
