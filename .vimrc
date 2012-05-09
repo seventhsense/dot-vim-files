@@ -4,6 +4,8 @@ set nocompatible
 set t_Co=256 
 "ステータスライン表示
 set laststatus=2
+"ステータスライン表示
+set showtabline=2
 "タブの代わりに空白文字を挿入する
 set expandtab
 "" 検索時に大文字小文字を無視 (noignorecase:無視しない)
@@ -34,6 +36,12 @@ set completeopt=menu,preview,menuone
 ""imap  <Down>
 ""imap  <Right>
 ""imap <Left>
+"ESCが遅い対策
+if !has('gui_running')
+    set notimeout
+    set ttimeout
+    set timeoutlen=100
+endif
 
 " タブの画面上での幅
  set tabstop=2
@@ -60,6 +68,8 @@ set mouse=a
 set ttymouse=xterm2
 ""バックアップ
 set backupdir=$HOME/.backup
+""空行追加
+""nnoremap O :<C-u>call append(expand('.'), '')<Cr>j
 
 
 filetype plugin indent off     " required!
@@ -70,7 +80,7 @@ if has('vim_starting')
 endif
 " let NeoBundle manage NeoBundle
 " required! 
-"NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neobundle.vim'
 " recommended to install
 NeoBundle 'Shougo/vimproc'
 " after install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
@@ -109,6 +119,19 @@ NeoBundle "tsaleh/vim-matchit"
 NeoBundle 'desert256.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'closetag.vim'
+NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundle 'vim-jp/vimdoc-ja'
+""NeoBundle 'vim-scripts/Align'
+""NeoBundle 'tsaleh/vim-align'
+NeoBundle 'h1mesuke/vim-alignta'
+NeoBundle 'taka84u9/vim-ref-ri'
+NeoBundle 'pasela/unite-webcolorname'
+NeoBundle 'fuenor/qfixhowm'
+"NeoBundle 'howm-calendar.vim'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'teramako/jscomplete-vim'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'hallettj/jslint.vim'
 " ...
 filetype plugin indent on     " required!
 "
@@ -201,7 +224,8 @@ inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcach
 
 " FileType毎のOmni補完を設定
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript set omnifunc=jscomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
@@ -216,6 +240,14 @@ endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
+" for ZenCoding.vim
+let g:user_zen_settings = {
+\ 'lang': 'ja'
+\}
+let g:use_zen_complete_tag = 1
+
+
+
 
 "" unite
 " 入力モードで開始
@@ -223,6 +255,7 @@ let g:unite_enable_start_insert=1
 
 "mru,reg,buf
 noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
 noremap :ur :<C-u>Unite register -buffer-name=register<CR>
 noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
 
@@ -232,7 +265,11 @@ noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
 
 "file file_current_dir
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+noremap :@ :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+""line
+noremap :ul :<C-u>Unite line<CR>
+noremap :; :<C-u>Unite line<CR>
 
 " c-jはescとする
 au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
@@ -284,8 +321,7 @@ let g:NERDTreeMouseMode=0
 inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
 ""Powerline設定
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
-""let g:Powerline_symbols  =  'fancy'
+"let g:Powerline_symbols  =  'fancy'
 
 "" vim-ref
 let $PATH = $PATH . ':/opt/local/bin' 
@@ -373,4 +409,36 @@ autocmd BufReadPost *_spec.rb call RSpecQuickrun()
 ""unite-outline
 noremap :uo :<C-u>Unite outline<CR>
 noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
+noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
+
+""unite-rails
+noremap :rc :<C-u>Unite rails/controller<CR>
+noremap :rm :<C-u>Unite rails/model<CR>
+noremap :rv :<C-u>Unite rails/view<CR>
+noremap :rh :<C-u>Unite rails/helper<CR>
+
+""unite-ref-ri
+noremap :rr :<C-u>Unite ref/ri<CR>
+
+
+""Align
+let g:Align_xstrlen = 3
+
+" yankring_historyのディレクトリ設定
+let g:yankring_history_dir = expand('$HOME')
+let g:yankring_history_file = '.yankring_history'"
+
+""qfixhowm
+let howm_dir = '~/Dropbox/howm'
+let howm_fileencoding = 'utf-8'
+let howm_fileformat = 'unix'
+
+""gundo.vim 
+nnoremap <F5> :GundoToggle<CR>
+if has('persistent_undo')
+    set undofile
+    set undodir=./.vimundo,~/.vim/undo
+endif
+
+
 
