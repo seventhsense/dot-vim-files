@@ -126,7 +126,7 @@ NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'pasela/unite-webcolorname'
-NeoBundle 'fuenor/qfixhowm'
+"NeoBundle 'fuenor/qfixhowm'
 "NeoBundle 'howm-calendar.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'teramako/jscomplete-vim'
@@ -152,7 +152,7 @@ colorscheme desert256
 let g:neocomplcache_enable_at_startup = 1
 " smarrt case有効化。 大文字が入力されるまで大文字小文字の区別を無視する
 let g:neocomplcache_enable_smart_case = 1
-" camle caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
+" camel caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
 let g:neocomplcache_enable_camel_case_completion = 1
 " _(アンダーバー)区切りの補完を有効化
 let g:neocomplcache_enable_underbar_completion = 1
@@ -161,7 +161,7 @@ let g:neocomplcache_min_syntax_length = 3
 " neocomplcacheを自動的にロックするバッファ名のパターン
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " -入力による候補番号の表示
-"let g:neocomplcache_enable_quick_match = 1
+let g:neocomplcache_enable_quick_match = 1
 " 補完候補の一番先頭を選択状態にする(AutoComplPopと似た動作)
 let g:neocomplcache_enable_auto_select = 1
 
@@ -429,12 +429,12 @@ let g:yankring_history_dir = expand('$HOME')
 let g:yankring_history_file = '.yankring_history'"
 
 ""qfixhowm
-let howm_dir = '~/Dropbox/howm'
-let howm_fileencoding = 'utf-8'
-let howm_fileformat = 'unix'
+"let howm_dir = '~/Dropbox/howm'
+"let howm_fileencoding = 'utf-8'
+"let howm_fileformat = 'unix'
 
 ""gundo.vim 
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F3> :GundoToggle<CR>
 if has('persistent_undo')
     set undofile
     set undodir=./.vimundo,~/.vim/undo
