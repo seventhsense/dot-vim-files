@@ -69,7 +69,12 @@ set ttymouse=xterm2
 ""バックアップ
 set backupdir=$HOME/.backup
 ""空行追加
+<<<<<<< HEAD
 ""nnoremap O :<C-u>call append(expand('.'), '')<Cr>j
+=======
+""nnoremap o :<C-u>call append(expand('.'), '')<Cr>j
+
+>>>>>>> 8d0a91124f4a477fc94fe6075a8299d470692dad
 
 
 filetype plugin indent off     " required!
@@ -121,6 +126,7 @@ NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'closetag.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-jp/vimdoc-ja'
+<<<<<<< HEAD
 ""NeoBundle 'vim-scripts/Align'
 ""NeoBundle 'tsaleh/vim-align'
 NeoBundle 'h1mesuke/vim-alignta'
@@ -132,6 +138,16 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'hallettj/jslint.vim'
+=======
+NeoBundle 'h1mesuke/vim-alignta'
+NeoBundle 'groenewege/vim-less'
+""NeoBundle 'vim-scripts/css_color.vim'
+NeoBundle 'taka84u9/vim-ref-ri'
+NeoBundle 'pasela/unite-webcolorname'
+"NeoBundle 'fuenor/qfixhowm'
+"NeoBundle 'howm-calendar.vim'
+""
+>>>>>>> 8d0a91124f4a477fc94fe6075a8299d470692dad
 " ...
 filetype plugin indent on     " required!
 "
@@ -145,6 +161,7 @@ colorscheme desert256
 
 "------------------------------------
 " neocomplecache.vim
+
 "------------------------------------
 " " AutoComplPopを無効にする
 " let g:acp_enableAtStartup = 0
@@ -240,6 +257,7 @@ endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
+<<<<<<< HEAD
 " for ZenCoding.vim
 let g:user_zen_settings = {
 \ 'lang': 'ja'
@@ -277,6 +295,14 @@ au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
 " ESCキーを2回押すと終了する
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+=======
+""ZenCoding
+let g:user_zen_settings = {
+            \ 'lang': 'ja'
+            \}
+let g:use_zen_complete_tag = 1
+
+>>>>>>> 8d0a91124f4a477fc94fe6075a8299d470692dad
 
 "" surround
 "------------------------------------
@@ -406,6 +432,34 @@ autocmd BufReadPost *_spec.rb call RSpecQuickrun()
 
 ""set autochdir
 
+"" unite
+" 入力モードで開始
+let g:unite_enable_start_insert=1
+
+"mru,reg,buf
+noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+noremap :ur :<C-u>Unite register -buffer-name=register<CR>
+noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
+
+"file current_dir
+noremap :ufc :<C-u>Unite file -buffer-name=file<CR>
+noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
+
+"file file_current_dir
+noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+""line
+noremap :ul :<C-u>Unite line<CR>
+noremap :; :<C-u>Unite line<CR>
+
+" c-jはescとする
+au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
+
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+
 ""unite-outline
 noremap :uo :<C-u>Unite outline<CR>
 noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
@@ -417,16 +471,20 @@ noremap :rm :<C-u>Unite rails/model<CR>
 noremap :rv :<C-u>Unite rails/view<CR>
 noremap :rh :<C-u>Unite rails/helper<CR>
 
+<<<<<<< HEAD
 ""unite-ref-ri
 noremap :rr :<C-u>Unite ref/ri<CR>
 
 
+=======
+>>>>>>> 8d0a91124f4a477fc94fe6075a8299d470692dad
 ""Align
 let g:Align_xstrlen = 3
 
 " yankring_historyのディレクトリ設定
 let g:yankring_history_dir = expand('$HOME')
 let g:yankring_history_file = '.yankring_history'"
+<<<<<<< HEAD
 
 ""qfixhowm
 let howm_dir = '~/Dropbox/howm'
@@ -441,4 +499,6 @@ if has('persistent_undo')
 endif
 
 
+=======
+>>>>>>> 8d0a91124f4a477fc94fe6075a8299d470692dad
 
