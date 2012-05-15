@@ -133,6 +133,7 @@ NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'hallettj/jslint.vim'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'Shougo/vimfiler'
 " ...
 filetype plugin indent on     " required!
 "

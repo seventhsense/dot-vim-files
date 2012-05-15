@@ -1,13 +1,34 @@
 My vim files
-0 cp .vimrc ~/
-1 Install plugin
-    mkdir -p ~/.vim/bundle
-    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-    Launch `vim`, run `:NeoBundleInstall`    
+## 0 cp .vimrc ~/
+## 1 Install plugin
+
+```bash
+mkdir -p ~/.vim/bundle
+git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+```
+
+Launch `vim`, run `:NeoBundleInstall`    
 
     ( ref https://github.com/Shougo/neobundle.vim )
-2 make for vimproc
-3 install ctags
-4 mkdir ~/.backup ~/.yankring_history ~/.vim/undo
-5 for ruby and rails
+## 2 make for vimproc
+
+```bash
+cd ~/.vim/bundle/vimpro/
+make -f make_unix.mak
+```
+
+in case u use unix
+## 3 install ctags
+
+```bash
+sudo apt-get install ctags
+```
+
+## 4 mkdir
+
+```bash
+ mkdir ~/.backup ~/.yankring_history ~/.vim/undo
+```
+
+## 5 for ruby and rails
     cp *.snip ~/.vim/snippets/
