@@ -132,6 +132,7 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'hallettj/jslint.vim'
+NeoBundle 'tpope/vim-fugitive'
 " ...
 filetype plugin indent on     " required!
 "
@@ -419,7 +420,6 @@ noremap :rh :<C-u>Unite rails/helper<CR>
 
 ""unite-ref-ri
 noremap :rr :<C-u>Unite ref/ri<CR>
-
 
 ""Align
 let g:Align_xstrlen = 3
