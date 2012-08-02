@@ -11,7 +11,7 @@ Launch `vim`, run `:NeoBundleInstall`
     ( ref https://github.com/Shougo/neobundle.vim )
 2 make for vimproc
 
-cd ~/.vim/bundle/vimpro/
+cd ~/.vim/bundle/vimproc/
 make -f make_unix.mak
 
 in case u use unix
