@@ -106,14 +106,11 @@ NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
 NeoBundle 'Lokaltog/vim-powerline'
-""Bundle 'javascript.vim'
 NeoBundle 'ruby.vim'
 NeoBundle 'vim-coffee-script'
-""Bundle 'project.vim'
 NeoBundle 'Vim-Rspec'
 NeoBundle 'tpope/vim-cucumber'
 NeoBundle 'basyura/unite-rails'
-""Bundle 'choplin/unite-vim_hacks'
 NeoBundle "tomasr/molokai"
 NeoBundle "tsaleh/vim-matchit"
 NeoBundle 'desert256.vim'
@@ -121,19 +118,16 @@ NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'closetag.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-jp/vimdoc-ja'
-""NeoBundle 'vim-scripts/Align'
-""NeoBundle 'tsaleh/vim-align'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'pasela/unite-webcolorname'
-"NeoBundle 'fuenor/qfixhowm'
-"NeoBundle 'howm-calendar.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'hallettj/jslint.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler'
+NeoBundle 'sudo.vim'
 " ...
 filetype plugin indent on     " required!
 "
@@ -233,13 +227,13 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
+""autocmd FileType ruby set omnifunc=rubycomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+""let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 " for ZenCoding.vim
@@ -441,5 +435,11 @@ if has('persistent_undo')
     set undodir=./.vimundo,~/.vim/undo
 endif
 
-
+""NERD-COMMENTER
+""コメントした後に挿入するスペースの数
+let NERDSpaceDelims = 1
+" キーマップの変更。<Leader>=\+cでコメント化と解除を行う。
+"コメントされていれば、コメントを外し、コメントされてなければコメント化する。
+nmap <Leader>c <Plug>NERDCommenterToggle
+vmap <Leader>c <Plug>NERDCommenterToggle
 
