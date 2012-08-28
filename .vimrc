@@ -70,7 +70,10 @@ set ttymouse=xterm2
 set backupdir=$HOME/.backup
 ""空行追加
 ""nnoremap O :<C-u>call append(expand('.'), '')<Cr>j
-
+" 全角スペースの表示
+ highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
+ au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
+ au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')"
 
 filetype plugin indent off     " required!
 
@@ -316,7 +319,8 @@ let g:NERDTreeMouseMode=0
 inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
 ""Powerline設定
-"let g:Powerline_symbols  =  'fancy'
+" let g:Powerline_symbols  =  'fancy'
+" let g:Powerline_colorscheme = 'skwp'
 
 "" vim-ref
 let $PATH = $PATH . ':/opt/local/bin' 
@@ -445,3 +449,7 @@ vmap <Leader>c <Plug>NERDCommenterToggle
 ""gist.vim
 let g:gist_show_privates = 1
 let g:gist_post_private = 1
+
+"" vim-coffee-script
+au BufRead,BufNewFile *.coffee            set filetype=coffee
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
