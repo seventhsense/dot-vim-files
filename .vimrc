@@ -47,7 +47,7 @@ endif
  set tabstop=2
  set shiftwidth=4
  set smarttab
-" " タブをスペースに展開しない (expandtab:展開する)
+" " タブをスペースに展開する (expandtab:展開する)
  set expandtab
 " " 自動的にインデントする (noautoindent:インデントしない)
  set autoindent
@@ -128,6 +128,8 @@ NeoBundle 'hallettj/jslint.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'sudo.vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/gist-vim'
 " ...
 filetype plugin indent on     " required!
 "
@@ -241,9 +243,6 @@ let g:user_zen_settings = {
 \ 'lang': 'ja'
 \}
 let g:use_zen_complete_tag = 1
-
-
-
 
 "" unite
 " 入力モードで開始
@@ -443,3 +442,6 @@ let NERDSpaceDelims = 1
 nmap <Leader>c <Plug>NERDCommenterToggle
 vmap <Leader>c <Plug>NERDCommenterToggle
 
+""gist.vim
+let g:gist_show_privates = 1
+let g:gist_post_private = 1
