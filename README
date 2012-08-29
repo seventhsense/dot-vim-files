@@ -1,28 +1,32 @@
 My vim files
 
-0 cp .vimrc ~/
-1 Install plugin
+1 set .vimrc
 
+cd
+git clone 
+ln -s dot-vim-files/.vimrc .
+
+2 Install plugin
 
 mkdir -p ~/.vim/bundle
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
 Launch `vim`, run `:NeoBundleInstall`    
-
     ( ref https://github.com/Shougo/neobundle.vim )
-2 make for vimproc
+
+3 make for vimproc
 
 cd ~/.vim/bundle/vimproc/
 make -f make_unix.mak
 
 in case u use unix
-3 install ctags
+4 install ctags
 
 sudo apt-get install ctags
 
-4 mkdir
+5 mkdir
 
  mkdir ~/.backup ~/.yankring_history ~/.vim/undo
 
-5 for ruby and rails
+6 for ruby and rails
  cp *.snip ~/.vim/snippets/
