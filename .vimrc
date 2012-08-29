@@ -453,3 +453,6 @@ let g:gist_post_private = 1
 "" vim-coffee-script
 au BufRead,BufNewFile *.coffee            set filetype=coffee
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
+"" easymotion
+let g:EasyMotion_leader_key = "<space>"
