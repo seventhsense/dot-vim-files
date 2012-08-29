@@ -316,7 +316,7 @@ let g:NERDTreeDirArrows=0
 let g:NERDTreeMouseMode=0
 
 ""smartchr設定
-inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
+""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
 ""Powerline設定
 " let g:Powerline_symbols  =  'fancy'
