@@ -133,6 +133,8 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'sudo.vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
+NeoBundle 'vim-ruby/vim-ruby'
+
 " ...
 filetype plugin indent on     " required!
 "
