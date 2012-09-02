@@ -133,12 +133,8 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'sudo.vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
-<<<<<<< HEAD
 NeoBundle 'uguu-org/vim-matrix-screensaver'
-=======
 NeoBundle 'vim-ruby/vim-ruby'
-
->>>>>>> f08fa2e7215fd7a250796391a67bca3c57e8ded3
 " ...
 filetype plugin indent on     " required!
 "
