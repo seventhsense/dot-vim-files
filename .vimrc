@@ -133,7 +133,12 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'sudo.vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
+<<<<<<< HEAD
 NeoBundle 'uguu-org/vim-matrix-screensaver'
+=======
+NeoBundle 'vim-ruby/vim-ruby'
+
+>>>>>>> f08fa2e7215fd7a250796391a67bca3c57e8ded3
 " ...
 filetype plugin indent on     " required!
 "
@@ -233,13 +238,13 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-""autocmd FileType ruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby set omnifunc=rubycomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-""let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 " for ZenCoding.vim
@@ -317,7 +322,7 @@ let g:NERDTreeDirArrows=0
 let g:NERDTreeMouseMode=0
 
 ""smartchr設定
-inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
+""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
 ""Powerline設定
 " let g:Powerline_symbols  =  'fancy'
