@@ -135,6 +135,8 @@ NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'uguu-org/vim-matrix-screensaver'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'pekepeke/titanium-vim'
+NeoBundle 'pekepeke/unite-fileline'
 " ...
 filetype plugin indent on     " required!
 "
