@@ -138,7 +138,8 @@ NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/pyte'
 NeoBundle 'vim-scripts/change-hash-syntax'
 NeoBundle 'groenewege/vim-less'
-
+NeoBundle 'pekepeke/titanium-vim'
+NeoBundle 'pekepeke/unite-fileline'
 " ...
 filetype plugin indent on     " required!
 "
