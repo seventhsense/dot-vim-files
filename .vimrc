@@ -16,8 +16,8 @@ set incsearch
 set hlsearch
 " " ESC2回押してハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
-"行番号を表示する
-set number
+"行番号を表示しない
+set nonumber
 "閉じ括弧が入力されたとき、対応する括弧を表示する
 set showmatch
 "カーソルを行頭、行末で止まらないようにする
@@ -135,6 +135,10 @@ NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'uguu-org/vim-matrix-screensaver'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'vim-scripts/pyte'
+NeoBundle 'vim-scripts/change-hash-syntax'
+NeoBundle 'groenewege/vim-less'
+
 " ...
 filetype plugin indent on     " required!
 "
@@ -234,7 +238,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
+" autocmd FileType ruby set omnifunc=rubycomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
@@ -458,3 +462,6 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
 "" easymotion
 let g:EasyMotion_leader_key = "<space>"
+
+"" vim-less
+au BufRead,BufNewFile *.less		set filetype=less
