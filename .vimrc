@@ -66,6 +66,25 @@ set showcmd
 ""マウス対応
 set mouse=a
 set ttymouse=xterm2
+
+""貼付け時に自動的にpasteモードにする.putty gdi用
+""http://ttssh2.sourceforge.jp/manual/ja/usage/tips/vim.html
+if &term =~ "xterm"
+  let &t_ti .= "\e[?2004h"
+  let &t_te .= "\e[?2004l"
+  let &pastetoggle = "\e[201~"
+
+  function XTermPasteBegin(ret)
+    set paste
+    return a:ret
+  endfunction
+
+  noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
+  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+  cnoremap <special> <Esc>[200~ <nop>
+  cnoremap <special> <Esc>[201~ <nop>
+endif
+"
 ""バックアップ
 set backupdir=$HOME/.backup
 ""空行追加
@@ -218,7 +237,6 @@ filetype plugin indent on     " required!
 " :NeoBundleList          - list configured bundles
 " :NeoBundleInstall(!)    - install(update) bundles
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
 
 colorscheme desert256
 
@@ -534,9 +552,12 @@ let g:EasyMotion_leader_key = "<space>"
 au BufRead,BufNewFile *.less		set filetype=less
 
 "" vim-ref
-let $PATH = $PATH . ':/opt/local/bin' 
-let g:ref_rubyreference_path = '~/Documents/Reference/rubyrefm'
-let g:ref_rubyreference_cmd = 'w3m -dump %s'
+" let $PATH = $PATH . ':/opt/local/bin' 
+" let g:ref_rubyreference_path = '~/Documents/Reference/rubyrefm'
+" let g:ref_rubyreference_cmd = 'w3m -dump %s'
+let g:ref_use_vimproc=1
+let g:ref_refe_version=2
+nmap ,rr :<C-u>Ref refe<Space>
 
 "webdictサイトの設定
 let g:ref_source_webdict_sites = {
@@ -572,3 +593,4 @@ au FileType ruby,eruby setl tags+=~/gtags
 
 ""syntastic
 let g:syntastic_javascript_checker = 'jshint'
+
