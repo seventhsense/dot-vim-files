@@ -190,7 +190,7 @@ NeoBundle 'AutoClose'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'surround.vim'
 NeoBundle 'The-NERD-Commenter'
-NeoBundle 'vim-scripts/Trinity.git'
+" NeoBundle 'vim-scripts/Trinity.git'
 NeoBundle 'taglist.vim'
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'The-NERD-tree'
@@ -396,17 +396,17 @@ nmap <F8> :SrcExplToggle<CR>
 
 "" trinity
 " Open and close all the three plugins on the same time
-nmap <F6>   :TrinityToggleAll<CR>
+" nmap <F6>   :TrinityToggleAll<CR>
 " Open and close the srcexpl.vim separately
-nmap <F4>   :TrinityToggleSourceExplorer<CR>
+" nmap <F4>   :TrinityToggleSourceExplorer<CR>
 " Open and close the taglist.vim separately
-nmap <F5>  :TrinityToggleTagList<CR>
+" nmap <F5>  :TrinityToggleTagList<CR>
 " Open and close the NERD_tree.vim separately
-nmap <F2>  :TrinityToggleNERDTree<CR> 
+" nmap <F2>  :TrinityToggleNERDTree<CR> 
 
 "NERD_tree.vim
 ""---------------------
-""nnoremap <f2> :NERDTreeToggle<CR>
+nnoremap <f2> :NERDTreeToggle<CR>
 ""最後に残ったウィンドウがNERDTREEのみのときはvimを閉じる
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let g:NERDTreeDirArrows=0
