@@ -16,8 +16,8 @@ set incsearch
 set hlsearch
 " " ESC2回押してハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
-"行番号を表示する
-set number
+"行番号を表示しない
+set nonumber
 "閉じ括弧が入力されたとき、対応する括弧を表示する
 set showmatch
 "カーソルを行頭、行末で止まらないようにする
@@ -45,7 +45,7 @@ endif
 
 " タブの画面上での幅
  set tabstop=2
- set shiftwidth=4
+ set shiftwidth=2
  set smarttab
 " " タブをスペースに展開する (expandtab:展開する)
  set expandtab
@@ -66,6 +66,25 @@ set showcmd
 ""マウス対応
 set mouse=a
 set ttymouse=xterm2
+
+""貼付け時に自動的にpasteモードにする.putty gdi用
+""http://ttssh2.sourceforge.jp/manual/ja/usage/tips/vim.html
+if &term =~ "xterm"
+  let &t_ti .= "\e[?2004h"
+  let &t_te .= "\e[?2004l"
+  let &pastetoggle = "\e[201~"
+
+  function XTermPasteBegin(ret)
+    set paste
+    return a:ret
+  endfunction
+
+  noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
+  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+  cnoremap <special> <Esc>[200~ <nop>
+  cnoremap <special> <Esc>[201~ <nop>
+endif
+"
 ""バックアップ
 set backupdir=$HOME/.backup
 ""空行追加
@@ -74,6 +93,77 @@ set backupdir=$HOME/.backup
  highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
  au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
  au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')"
+
+" タブ機能
+nnoremap <S-Tab> gt
+nnoremap <Tab><Tab> gT
+for i in range(1, 9)
+  execute 'nnoremap <Tab>' . i . ' ' . i . 'gt'
+endfor
+" タブ番号表示
+" set tabline=%!MyTabLine()
+ 
+" function! MyTabLine()
+  " let s = ''
+  " for i in range(tabpagenr('$'))
+    " " select the highlighting
+    " if i + 1 == tabpagenr()
+      " let s .= '%#TabLineSel#'
+    " else
+      " let s .= '%#TabLine#'
+    " endif
+ 
+    " " set the tab page number (for mouse clicks)
+    " let s .= '%' . (i + 1) . 'T'
+ 
+    " " the label is made by MyTabLabel()
+    " let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+  " endfor
+ 
+  " " after the last tab fill with TabLineFill and reset tab page nr
+  " let s .= '%#TabLineFill#%T'
+ 
+  " " right-align the label to close the current tab page
+  " if tabpagenr('$') > 1
+    " let s .= '%=%#TabLine#%999XClose'
+  " endif
+ 
+  " return s
+" endfunction
+ 
+" let g:use_Powerline_dividers = 1
+ 
+" function! MyTabLabel(n)
+    " let buflist = tabpagebuflist(a:n)
+    " let winnr = tabpagewinnr(a:n)
+    " let altbuf = bufname(buflist[winnr - 1])
+ 
+    " " $HOME を消す
+    " let altbuf = substitute(altbuf, expand('$HOME/'), '', '')
+ 
+    " " カレントタブ以外はパスを短くする
+    " if tabpagenr() != a:n
+        " let altbuf = substitute(altbuf, '^.*/', '', '')
+        " let altbuf = substitute(altbuf, '^.\zs.*\ze\.[^.]\+$', '', '')
+    " endif
+ 
+    " " vim-powerline のグリフを使う
+    " if g:use_Powerline_dividers
+        " let dividers = g:Pl#Parser#Symbols[g:Powerline_symbols].dividers
+        " let left_div = nr2char(get(dividers[3], 0, 124))
+        " let right_div = nr2char(get(dividers[1], 0, 124))
+        " let altbuf = left_div . altbuf . right_div
+    " else
+        " let altbuf = '|' . altbuf . '|'
+    " endif
+ 
+    " " タブ番号を付加
+    " let altbuf = a:n . ':' . altbuf
+ 
+    " return altbuf
+" endfunction
+
+" NeoBundle
 
 filetype plugin indent off     " required!
 
@@ -92,14 +182,15 @@ NeoBundle 'Shougo/unite.vim'
 
 "Your Bundles here
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
+" NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'AutoClose'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'surround.vim'
 NeoBundle 'The-NERD-Commenter'
-NeoBundle 'trinity.vim'
+" NeoBundle 'vim-scripts/Trinity.git'
 NeoBundle 'taglist.vim'
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'The-NERD-tree'
@@ -135,6 +226,9 @@ NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'uguu-org/vim-matrix-screensaver'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'vim-scripts/pyte'
+NeoBundle 'vim-scripts/change-hash-syntax'
+NeoBundle 'groenewege/vim-less'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'pekepeke/unite-fileline'
 NeoBundle 'vim-scripts/VOoM'
@@ -145,7 +239,6 @@ filetype plugin indent on     " required!
 " :NeoBundleList          - list configured bundles
 " :NeoBundleInstall(!)    - install(update) bundles
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
 
 colorscheme desert256
 
@@ -304,17 +397,17 @@ nmap <F8> :SrcExplToggle<CR>
 
 "" trinity
 " Open and close all the three plugins on the same time
-nmap <F6>   :TrinityToggleAll<CR>
+" nmap <F6>   :TrinityToggleAll<CR>
 " Open and close the srcexpl.vim separately
-nmap <F4>   :TrinityToggleSourceExplorer<CR>
+" nmap <F4>   :TrinityToggleSourceExplorer<CR>
 " Open and close the taglist.vim separately
-nmap <F5>  :TrinityToggleTagList<CR>
+" nmap <F5>  :TrinityToggleTagList<CR>
 " Open and close the NERD_tree.vim separately
-nmap <F2>  :TrinityToggleNERDTree<CR> 
+" nmap <F2>  :TrinityToggleNERDTree<CR> 
 
 "NERD_tree.vim
 ""---------------------
-""nnoremap <f2> :NERDTreeToggle<CR>
+nnoremap <f2> :NERDTreeToggle<CR>
 ""最後に残ったウィンドウがNERDTREEのみのときはvimを閉じる
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let g:NERDTreeDirArrows=0
@@ -326,11 +419,6 @@ let g:NERDTreeMouseMode=0
 ""Powerline設定
 " let g:Powerline_symbols  =  'fancy'
 " let g:Powerline_colorscheme = 'skwp'
-
-"" vim-ref
-let $PATH = $PATH . ':/opt/local/bin' 
-let g:ref_rubyreference_path = '~/Documents/Reference/rubyrefm'
-let g:ref_rubyreference_cmd = 'w3m -dump %s'
 
 """RSPEC実行
 nmap <F11>  :QuickRun 
@@ -465,4 +553,49 @@ let g:EasyMotion_leader_key = "<space>"
 let $XIKI_DIR = "~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/"
 source ~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/etc/vim/xiki.vim
 
+"" vim-less
+au BufRead,BufNewFile *.less		set filetype=less
+
+"" vim-ref
+" let $PATH = $PATH . ':/opt/local/bin' 
+" let g:ref_rubyreference_path = '~/Documents/Reference/rubyrefm'
+" let g:ref_rubyreference_cmd = 'w3m -dump %s'
+let g:ref_use_vimproc=1
+let g:ref_refe_version=2
+nmap ,rr :<C-u>Ref refe<Space>
+
+"webdictサイトの設定
+let g:ref_source_webdict_sites = {
+\   'je': {
+\     'url': 'http://dictionary.infoseek.ne.jp/jeword/%s',
+\   },
+\   'ej': {
+\     'url': 'http://dictionary.infoseek.ne.jp/ejword/%s',
+\   },
+\   'wiki': {
+\     'url': 'http://ja.wikipedia.org/wiki/%s',
+\   },
+\ }
+ 
+"デフォルトサイト
+let g:ref_source_webdict_sites.default = 'ej'
+ 
+"出力に対するフィルタ。最初の数行を削除
+function! g:ref_source_webdict_sites.je.filter(output)
+  return join(split(a:output, "\n")[15 :], "\n")
+endfunction
+function! g:ref_source_webdict_sites.ej.filter(output)
+  return join(split(a:output, "\n")[15 :], "\n")
+endfunction
+function! g:ref_source_webdict_sites.wiki.filter(output)
+  return join(split(a:output, "\n")[17 :], "\n")
+endfunction
+ 
+nmap <Leader>rj :<C-u>Ref webdict je<Space>
+nmap <Leader>re :<C-u>Ref webdict ej<Space>
+
+au FileType ruby,eruby setl tags+=~/gtags
+
+""syntastic
+let g:syntastic_javascript_checker = 'jshint'
 

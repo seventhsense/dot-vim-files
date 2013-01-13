@@ -93,3 +93,53 @@ abbr        expect { }.to
 prev_word   '^'
     expect { ${1} }.to ${2}
 
+snippet     visit
+abbr visit
+prev_word   '^'
+    visit ${1:'/'}
+
+snippet     current_path
+abbr current_path
+prev_word   '^'
+    current_path.should == ${1}
+
+snippet     click_link
+abbr click_link
+prev_word   '^'
+    click_link '${1:Link Text}'
+
+snippet     click_button
+abbr click_button
+prev_word   '^'
+    click_button '${1:Ok}'
+
+snippet     click_on
+abbr click_on
+prev_word   '^'
+    click_on '${1:Link Text}'
+
+snippet     fill_in
+abbr fill_in
+prev_word   '^'
+    fill_in '${1}',with: '${2}'
+
+snippet     have_content
+abbr have_content
+prev_word   'should'
+    have_content '${1}'
+
+snippet     have_no_content
+abbr have_no_content
+prev_word   'should'
+    have_no_content '${1}'
+
+snippet    have_css 
+abbr have_css
+prev_word   'should'
+    have_css '${1:table tr}'
+
+snippet     find
+abbr find
+prev_word   '^'
+    find('#navigation').${2:click}
+
