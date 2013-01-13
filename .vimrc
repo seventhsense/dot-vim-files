@@ -137,6 +137,7 @@ NeoBundle 'uguu-org/vim-matrix-screensaver'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'pekepeke/unite-fileline'
+NeoBundle 'vim-scripts/VOoM'
 " ...
 filetype plugin indent on     " required!
 "
@@ -236,7 +237,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
+" autocmd FileType ruby set omnifunc=rubycomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
@@ -460,3 +461,8 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
 "" easymotion
 let g:EasyMotion_leader_key = "<space>"
+
+let $XIKI_DIR = "~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/"
+source ~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/etc/vim/xiki.vim
+
+
