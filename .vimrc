@@ -232,6 +232,7 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'pekepeke/unite-fileline'
 NeoBundle 'vim-scripts/VOoM'
+NeoBundle 'AndrewRadev/vim-eco'
 " ...
 filetype plugin indent on     " required!
 "
