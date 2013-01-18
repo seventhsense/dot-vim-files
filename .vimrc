@@ -601,3 +601,5 @@ au FileType ruby,eruby setl tags+=~/gtags
 ""syntastic
 let g:syntastic_javascript_checker = 'jshint'
 
+""vim-eco
+autocmd BufNewFile,BufRead *.eco set filetype=eco
