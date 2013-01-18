@@ -66,6 +66,25 @@ set showcmd
 ""マウス対応
 set mouse=a
 set ttymouse=xterm2
+
+""貼付け時に自動的にpasteモードにする.putty gdi用
+""http://ttssh2.sourceforge.jp/manual/ja/usage/tips/vim.html
+if &term =~ "xterm"
+  let &t_ti .= "\e[?2004h"
+  let &t_te .= "\e[?2004l"
+  let &pastetoggle = "\e[201~"
+
+  function XTermPasteBegin(ret)
+    set paste
+    return a:ret
+  endfunction
+
+  noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
+  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+  cnoremap <special> <Esc>[200~ <nop>
+  cnoremap <special> <Esc>[201~ <nop>
+endif
+"
 ""バックアップ
 set backupdir=$HOME/.backup
 ""空行追加
@@ -163,14 +182,15 @@ NeoBundle 'Shougo/unite.vim'
 
 "Your Bundles here
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
+" NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'AutoClose'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'surround.vim'
 NeoBundle 'The-NERD-Commenter'
-NeoBundle 'trinity.vim'
+" NeoBundle 'vim-scripts/Trinity.git'
 NeoBundle 'taglist.vim'
 NeoBundle 'ZenCoding.vim'
 NeoBundle 'The-NERD-tree'
@@ -212,6 +232,8 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'pekepeke/unite-fileline'
 NeoBundle 'ujihisa/unite-gem'
+NeoBundle 'vim-scripts/VOoM'
+NeoBundle 'AndrewRadev/vim-eco'
 " ...
 filetype plugin indent on     " required!
 "
@@ -219,7 +241,6 @@ filetype plugin indent on     " required!
 " :NeoBundleList          - list configured bundles
 " :NeoBundleInstall(!)    - install(update) bundles
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
 
 colorscheme desert256
 
@@ -378,17 +399,17 @@ nmap <F8> :SrcExplToggle<CR>
 
 "" trinity
 " Open and close all the three plugins on the same time
-nmap <F6>   :TrinityToggleAll<CR>
+" nmap <F6>   :TrinityToggleAll<CR>
 " Open and close the srcexpl.vim separately
-nmap <F4>   :TrinityToggleSourceExplorer<CR>
+" nmap <F4>   :TrinityToggleSourceExplorer<CR>
 " Open and close the taglist.vim separately
-nmap <F5>  :TrinityToggleTagList<CR>
+" nmap <F5>  :TrinityToggleTagList<CR>
 " Open and close the NERD_tree.vim separately
-nmap <F2>  :TrinityToggleNERDTree<CR> 
+" nmap <F2>  :TrinityToggleNERDTree<CR> 
 
 "NERD_tree.vim
 ""---------------------
-""nnoremap <f2> :NERDTreeToggle<CR>
+nnoremap <f2> :NERDTreeToggle<CR>
 ""最後に残ったウィンドウがNERDTREEのみのときはvimを閉じる
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let g:NERDTreeDirArrows=0
@@ -531,13 +552,19 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 "" easymotion
 let g:EasyMotion_leader_key = "<space>"
 
+" let $XIKI_DIR = "~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/"
+" source ~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/etc/vim/xiki.vim
+
 "" vim-less
 au BufRead,BufNewFile *.less		set filetype=less
 
 "" vim-ref
-let $PATH = $PATH . ':/opt/local/bin' 
-let g:ref_rubyreference_path = '~/Documents/Reference/rubyrefm'
-let g:ref_rubyreference_cmd = 'w3m -dump %s'
+" let $PATH = $PATH . ':/opt/local/bin' 
+" let g:ref_rubyreference_path = '~/Documents/Reference/rubyrefm'
+" let g:ref_rubyreference_cmd = 'w3m -dump %s'
+let g:ref_use_vimproc=1
+let g:ref_refe_version=2
+nmap ,rr :<C-u>Ref refe<Space>
 
 "webdictサイトの設定
 let g:ref_source_webdict_sites = {
@@ -573,3 +600,4 @@ au FileType ruby,eruby setl tags+=~/gtags
 
 ""syntastic
 let g:syntastic_javascript_checker = 'jshint'
+
