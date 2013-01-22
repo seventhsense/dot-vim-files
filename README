@@ -14,19 +14,13 @@ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 Launch `vim`, run `:NeoBundleInstall`    
     ( ref https://github.com/Shougo/neobundle.vim )
 
-3 make for vimproc
-
-cd ~/.vim/bundle/vimproc/
-make -f make_unix.mak
-
-in case u use unix
-4 install ctags
+3 install ctags
 
 sudo apt-get install ctags
 
-5 mkdir
+4 mkdir
 
  mkdir ~/.backup ~/.yankring_history ~/.vim/undo
 
-6 for ruby and rails
- cp *.snip ~/.vim/snippets/
+5 for ruby and rails
+ cp dot-vim-files/snippets ~/.vim/
