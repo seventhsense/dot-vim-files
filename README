@@ -6,7 +6,19 @@ cd
 git clone 
 ln -s dot-vim-files/.vimrc .
 
-2 Install plugin
+
+2 install ctags
+
+sudo apt-get install ctags
+
+3 mkdir
+
+ mkdir ~/.backup ~/.yankring_history ~/.vim/undo
+
+4 for ruby and rails
+ cp dot-vim-files/snippets ~/.vim/
+
+5 Install plugins
 
 mkdir -p ~/.vim/bundle
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
@@ -14,16 +26,6 @@ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 Launch `vim`, run `:NeoBundleInstall`    
     ( ref https://github.com/Shougo/neobundle.vim )
 
-3 install ctags
-
-sudo apt-get install ctags
-
-4 mkdir
-
- mkdir ~/.backup ~/.yankring_history ~/.vim/undo
-
-5 for ruby and rails
- cp dot-vim-files/snippets ~/.vim/
 
 for vim-powerline
 
