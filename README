@@ -2,11 +2,9 @@ My vim files
 
 1 set .vimrc
 
-```
 cd
 git clone 
 ln -s dot-vim-files/.vimrc .
-```
 
 2 install ctags
 
