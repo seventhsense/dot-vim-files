@@ -24,3 +24,8 @@ sudo apt-get install ctags
 
 5 for ruby and rails
  cp dot-vim-files/snippets ~/.vim/
+
+for vim-powerline
+
+cd ~/.vim/bundle/vim-powerline
+git checkout -b develop origin/develop
