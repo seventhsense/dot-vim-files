@@ -162,6 +162,12 @@ endfor
  
     " return altbuf
 " endfunction
+"
+"" ファイルをひらいたとき最後にカーソルがあった場所にカーソルを移動する
+augroup vimrcEx
+  au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+  \ exe "normal g`\"" | endif
+augroup END
 
 " NeoBundle
 
@@ -197,7 +203,7 @@ NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'AutoClose'
 NeoBundle 'tpope/vim-rails'
-NeoBundle 'surround.vim'
+NeoBundle 'tpope/vim-surround'
 NeoBundle 'The-NERD-Commenter'
 " NeoBundle 'vim-scripts/Trinity.git'
 NeoBundle 'taglist.vim'
