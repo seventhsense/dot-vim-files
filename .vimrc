@@ -58,11 +58,11 @@ endif
 set showcmd
 
 "入力モード時、ステータスラインのカラーを変更
-""augroup InsertHook
-""autocmd!
-""autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
-""autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
-""augroup END
+" augroup InsertHook
+" autocmd!
+" autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
+" autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
+" augroup END
 ""マウス対応
 set mouse=a
 set ttymouse=xterm2
@@ -181,7 +181,16 @@ endif
 " required! 
 NeoBundle 'Shougo/neobundle.vim'
 " recommended to install
-NeoBundle 'Shougo/vimproc'
+""vimproc auto compile
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
 " after install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
@@ -205,7 +214,7 @@ NeoBundle 'vim-scripts/rails.vim'
 NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
-NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'vim-powerline'
 NeoBundle 'ruby.vim'
 NeoBundle 'vim-coffee-script'
 NeoBundle 'Vim-Rspec'
@@ -241,6 +250,7 @@ NeoBundle 'ujihisa/unite-gem'
 NeoBundle 'vim-scripts/VOoM'
 NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'bkad/CamelCaseMotion'
+NeoBundle 'mklabs/vim-backbone'
 " ...
 filetype plugin indent on     " required!
 "
@@ -426,7 +436,8 @@ let g:NERDTreeMouseMode=0
 ""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
 ""Powerline設定
-" let g:Powerline_symbols  =  'fancy'
+""python from powerline.ext.vim import source_plugin; source_plugin()
+""let g:Powerline_symbols  =  'fancy'
 " let g:Powerline_colorscheme = 'skwp'
 
 """RSPEC実行
