@@ -233,16 +233,14 @@ NeoBundle 'pasela/unite-webcolorname'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'sjl/gundo.vim'
-NeoBundle 'hallettj/jslint.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'sudo.vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
-NeoBundle 'uguu-org/vim-matrix-screensaver'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/pyte'
-NeoBundle 'vim-scripts/change-hash-syntax'
+" NeoBundle 'vim-scripts/change-hash-syntax'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'pekepeke/unite-fileline'
@@ -251,7 +249,7 @@ NeoBundle 'vim-scripts/VOoM'
 NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'mklabs/vim-backbone'
-" ...
+" NeoBundleLast...
 filetype plugin indent on     " required!
 "
 " Brief help
@@ -636,3 +634,8 @@ omap <silent> ib <Plug>CamelCaseMotion_ib
 xmap <silent> ib <Plug>CamelCaseMotion_ib
 omap <silent> ie <Plug>CamelCaseMotion_ie
 xmap <silent> ie <Plug>CamelCaseMotion_ie
+
+""syntastic
+" let g:syntastic_mode_map = { 'mode': 'active',
+      " \ 'active_filetypes': [],
+      " \ 'passive_filetypes': ['javascript'] }
