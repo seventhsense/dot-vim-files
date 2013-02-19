@@ -608,7 +608,7 @@ endfunction
 function! g:ref_source_webdict_sites.wiki.filter(output)
   return join(split(a:output, "\n")[17 :], "\n")
 endfunction
- 
+
 nmap <Leader>rj :<C-u>Ref webdict je<Space>
 nmap <Leader>re :<C-u>Ref webdict ej<Space>
 
@@ -616,6 +616,9 @@ au FileType ruby,eruby setl tags+=~/gtags
 
 ""syntastic
 let g:syntastic_javascript_checker = 'jshint'
+" let g:syntastic_mode_map = { 'mode': 'active',
+      " \ 'active_filetypes': [],
+      " \ 'passive_filetypes': ['javascript'] }
 
 ""vim-eco
 autocmd BufNewFile,BufRead *.eco set filetype=eco
@@ -635,7 +638,3 @@ xmap <silent> ib <Plug>CamelCaseMotion_ib
 omap <silent> ie <Plug>CamelCaseMotion_ie
 xmap <silent> ie <Plug>CamelCaseMotion_ie
 
-""syntastic
-" let g:syntastic_mode_map = { 'mode': 'active',
-      " \ 'active_filetypes': [],
-      " \ 'passive_filetypes': ['javascript'] }
