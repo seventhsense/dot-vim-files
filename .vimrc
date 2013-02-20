@@ -398,6 +398,13 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " s, ssで選択範囲を指定文字でくくる
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
+" let g:surround_{char2nr("d")} = "<div\1id: \r..*\r id=\"&\"\1>\r</div>"
+" let g:surround_108 = "\\begin{\1environment: \1}\r\\end{\1\1}"
+autocmd FileType php let b:surround_{char2nr("?")} = "<?php \r ?>"
+autocmd FileType ruby let b:surround_{char2nr("i")} = "if \1condition: \1 \r end"
+autocmd FileType ruby let b:surround_{char2nr("d")} = "def \1method: \1 \r end"
+autocmd FileType ruby let b:surround_{char2nr("w")} = "while \1condition: \1 do \r end"
+autocmd FileType ruby let b:surround_{char2nr("t")} = "\1times: \1.times do \r end"
 
 
 "" Source Explorer
