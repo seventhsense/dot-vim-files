@@ -378,11 +378,19 @@ noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
 
 "file file_current_dir
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :@ :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 ""line
 noremap :ul :<C-u>Unite line<CR>
 noremap :; :<C-u>Unite line<CR>
+
+""grep
+noremap :g :<C-u>Unite grep<CR>
+""file
+noremap :f :<C-u>Unite file_rec<CR>
+
+"" vim command 一覧
+noremap :<CR> :<C-u>Unite command mapping<CR>
 
 " c-jはescとする
 au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
@@ -406,6 +414,8 @@ autocmd FileType ruby let b:surround_{char2nr("d")} = "def \1method: \1 \r end"
 autocmd FileType ruby let b:surround_{char2nr("w")} = "while \1condition: \1 do \r end"
 autocmd FileType ruby let b:surround_{char2nr("t")} = "\1times: \1.times do \r end"
 
+"ビジュアルモード時kで「」の囲い込み
+let g:surround_107 = "「\r」" " 107 = k
 
 "" Source Explorer
 "自動でプレビューを表示する。TODO:うざくなってきたら手動にする。またはソースを追う時だけ自動に変更する。
