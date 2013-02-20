@@ -246,6 +246,21 @@ NeoBundle 'vim-scripts/VOoM'
 NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'mklabs/vim-backbone'
+" Railsプロジェクトで,Unite rails_best_practices
+NeoBundle 'taichouchou2/unite-rails_best_practices',{
+      \ 'build' : {
+      \     'mac' :  'gem install rails_best_practices',
+      \     'unix' : 'gem install rails_best_practices',
+      \  }}
+
+" rubyのファイルを開きながら、Unite reek
+NeoBundle 'taichouchou2/unite-reek',{
+      \ 'build' : {
+      \     'mac' :  'gem install reek',
+      \     'unix' : 'gem install reek',
+      \  }}
+
+
 " NeoBundleLast...
 filetype plugin indent on     " required!
 "
@@ -375,11 +390,19 @@ noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
 
 "file file_current_dir
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :@ :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 ""line
 noremap :ul :<C-u>Unite line<CR>
 noremap :; :<C-u>Unite line<CR>
+
+""grep
+noremap :g :<C-u>Unite grep<CR>
+""file
+noremap :f :<C-u>Unite file_rec<CR>
+
+"" vim command 一覧
+noremap :<CR> :<C-u>Unite command mapping<CR>
 
 " c-jはescとする
 au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
@@ -395,7 +418,16 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " s, ssで選択範囲を指定文字でくくる
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
+" let g:surround_{char2nr("d")} = "<div\1id: \r..*\r id=\"&\"\1>\r</div>"
+" let g:surround_108 = "\\begin{\1environment: \1}\r\\end{\1\1}"
+autocmd FileType php let b:surround_{char2nr("?")} = "<?php \r ?>"
+autocmd FileType ruby let b:surround_{char2nr("i")} = "if \1condition: \1 \r end"
+autocmd FileType ruby let b:surround_{char2nr("d")} = "def \1method: \1 \r end"
+autocmd FileType ruby let b:surround_{char2nr("w")} = "while \1condition: \1 do \r end"
+autocmd FileType ruby let b:surround_{char2nr("t")} = "\1times: \1.times do \r end"
 
+"ビジュアルモード時kで「」の囲い込み
+let g:surround_107 = "「\r」" " 107 = k
 
 "" Source Explorer
 "自動でプレビューを表示する。TODO:うざくなってきたら手動にする。またはソースを追う時だけ自動に変更する。
@@ -605,7 +637,7 @@ endfunction
 function! g:ref_source_webdict_sites.wiki.filter(output)
   return join(split(a:output, "\n")[17 :], "\n")
 endfunction
- 
+
 nmap <Leader>rj :<C-u>Ref webdict je<Space>
 nmap <Leader>re :<C-u>Ref webdict ej<Space>
 
@@ -613,6 +645,9 @@ au FileType ruby,eruby setl tags+=~/gtags
 
 ""syntastic
 let g:syntastic_javascript_checker = 'jshint'
+" let g:syntastic_mode_map = { 'mode': 'active',
+      " \ 'active_filetypes': [],
+      " \ 'passive_filetypes': ['javascript'] }
 
 ""vim-eco
 autocmd BufNewFile,BufRead *.eco set filetype=eco
@@ -632,7 +667,60 @@ xmap <silent> ib <Plug>CamelCaseMotion_ib
 omap <silent> ie <Plug>CamelCaseMotion_ie
 xmap <silent> ie <Plug>CamelCaseMotion_ie
 
-""syntastic
-" let g:syntastic_mode_map = { 'mode': 'active',
-      " \ 'active_filetypes': [],
-      " \ 'passive_filetypes': ['javascript'] }
+" endtagcomment.vim
+" https://gist.github.com/hokaccha/4118281
+" こういうHTMLがあったときに
+" <div id="hoge" class="fuga">
+" ...
+" </div>
+"
+" 実行するとこうなる
+" <div id="hoge" class="fuga">
+" ...
+" <!-- /div#hoge.fuga --></div>
+
+function! Endtagcomment()
+    let reg_save = @@
+
+    try
+        silent normal vaty
+    catch
+        execute "normal \<Esc>"
+        echohl ErrorMsg
+        echo 'no match html tags'
+        echohl None
+        return
+    endtry
+
+    let html = @@
+
+    let start_tag = matchstr(html, '\v(\<.{-}\>)')
+    let tag_name  = matchstr(start_tag, '\v([a-zA-Z]+)')
+
+    let id = ''
+    let id_match = matchlist(start_tag, '\vid\=["'']([^"'']+)["'']')
+    if exists('id_match[1]')
+        let id = '#' . id_match[1]
+    endif
+
+    let class = ''
+    let class_match = matchlist(start_tag, '\vclass\=["'']([^"'']+)["'']')
+    if exists('class_match[1]')
+        let class = '.' . join(split(class_match[1], '\v\s+'), '.')
+    endif
+
+    execute "normal `>va<\<Esc>`<"
+
+    let comment = g:endtagcommentFormat
+    let comment = substitute(comment, '%tag_name', tag_name, 'g')
+    let comment = substitute(comment, '%id', id, 'g')
+    let comment = substitute(comment, '%class', class, 'g')
+    let @@ = comment
+
+    normal ""P
+
+    let @@ = reg_save
+endfunction
+
+let g:endtagcommentFormat = '<!-- /%tag_name%id%class -->'
+nnoremap ,t :<C-u>call Endtagcomment()<CR>
