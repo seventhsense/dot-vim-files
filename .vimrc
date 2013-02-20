@@ -249,6 +249,21 @@ NeoBundle 'vim-scripts/VOoM'
 NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'mklabs/vim-backbone'
+" Railsプロジェクトで,Unite rails_best_practices
+NeoBundle 'taichouchou2/unite-rails_best_practices',{
+      \ 'build' : {
+      \     'mac' :  'gem install rails_best_practices',
+      \     'unix' : 'gem install rails_best_practices',
+      \  }}
+
+" rubyのファイルを開きながら、Unite reek
+NeoBundle 'taichouchou2/unite-reek',{
+      \ 'build' : {
+      \     'mac' :  'gem install reek',
+      \     'unix' : 'gem install reek',
+      \  }}
+
+
 " NeoBundleLast...
 filetype plugin indent on     " required!
 "
