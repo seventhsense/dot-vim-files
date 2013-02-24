@@ -261,7 +261,8 @@ NeoBundle 'taichouchou2/unite-reek',{
       \  }}
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'szw/vim-tags'
+" NeoBundle 'szw/vim-tags'
+NeoBundle 'lilydjwg/colorizer'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -362,7 +363,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-" autocmd FileType ruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby set omnifunc=rubycomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
@@ -570,9 +571,14 @@ noremap :rc :<C-u>Unite rails/controller<CR>
 noremap :rm :<C-u>Unite rails/model<CR>
 noremap :rv :<C-u>Unite rails/view<CR>
 noremap :rh :<C-u>Unite rails/helper<CR>
+noremap :rs :<C-u>Unite rails/stylesheets<CR>
+noremap :rj :<C-u>Unite rails/javascripts<CR>
+noremap :rr :<C-u>Unite rails/route<CR>
+noremap :rg :<C-u>Unite rails/gemfile<CR>
+noremap :rt :<C-u>Unite rails/spec<CR>
 
 ""unite-ref-ri
-noremap :rr :<C-u>Unite ref/ri<CR>
+" noremap :rr :<C-u>Unite ref/ri<CR>
 
 ""Align
 let g:Align_xstrlen = 3

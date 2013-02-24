@@ -12,20 +12,20 @@ abbr        <% end %>
 
 snippet     if
 abbr        <% if ${1} : %>
-    <% if ${1} %>
+    <% if ${1}: %>
     ${2}
     <% end %>
 
 snippet     ifelse
 abbr        <% if ${1}: %> <% else %>
-    <% if ${1} %>
+    <% if ${1}: %>
     ${2}
-    <% else %>
+    <% else: %>
     ${3}
     <% end %>
 
 
 snippet     else
-abbr        <% else %>
-    <% else %>
+abbr        <% else: %>
+    <% else: %>
 
