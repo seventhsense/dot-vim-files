@@ -1,27 +1,45 @@
 snippet class Backbone.View
 abbr class Backbone.View
-  class ${1:class name} extends Backbone.View
+  class ${1:className} extends Backbone.View
 
 snippet class Backbone.CompositeView
 abbr class Backbone.View
-  class ${1:class name} extends Support.CompositeView
+  class ${1:className} extends Support.CompositeView
 
 snippet class Backbone.Router
 abbr class Backbone.Router
-  class ${1:class name} extends Backbone.Router
+  class ${1:className} extends Backbone.Router
 
 snippet class Backbone.SwappingRouter
 abbr class Backbone.SwappingRouter
-  class ${1:class name} extends Backbone.SwappingRouter
+  class ${1:className} extends Backbone.SwappingRouter
 
 snippet class Backbone.Model
 abbr class Backbone.Model
-  class ${1:class name} extends Backbone.Model
+  class ${1:className} extends Backbone.Model
 
 snippet class Backbone.RelationalModel
 abbr class Backbone.RelationalModel
-  class ${1:class name} extends Backbone.RelationalModel
+  class ${1:className} extends Backbone.RelationalModel
 
 snippet class Backbone.Collection
 abbr class Backbone.Collection
-  class ${1:class name} extends Backbone.Collection
+  class ${1:className} extends Backbone.Collection
+
+snippet Bhs
+abbr Backbone.history.start()
+  Backbone.history.start()
+
+snippet BEt
+abbr Backbone.Events.trigger
+  Backbone.Events.trigger '${1:event}'
+
+snippet BEo
+abbr Backbone.Events.on
+  Backbone.Events.on '${1:event}', ${2:method}, ${3:context}
+
+snippet render
+abbr render
+  render: ->
+    ${1:@$el.html @temlate}
+    this

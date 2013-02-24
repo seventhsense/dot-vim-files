@@ -260,6 +260,8 @@ NeoBundle 'taichouchou2/unite-reek',{
       \     'unix' : 'gem install reek',
       \  }}
 NeoBundle 'tpope/vim-bundler'
+NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'szw/vim-tags'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -424,10 +426,13 @@ autocmd FileType ruby let b:surround_{char2nr("i")} = "if \1condition: \1 \r end
 autocmd FileType ruby let b:surround_{char2nr("d")} = "def \1method: \1 \r end"
 autocmd FileType ruby let b:surround_{char2nr("w")} = "while \1condition: \1 do \r end"
 autocmd FileType ruby let b:surround_{char2nr("t")} = "\1times: \1.times do \r end"
+autocmd FileType ruby let b:surround_{char2nr("g")} = "group \1group: \1 do \r end"
 autocmd FileType ruby let b:surround_{char2nr("l")} = "logger.debug \r"
 autocmd FileType ruby let b:surround_{char2nr("L")} = "logger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug \r"
 autocmd FileType ruby.rspec let b:surround_{char2nr("I")} = "it \"\1sentense: \1\" do \r end"
 autocmd FileType ruby.rspec let b:surround_{char2nr("D")} = "describe \"\1sentense: \1\" do \r end"
+autocmd FileType coffee let b:surround_{char2nr("I")} = "it \"\1sentense: \1\" do \r"
+autocmd FileType coffee let b:surround_{char2nr("D")} = "describe \"\1sentense: \1\" do \r"
 
 autocmd FileType eruby let b:surround_{char2nr("i")} = "<% if \1confition: \1 %> \r <% end %>"
 autocmd FileType eruby let b:surround_{char2nr("e")} = "<% \1valiable: \1.each do |\2local: \2| %> \r <% end %>"
@@ -734,3 +739,26 @@ endfunction
 
 let g:endtagcommentFormat = '<!-- /%tag_name%id%class -->'
 nnoremap ,t :<C-u>call Endtagcomment()<CR>
+
+""filetype cucumber
+au BufRead,BufNewFile *_steps.rb            setfiletype cucumber
+
+""filetype Gemfile
+" au BufRead,BufNewFile Gemfile            setfiletype Gemfile
+
+" insertモードから抜ける
+inoremap <silent> jj <ESC>
+inoremap <silent> <C-j> j
+inoremap <silent> kk <ESC>
+inoremap <silent> <C-k> k
+
+" vimdoc-ja
+helptags ~/.vim/bundle/vimdoc-ja/doc
+
+"tags
+"ctrl + [のとき選択できるようにする
+" tagsジャンプの時に複数ある時は一覧表示                                        
+nnoremap <C-]> g<C-]> 
+
+""保存時にtagsを実行
+" autocmd BufWrite * :TagsGenerate
