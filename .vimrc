@@ -47,14 +47,14 @@ endif
  set tabstop=2
  set shiftwidth=2
  set smarttab
-" " タブをスペースに展開する (expandtab:展開する)
+" タブをスペースに展開する (expandtab:展開する)
  set expandtab
-" " 自動的にインデントする (noautoindent:インデントしない)
+" 自動的にインデントする (noautoindent:インデントしない)
  set autoindent
  set smartindent
-" " バックスペースでインデントや改行を削除できるようにする
+" バックスペースでインデントや改行を削除できるようにする
  set backspace=indent,eol,start
- "" ステータスラインにコマンドを表示
+" ステータスラインにコマンドを表示
 set showcmd
 
 "入力モード時、ステータスラインのカラーを変更
