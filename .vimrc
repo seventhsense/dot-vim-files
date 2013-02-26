@@ -206,7 +206,8 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'taglist.vim'
 NeoBundle 'ZenCoding.vim'
-NeoBundle 'The-NERD-tree'
+" NeoBundle 'The-NERD-tree'
+NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundle 'vim-scripts/rails.vim'
 NeoBundle 'ctags.vim'
@@ -263,6 +264,18 @@ NeoBundle 'tpope/vim-bundler'
 NeoBundle 'rhysd/clever-f.vim'
 " NeoBundle 'szw/vim-tags'
 NeoBundle 'lilydjwg/colorizer'
+NeoBundle 'Shougo/neocomplcache-rsense', {
+      \ 'depends': 'Shougo/neocomplcache',
+      \ 'autoload': { 'filetypes': 'ruby' }}
+NeoBundleLazy 'taichouchou2/rsense-0.3', {
+      \ 'build' : {
+      \    'mac': 'ruby etc/config.rb > ~/.rsense',
+      \    'unix': 'ruby etc/config.rb > ~/.rsense',
+      \ } }
+" js BDDツール
+NeoBundle 'claco/jasmine.vim'
+" indentの深さに色を付ける
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -278,10 +291,14 @@ colorscheme desert256
 "------------------------------------
 " neocomplecache.vim
 "------------------------------------
+" 補完・履歴
+set infercase
 " " AutoComplPopを無効にする
 " let g:acp_enableAtStartup = 0
 " NeoComplCacheを有効にする
 let g:neocomplcache_enable_at_startup = 1
+" NeoComplCache-rsense
+let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
 " smarrt case有効化。 大文字が入力されるまで大文字小文字の区別を無視する
 let g:neocomplcache_enable_smart_case = 1
 " camel caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
@@ -290,6 +307,9 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 " シンタックスをキャッシュするときの最小文字長を3に
 let g:neocomplcache_min_syntax_length = 3
+" cache skip
+let g:neocomplcache_skip_auto_completion_time = '0.3'
+
 " neocomplcacheを自動的にロックするバッファ名のパターン
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " -入力による候補番号の表示
@@ -612,8 +632,12 @@ let g:gist_show_privates = 1
 let g:gist_post_private = 1
 
 "" vim-coffee-script
-au BufRead,BufNewFile *.coffee            set filetype=coffee
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+" au BufRead,BufNewFile *.coffee            set filetype=coffee
+" au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+" vimにcoffeeファイルタイプを認識させる
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+" インデントを設定
+autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 
 "" easymotion
 let g:EasyMotion_leader_key = "<space>"
@@ -747,7 +771,7 @@ let g:endtagcommentFormat = '<!-- /%tag_name%id%class -->'
 nnoremap ,t :<C-u>call Endtagcomment()<CR>
 
 ""filetype cucumber
-au BufRead,BufNewFile *_steps.rb            setfiletype cucumber
+au BufRead,BufNewFile *_steps.rb            set filetype=cucumber.ruby
 
 ""filetype Gemfile
 " au BufRead,BufNewFile Gemfile            setfiletype Gemfile
@@ -768,3 +792,35 @@ nnoremap <C-]> g<C-]>
 
 ""保存時にtagsを実行
 " autocmd BufWrite * :TagsGenerate
+
+"------------------------------------
+" jasmine.vim
+"------------------------------------
+" ファイルタイプを変更
+function! JasmineSetting()
+  au BufRead,BufNewFile *Helper.js,*Spec.js  set filetype=jasmine.javascript
+  au BufRead,BufNewFile *Helper.coffee,*Spec.coffee  set filetype=jasmine.coffee
+  au BufRead,BufNewFile,BufReadPre *Helper.coffee,*Spec.coffee  let b:quickrun_config = {'type' : 'coffee'}
+  call jasmine#load_snippets()
+  map <buffer> <leader>m :JasmineRedGreen<CR>
+  command! JasmineRedGreen :call jasmine#redgreen()
+  command! JasmineMake :call jasmine#make()
+endfunction
+au BufRead,BufNewFile,BufReadPre *.coffee,*.js call JasmineSetting()
+
+"------------------------------------
+" indent_guides
+"------------------------------------
+" インデントの深さに色を付ける
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=0
+let g:indent_guides_color_change_percent=20
+let g:indent_guides_guide_size=1
+let g:indent_guides_space_guides=1
+
+hi IndentGuidesOdd  ctermbg=235
+hi IndentGuidesEven ctermbg=237
+au FileType coffee,ruby,javascript,python IndentGuidesEnable
+nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+
