@@ -297,8 +297,6 @@ set infercase
 " let g:acp_enableAtStartup = 0
 " NeoComplCacheを有効にする
 let g:neocomplcache_enable_at_startup = 1
-" NeoComplCache-rsense
-let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
 " smarrt case有効化。 大文字が入力されるまで大文字小文字の区別を無視する
 let g:neocomplcache_enable_smart_case = 1
 " camel caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
@@ -391,6 +389,18 @@ if !exists('g:neocomplcache_omni_patterns')
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+let g:neocomplcache_enable_fuzzy_completion = 1
+
+let g:neocomplcache_source_rank = {
+  \ 'snippets_complete' : 5,
+  \ 'dictionary_complete' : 8,
+  \ }
+
+" imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
+
+" NeoComplCache-rsense
+let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
 
 " for ZenCoding.vim
 let g:user_zen_settings = {
