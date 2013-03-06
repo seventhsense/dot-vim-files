@@ -397,7 +397,7 @@ let g:neocomplcache_source_rank = {
   \ 'dictionary_complete' : 8,
   \ }
 
-" imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
+imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
 
 " NeoComplCache-rsense
 let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
