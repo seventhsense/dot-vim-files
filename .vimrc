@@ -275,6 +275,7 @@ NeoBundleLazy 'taichouchou2/rsense-0.3', {
 NeoBundle 'claco/jasmine.vim'
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'airblade/vim-gitgutter'
 
 " NeoBundleLast...
 " NeoBundleEnd...
