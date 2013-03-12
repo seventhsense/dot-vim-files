@@ -30,6 +30,8 @@ syntax on
 set wildmenu
 set wildmode=list:longest
 set completeopt=menu,preview,menuone
+"カレント行ハイライト
+set cursorline
 
 "十字キ <Up>
 ""imap ーの入力を受け付ける
@@ -276,6 +278,7 @@ NeoBundle 'claco/jasmine.vim'
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'heavenshell/vim-jsdoc'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -374,8 +377,8 @@ inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcach
 
 " FileType毎のOmni補完を設定
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType javascript set omnifunc=jscomplete#CompleteJS
+autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
@@ -395,7 +398,11 @@ let g:neocomplcache_enable_fuzzy_completion = 1
 let g:neocomplcache_source_rank = {
   \ 'snippets_complete' : 5,
   \ 'dictionary_complete' : 8,
+  \ 'jscomplete' : 500,
   \ }
+
+" domも含める
+let g:jscomplete_use = ['dom']
 
 imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
 
@@ -793,7 +800,7 @@ inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
 
 " vimdoc-ja
-helptags ~/.vim/bundle/vimdoc-ja/doc
+" helptags ~/.vim/bundle/vimdoc-ja/doc
 
 "tags
 "ctrl + [のとき選択できるようにする
