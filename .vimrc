@@ -208,15 +208,12 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'taglist.vim'
 NeoBundle 'ZenCoding.vim'
-" NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
 NeoBundle 'Lokaltog/vim-powerline'
-" NeoBundle 'ruby.vim'
 NeoBundle 'vim-coffee-script'
-" NeoBundle 'Vim-Rspec'
 NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-cucumber'
 NeoBundle 'basyura/unite-rails'
@@ -263,7 +260,6 @@ NeoBundle 'taichouchou2/unite-reek',{
       \  }}
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'rhysd/clever-f.vim'
-" NeoBundle 'szw/vim-tags'
 NeoBundle 'lilydjwg/colorizer'
 NeoBundle 'Shougo/neocomplcache-rsense', {
       \ 'depends': 'Shougo/neocomplcache',
@@ -279,17 +275,19 @@ NeoBundle 'claco/jasmine.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'heavenshell/vim-jsdoc'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'jpo/vim-railscasts-theme'
 
 " NeoBundleLast...
 " NeoBundleEnd...
 filetype plugin indent on     " required!
 "
-" Brief help
 " :NeoBundleList          - list configured bundles
 " :NeoBundleInstall(!)    - install(update) bundles
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 colorscheme desert256
+" colorscheme railscasts
 
 "------------------------------------
 " neocomplecache.vim
@@ -506,11 +504,11 @@ nmap <F8> :SrcExplToggle<CR>
 
 "NERD_tree.vim
 ""---------------------
-" nnoremap <f2> :NERDTreeToggle<CR>
+nnoremap <f2> :NERDTreeToggle<CR>
 ""最後に残ったウィンドウがNERDTREEのみのときはvimを閉じる
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" let g:NERDTreeDirArrows=0
-" let g:NERDTreeMouseMode=0
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let g:NERDTreeDirArrows=0
+let g:NERDTreeMouseMode=0
 
 ""smartchr設定
 ""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
@@ -937,7 +935,7 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-nmap <F2> :VimFiler -split -horizontal -project -toggle -quit<CR> 
+" nmap <F2> :VimFiler -split -horizontal -project -toggle -quit<CR> 
 autocmd FileType vimfiler nnoremap <buffer><silent>/  :<C-u>Unite file -default-action=vimfiler<CR>
 autocmd FileType vimfiler nnoremap <silent><buffer> e :call <SID>vimfiler_tree_edit('open')<CR>
 
