@@ -277,6 +277,7 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'heavenshell/vim-jsdoc'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'tpope/vim-markdown'
 
 " NeoBundleLast...
 " NeoBundleEnd...
