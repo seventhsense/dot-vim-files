@@ -109,5 +109,10 @@ abbr        redirect_to ${1:action_controller_url}
   redirect_to ${1:action_controller_url}
 
 snippet     logger
-abbr        logger.${1:debug}
-  logger.${1:debug}
+abbr        logger.debug ${1:message}
+  logger.debug ${1:message}
+
+snippet     logger-line
+abbr        logger.debug "-----"
+  logger.debug "------------------------------------------------------------"
+

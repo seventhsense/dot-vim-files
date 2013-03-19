@@ -1,0 +1,31 @@
+snippet     rp
+abbr        <%= %>
+    <%= ${1:CoffeeScript print code} %>${2}
+
+snippet     rc
+abbr        <% %>
+    <% ${1:CoffeeScript code} %>${2}
+
+snippet     end
+abbr        <% end %>
+    <% end %>
+
+snippet     if
+abbr        <% if ${1} : %>
+    <% if ${1}: %>
+    ${2}
+    <% end %>
+
+snippet     ifelse
+abbr        <% if ${1}: %> <% else %>
+    <% if ${1}: %>
+    ${2}
+    <% else: %>
+    ${3}
+    <% end %>
+
+
+snippet     else
+abbr        <% else: %>
+    <% else: %>
+

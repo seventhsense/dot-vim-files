@@ -30,6 +30,8 @@ syntax on
 set wildmenu
 set wildmode=list:longest
 set completeopt=menu,preview,menuone
+"カレント行ハイライト
+set cursorline
 
 "十字キ <Up>
 ""imap ーの入力を受け付ける
@@ -47,22 +49,22 @@ endif
  set tabstop=2
  set shiftwidth=2
  set smarttab
-" " タブをスペースに展開する (expandtab:展開する)
+" タブをスペースに展開する (expandtab:展開する)
  set expandtab
-" " 自動的にインデントする (noautoindent:インデントしない)
+" 自動的にインデントする (noautoindent:インデントしない)
  set autoindent
  set smartindent
-" " バックスペースでインデントや改行を削除できるようにする
+" バックスペースでインデントや改行を削除できるようにする
  set backspace=indent,eol,start
- "" ステータスラインにコマンドを表示
+" ステータスラインにコマンドを表示
 set showcmd
 
 "入力モード時、ステータスラインのカラーを変更
-""augroup InsertHook
-""autocmd!
-""autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
-""autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
-""augroup END
+" augroup InsertHook
+" autocmd!
+" autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
+" autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
+" augroup END
 ""マウス対応
 set mouse=a
 set ttymouse=xterm2
@@ -162,6 +164,12 @@ endfor
  
     " return altbuf
 " endfunction
+"
+"" ファイルをひらいたとき最後にカーソルがあった場所にカーソルを移動する
+augroup vimrcEx
+  au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+  \ exe "normal g`\"" | endif
+augroup END
 
 " NeoBundle
 
@@ -175,34 +183,38 @@ endif
 " required! 
 NeoBundle 'Shougo/neobundle.vim'
 " recommended to install
-NeoBundle 'Shougo/vimproc'
+""vimproc auto compile
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
 " after install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
 
 "Your Bundles here
 NeoBundle 'Shougo/neocomplcache'
-" NeoBundle 'Shougo/neocomplcache-snippets-complete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'AutoClose'
 NeoBundle 'tpope/vim-rails'
-NeoBundle 'surround.vim'
+NeoBundle 'tpope/vim-surround'
 NeoBundle 'The-NERD-Commenter'
-" NeoBundle 'vim-scripts/Trinity.git'
 NeoBundle 'taglist.vim'
 NeoBundle 'ZenCoding.vim'
-NeoBundle 'The-NERD-tree'
 NeoBundle 'Source-Explorer-srcexpl.vim'
-NeoBundle 'vim-scripts/rails.vim'
 NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
 NeoBundle 'Lokaltog/vim-powerline'
-NeoBundle 'ruby.vim'
 NeoBundle 'vim-coffee-script'
-NeoBundle 'Vim-Rspec'
+NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-cucumber'
 NeoBundle 'basyura/unite-rails'
 NeoBundle "tomasr/molokai"
@@ -218,32 +230,71 @@ NeoBundle 'pasela/unite-webcolorname'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'sjl/gundo.vim'
-NeoBundle 'hallettj/jslint.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'sudo.vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
-NeoBundle 'uguu-org/vim-matrix-screensaver'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/pyte'
-NeoBundle 'vim-scripts/change-hash-syntax'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'pekepeke/unite-fileline'
-" ...
+NeoBundle 'ujihisa/unite-gem'
+NeoBundle 'vim-scripts/VOoM'
+NeoBundle 'AndrewRadev/vim-eco'
+NeoBundle 'bkad/CamelCaseMotion'
+NeoBundle 'mklabs/vim-backbone'
+" Railsプロジェクトで,Unite rails_best_practices
+NeoBundle 'taichouchou2/unite-rails_best_practices',{
+      \ 'build' : {
+      \     'mac' :  'gem install rails_best_practices',
+      \     'unix' : 'gem install rails_best_practices',
+      \  }}
+
+" rubyのファイルを開きながら、Unite reek
+NeoBundle 'taichouchou2/unite-reek',{
+      \ 'build' : {
+      \     'mac' :  'gem install reek',
+      \     'unix' : 'gem install reek',
+      \  }}
+NeoBundle 'tpope/vim-bundler'
+NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'lilydjwg/colorizer'
+NeoBundle 'Shougo/neocomplcache-rsense', {
+      \ 'depends': 'Shougo/neocomplcache',
+      \ 'autoload': { 'filetypes': 'ruby' }}
+NeoBundleLazy 'taichouchou2/rsense-0.3', {
+      \ 'build' : {
+      \    'mac': 'ruby etc/config.rb > ~/.rsense',
+      \    'unix': 'ruby etc/config.rb > ~/.rsense',
+      \ } }
+" js BDDツール
+NeoBundle 'claco/jasmine.vim'
+" indentの深さに色を付ける
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'heavenshell/vim-jsdoc'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'tpope/vim-markdown'
+
+" NeoBundleLast...
+" NeoBundleEnd...
 filetype plugin indent on     " required!
 "
-" Brief help
 " :NeoBundleList          - list configured bundles
 " :NeoBundleInstall(!)    - install(update) bundles
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 colorscheme desert256
+" colorscheme railscasts
 
 "------------------------------------
 " neocomplecache.vim
 "------------------------------------
+" 補完・履歴
+set infercase
 " " AutoComplPopを無効にする
 " let g:acp_enableAtStartup = 0
 " NeoComplCacheを有効にする
@@ -256,6 +307,9 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 " シンタックスをキャッシュするときの最小文字長を3に
 let g:neocomplcache_min_syntax_length = 3
+" cache skip
+let g:neocomplcache_skip_auto_completion_time = '0.3'
+
 " neocomplcacheを自動的にロックするバッファ名のパターン
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " -入力による候補番号の表示
@@ -322,14 +376,14 @@ inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcach
 
 " FileType毎のOmni補完を設定
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType javascript set omnifunc=jscomplete#CompleteJS
+autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-" autocmd FileType ruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby set omnifunc=rubycomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
@@ -337,6 +391,22 @@ if !exists('g:neocomplcache_omni_patterns')
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+let g:neocomplcache_enable_fuzzy_completion = 1
+
+let g:neocomplcache_source_rank = {
+  \ 'snippets_complete' : 5,
+  \ 'dictionary_complete' : 8,
+  \ 'jscomplete' : 500,
+  \ }
+
+" domも含める
+let g:jscomplete_use = ['dom']
+
+imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
+
+" NeoComplCache-rsense
+let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
 
 " for ZenCoding.vim
 let g:user_zen_settings = {
@@ -360,14 +430,19 @@ noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
 
 "file file_current_dir
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :@ :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 ""line
 noremap :ul :<C-u>Unite line<CR>
 noremap :; :<C-u>Unite line<CR>
 
+""grep
+noremap :g :<C-u>Unite grep<CR>
+""file
+noremap :f :<C-u>Unite file_rec<CR>
+
 "" vim command 一覧
-noremap :<CR> :<C-u>Unite mapping<CR>
+noremap :<CR> :<C-u>Unite command mapping<CR>
 
 " c-jはescとする
 au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
@@ -383,7 +458,28 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " s, ssで選択範囲を指定文字でくくる
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
+autocmd FileType php let b:surround_{char2nr("?")} = "<?php \r ?>"
+autocmd FileType ruby let b:surround_{char2nr("i")} = "if \1condition: \1 \r end"
+autocmd FileType ruby let b:surround_{char2nr("d")} = "def \1method: \1 \r end"
+autocmd FileType ruby let b:surround_{char2nr("w")} = "while \1condition: \1 do \r end"
+autocmd FileType ruby let b:surround_{char2nr("t")} = "\1times: \1.times do \r end"
+autocmd FileType ruby let b:surround_{char2nr("g")} = "group \1group: \1 do \r end"
+autocmd FileType ruby let b:surround_{char2nr("l")} = "logger.debug \r"
+autocmd FileType ruby let b:surround_{char2nr("L")} = "logger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug \r"
+autocmd FileType ruby.rspec let b:surround_{char2nr("I")} = "it \"\1sentense: \1\" do \r end"
+autocmd FileType ruby.rspec let b:surround_{char2nr("D")} = "describe \"\1sentense: \1\" do \r end"
+autocmd FileType coffee let b:surround_{char2nr("I")} = "it \"\1sentense: \1\" do \r"
+autocmd FileType coffee let b:surround_{char2nr("D")} = "describe \"\1sentense: \1\" do \r"
 
+autocmd FileType eruby let b:surround_{char2nr("i")} = "<% if \1confition: \1 %> \r <% end %>"
+autocmd FileType eruby let b:surround_{char2nr("e")} = "<% \1valiable: \1.each do |\2local: \2| %> \r <% end %>"
+autocmd FileType coffee let b:surround_{char2nr("i")} = "if \1condition: \1 \r"
+autocmd FileType coffee let b:surround_{char2nr("l")} = "console.log \r"
+autocmd FileType javascript let b:surround_{char2nr("f")} = "function(\1locals: \1)({\r})"
+autocmd FileType javascript let b:surround_{char2nr("l")} = "console.log(\r)"
+
+"ビジュアルモード時kで「」の囲い込み
+let g:surround_107 = "「\r」" " 107 = k
 
 "" Source Explorer
 "自動でプレビューを表示する。TODO:うざくなってきたら手動にする。またはソースを追う時だけ自動に変更する。
@@ -419,7 +515,8 @@ let g:NERDTreeMouseMode=0
 ""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
 ""Powerline設定
-" let g:Powerline_symbols  =  'fancy'
+""python from powerline.ext.vim import source_plugin; source_plugin()
+""let g:Powerline_symbols  =  'fancy'
 " let g:Powerline_colorscheme = 'skwp'
 
 """RSPEC実行
@@ -510,9 +607,14 @@ noremap :rc :<C-u>Unite rails/controller<CR>
 noremap :rm :<C-u>Unite rails/model<CR>
 noremap :rv :<C-u>Unite rails/view<CR>
 noremap :rh :<C-u>Unite rails/helper<CR>
+noremap :rs :<C-u>Unite rails/stylesheets<CR>
+noremap :rj :<C-u>Unite rails/javascripts<CR>
+noremap :rr :<C-u>Unite rails/route<CR>
+noremap :rg :<C-u>Unite rails/gemfile<CR>
+noremap :rt :<C-u>Unite rails/spec<CR>
 
 ""unite-ref-ri
-noremap :rr :<C-u>Unite ref/ri<CR>
+" noremap :rr :<C-u>Unite ref/ri<CR>
 
 ""Align
 let g:Align_xstrlen = 3
@@ -546,11 +648,18 @@ let g:gist_show_privates = 1
 let g:gist_post_private = 1
 
 "" vim-coffee-script
-au BufRead,BufNewFile *.coffee            set filetype=coffee
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+" au BufRead,BufNewFile *.coffee            set filetype=coffee
+" au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+" vimにcoffeeファイルタイプを認識させる
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+" インデントを設定
+autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 
 "" easymotion
 let g:EasyMotion_leader_key = "<space>"
+
+" let $XIKI_DIR = "~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/"
+" source ~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/etc/vim/xiki.vim
 
 "" vim-less
 au BufRead,BufNewFile *.less		set filetype=less
@@ -589,7 +698,7 @@ endfunction
 function! g:ref_source_webdict_sites.wiki.filter(output)
   return join(split(a:output, "\n")[17 :], "\n")
 endfunction
- 
+
 nmap <Leader>rj :<C-u>Ref webdict je<Space>
 nmap <Leader>re :<C-u>Ref webdict ej<Space>
 
@@ -597,6 +706,283 @@ au FileType ruby,eruby setl tags+=~/gtags
 
 ""syntastic
 let g:syntastic_javascript_checker = 'jshint'
+" let g:syntastic_mode_map = { 'mode': 'active',
+      " \ 'active_filetypes': [],
+      " \ 'passive_filetypes': ['javascript'] }
+
+""vim-eco
+autocmd BufNewFile,BufRead *.eco set filetype=eco
+
+""CamelCaseMotion
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
+
+" endtagcomment.vim
+" https://gist.github.com/hokaccha/4118281
+" こういうHTMLがあったときに
+" <div id="hoge" class="fuga">
+" ...
+" </div>
+"
+" 実行するとこうなる
+" <div id="hoge" class="fuga">
+" ...
+" <!-- /div#hoge.fuga --></div>
+
+function! Endtagcomment()
+    let reg_save = @@
+
+    try
+        silent normal vaty
+    catch
+        execute "normal \<Esc>"
+        echohl ErrorMsg
+        echo 'no match html tags'
+        echohl None
+        return
+    endtry
+
+    let html = @@
+
+    let start_tag = matchstr(html, '\v(\<.{-}\>)')
+    let tag_name  = matchstr(start_tag, '\v([a-zA-Z]+)')
+
+    let id = ''
+    let id_match = matchlist(start_tag, '\vid\=["'']([^"'']+)["'']')
+    if exists('id_match[1]')
+        let id = '#' . id_match[1]
+    endif
+
+    let class = ''
+    let class_match = matchlist(start_tag, '\vclass\=["'']([^"'']+)["'']')
+    if exists('class_match[1]')
+        let class = '.' . join(split(class_match[1], '\v\s+'), '.')
+    endif
+
+    execute "normal `>va<\<Esc>`<"
+
+    let comment = g:endtagcommentFormat
+    let comment = substitute(comment, '%tag_name', tag_name, 'g')
+    let comment = substitute(comment, '%id', id, 'g')
+    let comment = substitute(comment, '%class', class, 'g')
+    let @@ = comment
+
+    normal ""P
+
+    let @@ = reg_save
+endfunction
+
+let g:endtagcommentFormat = '<!-- /%tag_name%id%class -->'
+nnoremap ,t :<C-u>call Endtagcomment()<CR>
+
+""filetype cucumber
+au BufRead,BufNewFile *_steps.rb            set filetype=cucumber.ruby
+
+""filetype Gemfile
+" au BufRead,BufNewFile Gemfile            setfiletype Gemfile
+
+" insertモードから抜ける
+inoremap <silent> jj <ESC>
+inoremap <silent> <C-j> j
+inoremap <silent> kk <ESC>
+inoremap <silent> <C-k> k
+
+" vimdoc-ja
+" helptags ~/.vim/bundle/vimdoc-ja/doc
+
+"tags
+"ctrl + [のとき選択できるようにする
+" tagsジャンプの時に複数ある時は一覧表示                                        
+nnoremap <C-]> g<C-]> 
+
+""保存時にtagsを実行
+" autocmd BufWrite * :TagsGenerate
+
+"------------------------------------
+" jasmine.vim
+"------------------------------------
+" ファイルタイプを変更
+function! JasmineSetting()
+  au BufRead,BufNewFile *Helper.js,*Spec.js  set filetype=jasmine.javascript
+  au BufRead,BufNewFile *Helper.coffee,*Spec.coffee  set filetype=jasmine.coffee
+  au BufRead,BufNewFile,BufReadPre *Helper.coffee,*Spec.coffee  let b:quickrun_config = {'type' : 'coffee'}
+  call jasmine#load_snippets()
+  map <buffer> <leader>m :JasmineRedGreen<CR>
+  command! JasmineRedGreen :call jasmine#redgreen()
+  command! JasmineMake :call jasmine#make()
+endfunction
+au BufRead,BufNewFile,BufReadPre *.coffee,*.js call JasmineSetting()
+
+"------------------------------------
+" indent_guides
+"------------------------------------
+" インデントの深さに色を付ける
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=0
+let g:indent_guides_color_change_percent=20
+let g:indent_guides_guide_size=1
+let g:indent_guides_space_guides=1
+
+hi IndentGuidesOdd  ctermbg=235
+hi IndentGuidesEven ctermbg=237
+au FileType coffee,ruby,javascript,python IndentGuidesEnable
+nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+
+
+"emacs風移動
+"単語単位移動（行末で止まる必要がない場合）
+inoremap <silent> <C-b> <S-Left>
+inoremap <silent> <C-w> <S-Right>
+"行頭へ
+inoremap <silent> <C-a> <C-r>=MyJumptoBol('　。、．，／！？「」')<CR>
+"行末へ
+inoremap <silent> <C-e> <C-r>=MyJumptoEol('　。、．，／！？「」')<CR>
+"現在行をインデント
+inoremap <silent> <Tab>   <C-g>u<C-t>
+inoremap <silent> <S-Tab> <C-g>u<C-d>
+
+"undo
+inoremap <silent> <C-u> <C-g>u<C-r>=MyExecExCommand('undo', 'onemore')<CR>
+ 
+"新行挿入
+inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col('$'))")<CR><CR>
+""""""""""""""""""""""""""""""
+"sepが空でなければ、sepをセパレータとしてジャンプ。
+"見つからなければ見かけの行頭へ。
+"カーソル位置が見かけの行頭の場合は真の行頭へ。
+""""""""""""""""""""""""""""""
+function! MyJumptoBol(sep)
+if col('.') == 1
+call cursor(line('.')-1, col('$'))
+call cursor(line('.'), col('$'))
+return ''
+endif
+if matchend(strpart(getline('.'), 0, col('.')), '[[:blank:]]\+') >= col('.')-1
+silent exec 'normal! 0'
+return ''
+endif
+if a:sep != ''
+call search('[^'.a:sep.']\+', 'bW', line("."))
+if col('.') == 1
+silent exec 'normal! ^'
+endif
+return ''
+endif
+exec 'normal! ^'
+return ''
+endfunction
+ 
+""""""""""""""""""""""""""""""
+"sepが空でなければ、sepをセパレータとしてジャンプ。
+"見つからなければ行末へ。
+""""""""""""""""""""""""""""""
+function! MyJumptoEol(sep)
+if col('.') == col('$')
+silent exec 'normal! w'
+return ''
+endif
+ 
+if a:sep != ''
+let prevcol = col('.')
+call search('['.a:sep.']\+[^'.a:sep.']', 'eW', line("."))
+if col('.') != prevcol
+return ''
+endif
+endif
+call cursor(line('.'), col('$'))
+return ''
+endfunction
+ 
+""""""""""""""""""""""""""""""
+"IMEの状態とカーソル位置保存のため<C-r>を使用してコマンドを実行。
+""""""""""""""""""""""""""""""
+function! MyExecExCommand(cmd, ...)
+let saved_ve = &virtualedit
+let index = 1
+while index <= a:0
+if a:{index} == 'onemore'
+silent setlocal virtualedit+=onemore
+endif
+let index = index + 1
+endwhile
+ 
+silent exec a:cmd
+if a:0 > 0
+silent exec 'setlocal virtualedit='.saved_ve
+endif
+return ''
+endfunction
+
+"VimFiler"
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+" Edit file by tabedit.
+let g:vimfiler_edit_action = 'edit'
+" Like Textmate icons.
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+" nmap <F2> :VimFiler -split -horizontal -project -toggle -quit<CR> 
+autocmd FileType vimfiler nnoremap <buffer><silent>/  :<C-u>Unite file -default-action=vimfiler<CR>
+autocmd FileType vimfiler nnoremap <silent><buffer> e :call <SID>vimfiler_tree_edit('open')<CR>
+
+function! s:vimfiler_tree_edit(method) "{{{4
+  " let file = vimfiler#get_file()
+  " if empty(file) || empty(a:method) | return | endif
+  " let path = file.action__path
+  " wincmd p
+  " execute a:method
+  " exe 'edit' path
+  if empty(a:method) | return | endif
+  let linenr = line('.')
+  let context = s:vimfiler_create_action_context(a:method, linenr)
+  wincmd p
+  " call vimfiler#mappings#do_action(a:method, linenr)
+  call context.execute()
+  unlet context
+endfunction
+
+function! s:vimfiler_create_action_context(action, ...) " {{{4
+  let cursor_linenr = get(a:000, 0, line('.'))
+  let vimfiler = vimfiler#get_current_vimfiler()
+  let marked_files = vimfiler#get_marked_files()
+  if empty(marked_files)
+    let marked_files = [ vimfiler#get_file(cursor_linenr) ]
+  endif
+
+  let context = s:vimfiler_context.new({
+        \ 'action' : a:action,
+        \ 'files' : marked_files,
+        \ 'current_dir' : vimfiler.current_dir,
+        \ })
+  return context
+endfunction
+
+let s:vimfiler_context = {} " {{{4
+function! s:vimfiler_context.new(...)
+  let dict = get(a:000, 0, {})
+  return extend(dict, self)
+endfunction
+
+function! s:vimfiler_context.execute()
+  call unite#mappings#do_action(self.action, self.files, {
+        \ 'vimfiler__current_directory' : self.current_dir,
+        \ })
+endfunction
 
 "" C-pで0レジスタで貼り付け
 vnoremap <silent> <C-p> "0p<CR>
