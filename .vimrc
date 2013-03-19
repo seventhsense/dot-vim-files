@@ -366,6 +366,9 @@ noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 noremap :ul :<C-u>Unite line<CR>
 noremap :; :<C-u>Unite line<CR>
 
+"" vim command 一覧
+noremap :<CR> :<C-u>Unite mapping<CR>
+
 " c-jはescとする
 au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
 
@@ -595,3 +598,5 @@ au FileType ruby,eruby setl tags+=~/gtags
 ""syntastic
 let g:syntastic_javascript_checker = 'jshint'
 
+"" C-pで0レジスタで貼り付け
+vnoremap <silent> <C-p> "0p<CR>
