@@ -789,6 +789,9 @@ nnoremap ,t :<C-u>call Endtagcomment()<CR>
 ""filetype cucumber
 au BufRead,BufNewFile *_steps.rb            set filetype=cucumber.ruby
 
+""filetype snippet
+au BufRead,BufNewFile,BufReadPre *.snip set filetype=snippet
+
 ""filetype Gemfile
 " au BufRead,BufNewFile Gemfile            setfiletype Gemfile
 
