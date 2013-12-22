@@ -230,7 +230,7 @@ NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'pasela/unite-webcolorname'
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'teramako/jscomplete-vim'
+" NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler'
@@ -248,18 +248,18 @@ NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'mklabs/vim-backbone'
 " Railsプロジェクトで,Unite rails_best_practices
-NeoBundle 'taichouchou2/unite-rails_best_practices',{
-      \ 'build' : {
-      \     'mac' :  'gem install rails_best_practices',
-      \     'unix' : 'gem install rails_best_practices',
-      \  }}
+" NeoBundle 'taichouchou2/unite-rails_best_practices',{
+      " \ 'build' : {
+      " \     'mac' :  'gem install rails_best_practices',
+      " \     'unix' : 'gem install rails_best_practices',
+      " \  }}
 
 " rubyのファイルを開きながら、Unite reek
-NeoBundle 'taichouchou2/unite-reek',{
-      \ 'build' : {
-      \     'mac' :  'gem install reek',
-      \     'unix' : 'gem install reek',
-      \  }}
+" NeoBundle 'taichouchou2/unite-reek',{
+      " \ 'build' : {
+      " \     'mac' :  'gem install reek',
+      " \     'unix' : 'gem install reek',
+      " \  }}
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'lilydjwg/colorizer'
