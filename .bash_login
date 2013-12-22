@@ -1,0 +1,8 @@
+#
+# .bash_login is executed only for the login shell
+
+if [ -f ~/.platformrc ]; then . ~/.platformrc; fi
+
+if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
+
+

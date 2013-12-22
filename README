@@ -38,3 +38,5 @@ for vim-powerline
 
 cd ~/.vim/bundle/vim-powerline
 git checkout -b develop origin/develop
+
+add .bashrc etc. from http://geocities.com/h2428/petar/bashrc.htm
