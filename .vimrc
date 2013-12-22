@@ -791,6 +791,9 @@ nnoremap ,t :<C-u>call Endtagcomment()<CR>
 ""filetype cucumber
 au BufRead,BufNewFile *_steps.rb            set filetype=cucumber.ruby
 
+""filetype snippet
+au BufRead,BufNewFile,BufReadPre *.snip set filetype=snippet
+
 ""filetype Gemfile
 " au BufRead,BufNewFile Gemfile            setfiletype Gemfile
 
@@ -993,3 +996,5 @@ endfunction
 
 ""* enable/disable usage of patched powerline font symbols >
 ""  let g:airline_powerline_fonts=0
+"" C-pで0レジスタで貼り付け
+vnoremap <silent> <C-p> "0p<CR>
