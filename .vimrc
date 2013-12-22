@@ -207,12 +207,14 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'taglist.vim'
-NeoBundle 'ZenCoding.vim'
+" NeoBundle 'ZenCoding.vim'
+NeoBundle 'mattn/emmet-vim'
 NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
 NeoBundle 'Lokaltog/vim-powerline'
+""NeoBundle 'bling/vim-airline'
 NeoBundle 'vim-coffee-script'
 NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-cucumber'
@@ -984,3 +986,10 @@ function! s:vimfiler_context.execute()
         \ })
 endfunction
 
+"vim-airline
+
+""* enable paste detection >
+""  let g:airline_detect_paste=1
+
+""* enable/disable usage of patched powerline font symbols >
+""  let g:airline_powerline_fonts=0
