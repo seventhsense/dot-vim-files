@@ -279,6 +279,7 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'heavenshell/vim-jsdoc'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
 NeoBundle 'tpope/vim-markdown'
 
 " NeoBundleLast...
@@ -289,7 +290,7 @@ filetype plugin indent on     " required!
 " :NeoBundleInstall(!)    - install(update) bundles
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
-colorscheme desert256
+colorscheme sexy-railscasts-256
 " colorscheme railscasts
 
 "------------------------------------
@@ -342,7 +343,6 @@ let g:neocomplcache_dictionary_filetype_lists = {
  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
 " ユーザー定義スニペット保存ディレクトリ
-" let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
 let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets'
 
 " スニペット
