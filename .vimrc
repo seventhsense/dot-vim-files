@@ -281,6 +281,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
 NeoBundle 'tpope/vim-markdown'
+NeoBundle 'honza/vim-snippets'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -349,6 +350,27 @@ let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets'
 imap <silent>,, <Plug>(neosnippet_expand_or_jump)
 smap <silent>,, <Plug>(neosnippet_expand_or_jump))
 
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+
+" ほかのスニペットをつかう
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
 " 補完を選択しpopupを閉じる
 inoremap <expr><C-y> neocomplcache#close_popup()
 " 補完をキャンセルしpopupを閉じる
@@ -359,8 +381,6 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 " 補完候補の共通部分までを補完する
 inoremap <expr><C-l> neocomplcache#complete_common_string()
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 " C-kを押すと行末まで削除
 inoremap <C-k> <C-o>D
 " C-nでneocomplcache補完
