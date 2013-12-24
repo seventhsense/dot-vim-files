@@ -346,8 +346,8 @@ let g:neocomplcache_dictionary_filetype_lists = {
 let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets'
 
 " スニペット
-imap <silent>,, <Plug>(neosnippet_expand)
-smap <silent>,, <Plug>(neosnippet_expand)
+imap <silent>,, <Plug>(neosnippet_expand_or_jump)
+smap <silent>,, <Plug>(neosnippet_expand_or_jump))
 
 " 補完を選択しpopupを閉じる
 inoremap <expr><C-y> neocomplcache#close_popup()
