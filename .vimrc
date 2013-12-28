@@ -207,14 +207,12 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'taglist.vim'
-" NeoBundle 'ZenCoding.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
-NeoBundle 'Lokaltog/vim-powerline'
-""NeoBundle 'bling/vim-airline'
+NeoBundle "itchyny/lightline.vim"
 NeoBundle 'vim-coffee-script'
 NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-cucumber'
@@ -230,7 +228,6 @@ NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'pasela/unite-webcolorname'
 NeoBundle 'Lokaltog/vim-easymotion'
-" NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler'
@@ -277,11 +274,12 @@ NeoBundle 'claco/jasmine.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'heavenshell/vim-jsdoc'
-NeoBundle 'scrooloose/nerdtree'
+" NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'honza/vim-snippets'
+NeoBundle 'seventhsense/nerdtree', 'development'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -369,7 +367,7 @@ endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim/snippets'
 
 " 補完を選択しpopupを閉じる
 inoremap <expr><C-y> neocomplcache#close_popup()
