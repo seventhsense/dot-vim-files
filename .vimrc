@@ -231,7 +231,6 @@ NeoBundleLazy 'Shougo/vimfiler', {'augroup': 'vimfiler', 'autoload': {'unite_sou
 NeoBundleLazy 'sudo.vim', {'autoload': {'commands': ['SudoRead', 'SudoWrite']}}
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
-NeoBundle 'vim-scripts/pyte'
 NeoBundle 'vim-scripts/VOoM'
 NeoBundle 'bkad/CamelCaseMotion'
 " NeoBundle 'rhysd/clever-f.vim'
@@ -278,6 +277,7 @@ NeoBundle 'tpope/vim-markdown'
 " NeoBundle "tomasr/molokai"
 " NeoBundle 'desert256.vim'
 " NeoBundle 'jpo/vim-railscasts-theme'
+" NeoBundle 'vim-scripts/pyte'
 NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
 
 " NeoBundleLast...
