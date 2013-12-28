@@ -348,7 +348,8 @@ if s:meet_neocomplete_requirements()
   " <CR>: close popup and save indent.
   inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
   function! s:my_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
+    " return neocomplete#close_popup() . "\<CR>"
+    return neocomplete#close_popup()
     " For no inserting <CR> key.
     "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
   endfunction
@@ -384,21 +385,24 @@ if s:meet_neocomplete_requirements()
   " Enable omni completion.
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType ruby set omnifunc=rubycomplete#Complete
+  autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
 
   " Enable heavy omni completion.
   if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
   endif
+  let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
   "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
   "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
   "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
   " For perlomni.vim setting.
   " https://github.com/c9s/perlomni.vim
-  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+  " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 else
   " 今までの neocomplcache の設定
   "------------------------------------
@@ -495,7 +499,7 @@ else
   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
   let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
-  let g:neocomplcache_enable_fuzzy_completion = 1
+  let g:neocomplcache_enable_fuzzy_completion = 0
 
   let g:neocomplcache_source_rank = {
         \ 'snippets_complete' : 5,
