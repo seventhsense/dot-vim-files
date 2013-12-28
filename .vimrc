@@ -200,14 +200,18 @@ NeoBundle 'Shougo/unite.vim'
 "Your Bundles here
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
-NeoBundle 'thinca/vim-ref'
+" NeoBundle 'thinca/vim-ref'
+NeoBundleLazy 'thinca/vim-ref', {'autoload': {'unite_sources': ['ref'], 'mappings': [['sxn', '<Plug>(ref-keyword)']], 'commands': [{'complete': 'customlist,ref#complete', 'name': 'Ref'}, 'RefHistory']}}
 " NeoBundle 'thinca/vim-quickrun'
 NeoBundleLazy 'thinca/vim-quickrun', {'autoload': {'mappings': [['sxn', '<Plug>(quickrun']], 'commands': [{'complete': 'customlist,quickrun#complete', 'name': 'QuickRun'}]}}
 NeoBundle 'AutoClose'
-NeoBundle 'tpope/vim-surround'
+" NeoBundle 'tpope/vim-surround'
+NeoBundleLazy 'tpope/vim-surround', {'autoload': {'mappings': ['<Plug>Ysurround', '<Plug>YSsurround', '<Plug>YSurround', '<Plug>Dsurround', ['i', '<Plug>ISurround'], ['sx', '<Plug>VgSurround'], '<Plug>Yssurround', '<Plug>SurroundRepeat', '<Plug>Csurround', ['i', '<Plug>Isurround'], ['sx', '<Plug>VSurround']]}}
 NeoBundle 'The-NERD-Commenter'
-NeoBundle 'taglist.vim'
-NeoBundle 'mattn/emmet-vim'
+" NeoBundle 'taglist.vim'
+NeoBundleLazy 'taglist.vim', {'augroup': 'END', 'autoload': {'commands': [{'complete': 'file', 'name': 'TlistDebug'}, {'complete': 'file', 'name': 'TlistAddFiles'}, 'TlistUndebug', {'complete': 'dir', 'name': 'TlistAddFilesRecursive'}, 'TlistLock', 'TlistOpen', {'complete': 'buffer', 'name': 'TlistShowPrototype'}, 'TlistUnlock', 'TlistHighlightTag', 'Tlist', 'TlistClose', {'complete': 'file', 'name': 'TlistSessionSave'}, {'complete': 'buffer', 'name': 'TlistShowTag'}, 'TlistToggle', 'TlistUpdate', 'TlistMessages', 'TlistSync', {'complete': 'file', 'name': 'TlistSessionLoad'}]}}
+" NeoBundle 'mattn/emmet-vim'
+NeoBundleLazy 'mattn/emmet-vim', {'autoload': {'commands': ['Emmet', 'EmmetInstall']}}
 " NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundleLazy 'Source-Explorer-srcexpl.vim', {}
 NeoBundle 'ctags.vim'
@@ -216,8 +220,10 @@ NeoBundle 'smartchr'
 NeoBundle "itchyny/lightline.vim"
 NeoBundle "tsaleh/vim-matchit"
 NeoBundle 'closetag.vim'
-NeoBundle 'vim-scripts/YankRing.vim'
+" NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundleLazy 'vim-scripts/YankRing.vim', {'augroup': 'YankRing', 'autoload': {'commands': ['YRGetElem', 'YRPush', 'YRToggle', 'YRPaste', 'YRShow', 'YRMapsCreate', 'YRGetMultiple', 'YRPop', 'YRMapsDelete', 'YRSearch', 'YRYankCount', 'YRReplace', 'YRYankRange', 'YRCheckClipboard', 'YRDeleteRange', 'YRMapsMacro', 'YRClear']}}
 NeoBundle 'vim-jp/vimdoc-ja'
+" NeoBundleLazy 'vim-jp/vimdoc-ja', {'autoload': {'commands': ['help']}}
 " NeoBundle 'h1mesuke/vim-alignta'
 NeoBundleLazy 'h1mesuke/vim-alignta', {'autoload': {'unite_sources': ['alignta'], 'commands': [{'complete': 'customlist,s:complete_command_option', 'name': 'Alignta'}, {'complete': 'customlist,s:complete_command_option', 'name': 'Align'}]}}
 " NeoBundle 'taka84u9/vim-ref-ri'
@@ -231,7 +237,8 @@ NeoBundleLazy 'Shougo/vimfiler', {'augroup': 'vimfiler', 'autoload': {'unite_sou
 NeoBundleLazy 'sudo.vim', {'autoload': {'commands': ['SudoRead', 'SudoWrite']}}
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
-NeoBundle 'vim-scripts/VOoM'
+" NeoBundle 'vim-scripts/VOoM'
+NeoBundleLazy 'vim-scripts/VOoM', {'autoload': {'commands': ['VoomReloadVim', 'VoomFoldingCleanup', {'complete': 'custom,voom#Complete', 'name': 'Voom'}, 'Voominfo', {'complete': 'custom,voom#Complete', 'name': 'VoomToggle'}, 'Voomquit', 'Voomtoggle', 'VoomFoldingSave', 'VoomReloadAll', 'Voomexec', 'VoomSort', 'Voomhelp', 'VoomFoldingRestore', 'Voomgrep', 'Voomlog', 'Voomunl', 'VoomQuitAll']}}
 NeoBundle 'bkad/CamelCaseMotion'
 " NeoBundle 'rhysd/clever-f.vim'
 NeoBundleLazy 'rhysd/clever-f.vim', {'autoload': {'mappings': [['sxno', '<Plug>(clever-f-']]}}
@@ -254,7 +261,8 @@ NeoBundleLazy 'seventhsense/nerdtree', {'augroup': 'NERDTreeHijackNetrw', 'autol
 " NeoBundle 'LeafCage/nebula.vim'
 NeoBundleLazy 'LeafCage/nebula.vim', {'autoload': {'commands': ['NebulaPutLazy', 'NebulaPutFromClipboard', 'NebulaYankOptions', 'NebulaYankConfig', 'NebulaPutConfig', 'NebulaYankTap']}}
 " Unite source
-NeoBundle 'ujihisa/unite-gem'
+" NeoBundle 'ujihisa/unite-gem'
+NeoBundleLazy 'ujihisa/unite-gem', {'autoload': {'unite_sources': ['gem']}}
 NeoBundle 'pasela/unite-webcolorname'
 NeoBundle 'pekepeke/unite-fileline'
 NeoBundle 'h1mesuke/unite-outline'
@@ -274,7 +282,7 @@ NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-cucumber'
 NeoBundle 'tpope/vim-markdown'
 ""Theme
-" NeoBundle "tomasr/molokai"
+" NeoBundle 'tomasr/molokai'
 " NeoBundle 'desert256.vim'
 " NeoBundle 'jpo/vim-railscasts-theme'
 " NeoBundle 'vim-scripts/pyte'
