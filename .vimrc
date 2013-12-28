@@ -198,7 +198,21 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
 
 "Your Bundles here
-NeoBundle 'Shougo/neocomplcache'
+" NeoBundle 'Shougo/neocomplcache'
+function! s:meet_neocomplete_requirements()
+    return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
+endfunction
+
+if s:meet_neocomplete_requirements()
+    NeoBundle 'Shougo/neocomplete.vim'
+    NeoBundleFetch 'Shougo/neocomplcache.vim'
+else
+    NeoBundleFetch 'Shougo/neocomplete.vim'
+    NeoBundle 'Shougo/neocomplcache.vim'
+endif
+
+
+
 NeoBundle 'Shougo/neosnippet'
 " NeoBundle 'thinca/vim-ref'
 NeoBundleLazy 'thinca/vim-ref', {'autoload': {'unite_sources': ['ref'], 'mappings': [['sxn', '<Plug>(ref-keyword)']], 'commands': [{'complete': 'customlist,ref#complete', 'name': 'Ref'}, 'RefHistory']}}
@@ -254,7 +268,7 @@ NeoBundleLazy 'lilydjwg/colorizer', {'augroup': 'Colorizer', 'autoload': {'mappi
       " \ } }
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'sgur/vim-gitgutter'
 NeoBundle 'honza/vim-snippets'
 " NeoBundle 'seventhsense/nerdtree', 'development'
 NeoBundleLazy 'seventhsense/nerdtree', {'augroup': 'NERDTreeHijackNetrw', 'autoload': {'commands': ['NERDTreeMirror', 'NERDTreeClose', {'complete': 'dir', 'name': 'NERDTree'}, 'NERDTreeFocus', {'complete': 'customlist,nerdtree#completeBookmarks', 'name': 'NERDTreeFromBookmark'}, {'complete': 'dir', 'name': 'NERDTreeToggle'}, 'NERDTreeCWD', 'NERDTreeFind']}}
@@ -299,55 +313,205 @@ filetype plugin indent on     " required!
 colorscheme sexy-railscasts-256
 " colorscheme railscasts
 
-"------------------------------------
-" neocomplecache.vim
-"------------------------------------
-" 補完・履歴
-set infercase
-" " AutoComplPopを無効にする
-" let g:acp_enableAtStartup = 0
-" NeoComplCacheを有効にする
-let g:neocomplcache_enable_at_startup = 1
-" smarrt case有効化。 大文字が入力されるまで大文字小文字の区別を無視する
-let g:neocomplcache_enable_smart_case = 1
-" camel caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
-let g:neocomplcache_enable_camel_case_completion = 1
-" _(アンダーバー)区切りの補完を有効化
-let g:neocomplcache_enable_underbar_completion = 1
-" シンタックスをキャッシュするときの最小文字長を3に
-let g:neocomplcache_min_syntax_length = 3
-" cache skip
-let g:neocomplcache_skip_auto_completion_time = '0.3'
+if s:meet_neocomplete_requirements()
+  " 新しく追加した neocomplete の設定
+  "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+  " Disable AutoComplPop.
+  " let g:acp_enableAtStartup = 0
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-" neocomplcacheを自動的にロックするバッファ名のパターン
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-" -入力による候補番号の表示
-let g:neocomplcache_enable_quick_match = 1
-" 補完候補の一番先頭を選択状態にする(AutoComplPopと似た動作)
-let g:neocomplcache_enable_auto_select = 1
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'ruby' : $HOME.'/.ruby.dict',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
 
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scala' : $HOME.'/.vim/bundle/vim-scala/dict/scala.dict',
-    \ 'java' : $HOME.'/.vim/dict/java.dict',
-    \ 'c' : $HOME.'/.vim/dict/c.dict',
-    \ 'cpp' : $HOME.'/.vim/dict/cpp.dict',
-    \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
-    \ 'ocaml' : $HOME.'/.vim/dict/ocaml.dict',
-    \ 'perl' : $HOME.'/.vim/dict/perl.dict',
-    \ 'php' : $HOME.'/.vim/dict/php.dict',
-    \ 'scheme' : $HOME.'/.vim/dict/scheme.dict',
-    \ 'vm' : $HOME.'/.vim/dict/vim.dict'
-    \ }
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Define keyword.
- if !exists('g:neocomplcache_keyword_patterns')
- let g:neocomplcache_keyword_patterns = {}
- endif
- let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplete#undo_completion()
+  inoremap <expr><C-l>     neocomplete#complete_common_string()
 
+  " Recommended key-mappings.
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return neocomplete#close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-y>  neocomplete#close_popup()
+  inoremap <expr><C-e>  neocomplete#cancel_popup()
+  " Close popup by <Space>.
+  "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+  " For cursor moving in insert mode(Not recommended)
+  "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+  "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+  "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+  "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+  " Or set this.
+  "let g:neocomplete#enable_cursor_hold_i = 1
+  " Or set this.
+  "let g:neocomplete#enable_insert_char_pre = 1
+
+  " AutoComplPop like behavior.
+  "let g:neocomplete#enable_auto_select = 1
+
+  " Shell like behavior(not recommended).
+  "set completeopt+=longest
+  "let g:neocomplete#enable_auto_select = 1
+  "let g:neocomplete#disable_auto_complete = 1
+  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+  " Enable heavy omni completion.
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+  " For perlomni.vim setting.
+  " https://github.com/c9s/perlomni.vim
+  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+else
+  " 今までの neocomplcache の設定
+  "------------------------------------
+  " neocomplecache.vim
+  "------------------------------------
+  " 補完・履歴
+  set infercase
+  " " AutoComplPopを無効にする
+  " let g:acp_enableAtStartup = 0
+  " NeoComplCacheを有効にする
+  let g:neocomplcache_enable_at_startup = 1
+  " smarrt case有効化。 大文字が入力されるまで大文字小文字の区別を無視する
+  let g:neocomplcache_enable_smart_case = 1
+  " camel caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
+  let g:neocomplcache_enable_camel_case_completion = 1
+  " _(アンダーバー)区切りの補完を有効化
+  let g:neocomplcache_enable_underbar_completion = 1
+  " シンタックスをキャッシュするときの最小文字長を3に
+  let g:neocomplcache_min_syntax_length = 3
+  " cache skip
+  let g:neocomplcache_skip_auto_completion_time = '0.3'
+
+  " neocomplcacheを自動的にロックするバッファ名のパターン
+  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+  " -入力による候補番号の表示
+  let g:neocomplcache_enable_quick_match = 1
+  " 補完候補の一番先頭を選択状態にする(AutoComplPopと似た動作)
+  let g:neocomplcache_enable_auto_select = 1
+
+  " Define dictionary.
+  let g:neocomplcache_dictionary_filetype_lists = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scala' : $HOME.'/.vim/bundle/vim-scala/dict/scala.dict',
+        \ 'java' : $HOME.'/.vim/dict/java.dict',
+        \ 'c' : $HOME.'/.vim/dict/c.dict',
+        \ 'cpp' : $HOME.'/.vim/dict/cpp.dict',
+        \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
+        \ 'ocaml' : $HOME.'/.vim/dict/ocaml.dict',
+        \ 'perl' : $HOME.'/.vim/dict/perl.dict',
+        \ 'php' : $HOME.'/.vim/dict/php.dict',
+        \ 'scheme' : $HOME.'/.vim/dict/scheme.dict',
+        \ 'ruby' : $HOME.'/.vim/dict/ruby.dict',
+        \ 'vm' : $HOME.'/.vim/dict/vim.dict'
+        \ }
+
+  " Define keyword.
+  if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+  endif
+  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+  " 補完を選択しpopupを閉じる
+  inoremap <expr><C-y> neocomplcache#close_popup()
+  " 補完をキャンセルしpopupを閉じる
+  inoremap <expr><C-e> neocomplcache#cancel_popup()
+  " TABで補完できるようにする
+  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  " undo
+  inoremap <expr><C-g>     neocomplcache#undo_completion()
+  " 補完候補の共通部分までを補完する
+  inoremap <expr><C-l> neocomplcache#complete_common_string()
+  " C-kを押すと行末まで削除
+  inoremap <C-k> <C-o>D
+  " C-nでneocomplcache補完
+  inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
+  " C-pでkeyword補完
+  inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
+  " 補完候補が出ていたら確定、なければ改行
+  ""inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
+
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcache#manual_omni_complete()
+
+  " FileType毎のOmni補完を設定
+  autocmd FileType python set omnifunc=pythoncomplete#Complete
+  autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+  autocmd FileType c set omnifunc=ccomplete#Complete
+  autocmd FileType ruby set omnifunc=rubycomplete#Complete
+
+  " Enable heavy omni completion.
+  if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+  endif
+  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+  let g:neocomplcache_enable_fuzzy_completion = 1
+
+  let g:neocomplcache_source_rank = {
+        \ 'snippets_complete' : 5,
+        \ 'dictionary_complete' : 8,
+        \ 'jscomplete' : 500,
+        \ }
+
+  " domも含める
+  let g:jscomplete_use = ['dom']
+
+  imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
+
+  " NeoComplCache-rsense
+  let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
+
+endif
 " ユーザー定義スニペット保存ディレクトリ
 let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets'
 
@@ -357,11 +521,11 @@ smap <silent>,, <Plug>(neosnippet_expand_or_jump))
 
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
@@ -376,70 +540,10 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim/snippets'
 
-" 補完を選択しpopupを閉じる
-inoremap <expr><C-y> neocomplcache#close_popup()
-" 補完をキャンセルしpopupを閉じる
-inoremap <expr><C-e> neocomplcache#cancel_popup()
-" TABで補完できるようにする
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" undo
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-" 補完候補の共通部分までを補完する
-inoremap <expr><C-l> neocomplcache#complete_common_string()
-" C-kを押すと行末まで削除
-inoremap <C-k> <C-o>D
-" C-nでneocomplcache補完
-inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
-" C-pでkeyword補完
-inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
-" 補完候補が出ていたら確定、なければ改行
-""inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcache#manual_omni_complete()
-
-" FileType毎のOmni補完を設定
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-
-let g:neocomplcache_enable_fuzzy_completion = 1
-
-let g:neocomplcache_source_rank = {
-  \ 'snippets_complete' : 5,
-  \ 'dictionary_complete' : 8,
-  \ 'jscomplete' : 500,
-  \ }
-
-" domも含める
-let g:jscomplete_use = ['dom']
-
-imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
-
-" NeoComplCache-rsense
-let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
-
 " for ZenCoding.vim
 let g:user_zen_settings = {
-\ 'lang': 'ja'
-\}
+      \ 'lang': 'ja'
+      \}
 let g:use_zen_complete_tag = 1
 
 "" unite
@@ -595,31 +699,31 @@ let g:quickrun_config._ = {'runner' : 'vimproc'}
 
 " bundleを利用する設定。
 let g:quickrun_config['rspec/bundle'] = {
-  \ 'type': 'rspec/bundle',
-  \ 'command': 'rspec',
-  \ 'exec': 'bundle exec %c %s',
-  \ 'outputter': 'rspec_outputter',
-  \ 'split': ''
-  \}
+      \ 'type': 'rspec/bundle',
+      \ 'command': 'rspec',
+      \ 'exec': 'bundle exec %c %s',
+      \ 'outputter': 'rspec_outputter',
+      \ 'split': ''
+      \}
 
 " 通常で利用する設定。
 let g:quickrun_config['rspec/normal'] = {
-  \ 'type': 'rspec/normal',
-  \ 'command': 'rspec',
-  \ 'exec': '%c %s',
-  \ 'outputter': 'rspec_outputter',
-  \ 'vsplit': ''
-  \}
+      \ 'type': 'rspec/normal',
+      \ 'command': 'rspec',
+      \ 'exec': '%c %s',
+      \ 'outputter': 'rspec_outputter',
+      \ 'vsplit': ''
+      \}
 
 "※重要
 "※ここで動作を変更する
 "どの場面で使うか（rubyかrailsか）によってコマンドが変わるので
 "手動でコメントアウトをつけたり外したりして利用している。
 function! RSpecQuickrun()
-" 通常の場合。（rubyなど）
-""let b:quickrun_config = {'type' : 'rspec/normal'}
-" bundle、Gemfileを利用している場合。（railsなど）
-let b:quickrun_config = {'type' : 'rspec/bundle'}
+  " 通常の場合。（rubyなど）
+  ""let b:quickrun_config = {'type' : 'rspec/normal'}
+  " bundle、Gemfileを利用している場合。（railsなど）
+  let b:quickrun_config = {'type' : 'rspec/bundle'}
 endfunction
 autocmd BufReadPost *_spec.rb call RSpecQuickrun()
 
@@ -659,8 +763,8 @@ let g:yankring_history_file = '.yankring_history'"
 ""gundo.vim 
 nnoremap <F3> :GundoToggle<CR>
 if has('persistent_undo')
-    set undofile
-    set undodir=./.vimundo,~/.vim/undo
+  set undofile
+  set undodir=./.vimundo,~/.vim/undo
 endif
 
 ""NERD-COMMENTER
@@ -702,20 +806,20 @@ nmap ,rr :<C-u>Ref refe<Space>
 
 "webdictサイトの設定
 let g:ref_source_webdict_sites = {
-\   'je': {
-\     'url': 'http://dictionary.infoseek.ne.jp/jeword/%s',
-\   },
-\   'ej': {
-\     'url': 'http://dictionary.infoseek.ne.jp/ejword/%s',
-\   },
-\   'wiki': {
-\     'url': 'http://ja.wikipedia.org/wiki/%s',
-\   },
-\ }
- 
+      \   'je': {
+      \     'url': 'http://dictionary.infoseek.ne.jp/jeword/%s',
+      \   },
+      \   'ej': {
+      \     'url': 'http://dictionary.infoseek.ne.jp/ejword/%s',
+      \   },
+      \   'wiki': {
+      \     'url': 'http://ja.wikipedia.org/wiki/%s',
+      \   },
+      \ }
+
 "デフォルトサイト
 let g:ref_source_webdict_sites.default = 'ej'
- 
+
 "出力に対するフィルタ。最初の数行を削除
 function! g:ref_source_webdict_sites.je.filter(output)
   return join(split(a:output, "\n")[15 :], "\n")
@@ -735,8 +839,8 @@ au FileType ruby,eruby setl tags+=~/gtags
 ""syntastic
 let g:syntastic_javascript_checker = 'jshint'
 " let g:syntastic_mode_map = { 'mode': 'active',
-      " \ 'active_filetypes': [],
-      " \ 'passive_filetypes': ['javascript'] }
+" \ 'active_filetypes': [],
+" \ 'passive_filetypes': ['javascript'] }
 
 ""vim-eco
 autocmd BufNewFile,BufRead *.eco set filetype=eco
@@ -769,46 +873,46 @@ xmap <silent> ie <Plug>CamelCaseMotion_ie
 " <!-- /div#hoge.fuga --></div>
 
 function! Endtagcomment()
-    let reg_save = @@
+  let reg_save = @@
 
-    try
-        silent normal vaty
-    catch
-        execute "normal \<Esc>"
-        echohl ErrorMsg
-        echo 'no match html tags'
-        echohl None
-        return
-    endtry
+  try
+    silent normal vaty
+  catch
+    execute "normal \<Esc>"
+    echohl ErrorMsg
+    echo 'no match html tags'
+    echohl None
+    return
+  endtry
 
-    let html = @@
+  let html = @@
 
-    let start_tag = matchstr(html, '\v(\<.{-}\>)')
-    let tag_name  = matchstr(start_tag, '\v([a-zA-Z]+)')
+  let start_tag = matchstr(html, '\v(\<.{-}\>)')
+  let tag_name  = matchstr(start_tag, '\v([a-zA-Z]+)')
 
-    let id = ''
-    let id_match = matchlist(start_tag, '\vid\=["'']([^"'']+)["'']')
-    if exists('id_match[1]')
-        let id = '#' . id_match[1]
-    endif
+  let id = ''
+  let id_match = matchlist(start_tag, '\vid\=["'']([^"'']+)["'']')
+  if exists('id_match[1]')
+    let id = '#' . id_match[1]
+  endif
 
-    let class = ''
-    let class_match = matchlist(start_tag, '\vclass\=["'']([^"'']+)["'']')
-    if exists('class_match[1]')
-        let class = '.' . join(split(class_match[1], '\v\s+'), '.')
-    endif
+  let class = ''
+  let class_match = matchlist(start_tag, '\vclass\=["'']([^"'']+)["'']')
+  if exists('class_match[1]')
+    let class = '.' . join(split(class_match[1], '\v\s+'), '.')
+  endif
 
-    execute "normal `>va<\<Esc>`<"
+  execute "normal `>va<\<Esc>`<"
 
-    let comment = g:endtagcommentFormat
-    let comment = substitute(comment, '%tag_name', tag_name, 'g')
-    let comment = substitute(comment, '%id', id, 'g')
-    let comment = substitute(comment, '%class', class, 'g')
-    let @@ = comment
+  let comment = g:endtagcommentFormat
+  let comment = substitute(comment, '%tag_name', tag_name, 'g')
+  let comment = substitute(comment, '%id', id, 'g')
+  let comment = substitute(comment, '%class', class, 'g')
+  let @@ = comment
 
-    normal ""P
+  normal ""P
 
-    let @@ = reg_save
+  let @@ = reg_save
 endfunction
 
 let g:endtagcommentFormat = '<!-- /%tag_name%id%class -->'
@@ -886,7 +990,7 @@ inoremap <silent> <S-Tab> <C-g>u<C-d>
 
 "undo
 inoremap <silent> <C-u> <C-g>u<C-r>=MyExecExCommand('undo', 'onemore')<CR>
- 
+
 "新行挿入
 inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col('$'))")<CR><CR>
 """"""""""""""""""""""""""""""
@@ -895,65 +999,65 @@ inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col(
 "カーソル位置が見かけの行頭の場合は真の行頭へ。
 """"""""""""""""""""""""""""""
 function! MyJumptoBol(sep)
-if col('.') == 1
-call cursor(line('.')-1, col('$'))
-call cursor(line('.'), col('$'))
-return ''
-endif
-if matchend(strpart(getline('.'), 0, col('.')), '[[:blank:]]\+') >= col('.')-1
-silent exec 'normal! 0'
-return ''
-endif
-if a:sep != ''
-call search('[^'.a:sep.']\+', 'bW', line("."))
-if col('.') == 1
-silent exec 'normal! ^'
-endif
-return ''
-endif
-exec 'normal! ^'
-return ''
+  if col('.') == 1
+    call cursor(line('.')-1, col('$'))
+    call cursor(line('.'), col('$'))
+    return ''
+  endif
+  if matchend(strpart(getline('.'), 0, col('.')), '[[:blank:]]\+') >= col('.')-1
+    silent exec 'normal! 0'
+    return ''
+  endif
+  if a:sep != ''
+    call search('[^'.a:sep.']\+', 'bW', line("."))
+    if col('.') == 1
+      silent exec 'normal! ^'
+    endif
+    return ''
+  endif
+  exec 'normal! ^'
+  return ''
 endfunction
- 
+
 """"""""""""""""""""""""""""""
 "sepが空でなければ、sepをセパレータとしてジャンプ。
 "見つからなければ行末へ。
 """"""""""""""""""""""""""""""
 function! MyJumptoEol(sep)
-if col('.') == col('$')
-silent exec 'normal! w'
-return ''
-endif
- 
-if a:sep != ''
-let prevcol = col('.')
-call search('['.a:sep.']\+[^'.a:sep.']', 'eW', line("."))
-if col('.') != prevcol
-return ''
-endif
-endif
-call cursor(line('.'), col('$'))
-return ''
+  if col('.') == col('$')
+    silent exec 'normal! w'
+    return ''
+  endif
+
+  if a:sep != ''
+    let prevcol = col('.')
+    call search('['.a:sep.']\+[^'.a:sep.']', 'eW', line("."))
+    if col('.') != prevcol
+      return ''
+    endif
+  endif
+  call cursor(line('.'), col('$'))
+  return ''
 endfunction
- 
+
 """"""""""""""""""""""""""""""
 "IMEの状態とカーソル位置保存のため<C-r>を使用してコマンドを実行。
 """"""""""""""""""""""""""""""
 function! MyExecExCommand(cmd, ...)
-let saved_ve = &virtualedit
-let index = 1
-while index <= a:0
-if a:{index} == 'onemore'
-silent setlocal virtualedit+=onemore
-endif
-let index = index + 1
-endwhile
- 
-silent exec a:cmd
-if a:0 > 0
-silent exec 'setlocal virtualedit='.saved_ve
-endif
-return ''
+  let saved_ve = &virtualedit
+  let index = 1
+  while index <= a:0
+    if a:{index} == 'onemore'
+      silent setlocal virtualedit+=onemore
+    endif
+    let index = index + 1
+  endwhile
+
+  silent exec a:cmd
+  if a:0 > 0
+    silent exec 'setlocal virtualedit='.saved_ve
+  endif
+  return ''
 endfunction
 
 "VimFiler"
