@@ -224,8 +224,8 @@ NeoBundleLazy 'tpope/vim-surround', {'autoload': {'mappings': ['<Plug>Ysurround'
 NeoBundle 'The-NERD-Commenter'
 " NeoBundle 'taglist.vim'
 NeoBundleLazy 'taglist.vim', {'augroup': 'END', 'autoload': {'commands': [{'complete': 'file', 'name': 'TlistDebug'}, {'complete': 'file', 'name': 'TlistAddFiles'}, 'TlistUndebug', {'complete': 'dir', 'name': 'TlistAddFilesRecursive'}, 'TlistLock', 'TlistOpen', {'complete': 'buffer', 'name': 'TlistShowPrototype'}, 'TlistUnlock', 'TlistHighlightTag', 'Tlist', 'TlistClose', {'complete': 'file', 'name': 'TlistSessionSave'}, {'complete': 'buffer', 'name': 'TlistShowTag'}, 'TlistToggle', 'TlistUpdate', 'TlistMessages', 'TlistSync', {'complete': 'file', 'name': 'TlistSessionLoad'}]}}
-" NeoBundle 'mattn/emmet-vim'
-NeoBundleLazy 'mattn/emmet-vim', {'autoload': {'commands': ['Emmet', 'EmmetInstall']}}
+NeoBundle 'mattn/emmet-vim'
+" NeoBundleLazy 'mattn/emmet-vim', {'autoload': {'commands': ['Emmet', 'EmmetInstall']}}
 " NeoBundle 'Source-Explorer-srcexpl.vim'
 NeoBundleLazy 'Source-Explorer-srcexpl.vim', {}
 NeoBundle 'ctags.vim'
@@ -545,10 +545,55 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim/snippets'
 
 " for ZenCoding.vim
-let g:user_zen_settings = {
-      \ 'lang': 'ja'
+" let g:user_zen_settings = {
+      " \ 'lang': 'ja'
+      " \}
+" let g:use_zen_complete_tag = 1
+" for emmet
+let g:user_emmet_settings = {
+      \  'lang' : 'ja',
+      \  'html' : {
+      \    'filters' : 'html',
+      \    'indentation' : ' '
+      \  },
+      \  'perl' : {
+      \    'indentation' : '  ',
+      \    'aliases' : {
+      \      'req' : "require '|'"
+      \    },
+      \    'snippets' : {
+      \      'use' : "use strict\nuse warnings\n\n",
+      \      'w' : "warn \"${cursor}\";",
+      \    },
+      \  },
+      \  'php' : {
+      \    'extends' : 'html',
+      \    'filters' : 'html,c',
+      \  },
+      \  'css' : {
+      \    'filters' : 'fc',
+      \  },
+      \  'javascript' : {
+      \    'snippets' : {
+      \      'jq' : "$(function() {\n\t${cursor}${child}\n});",
+      \      'jq:each' : "$.each(arr, function(index, item)\n\t${child}\n});",
+      \      'fn' : "(function() {\n\t${cursor}\n})();",
+      \      'tm' : "setTimeout(function() {\n\t${cursor}\n}, 100);",
+      \    },
+      \  },
+      \ 'java' : {
+      \  'indentation' : '    ',
+      \  'snippets' : {
+      \   'main': "public static void main(String[] args) {\n\t|\n}",
+      \   'println': "System.out.println(\"|\");",
+      \   'class': "public class | {\n}\n",
+      \  }
+      \ },
+      \ 'custom_expands1' : {
+      \    '^\%(lorem\|lipsum\)\(\d*\)$' : function('emmet#lorem#ja#expand'),
+      \  }
       \}
-let g:use_zen_complete_tag = 1
+let g:use_emmet_complete_tag = 1
 
 "" unite
 " 入力モードで開始
