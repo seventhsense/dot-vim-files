@@ -1,13 +1,11 @@
 My vim files
 
-cd ~
-git clone git://github.com/seventhsense/dot-vim-files.git
 
 1 set .vimrc
 
-cd
-git clone 
-ln -s dot-vim-files/.vimrc .
+cd ~
+git clone git://github.com/seventhsense/dot-vim-files.git
+ln -s ~/dot-vim-files/.vimrc .
 
 2 install ctags
 
@@ -19,6 +17,7 @@ ln -s dot-vim-files/.vimrc .
 
 4 for ruby and rails
  cp dot-vim-files/snippets ~/.vim/
+ cp dot-vim-files/dict ~/.vim/
 
 5 Install plugins
 
