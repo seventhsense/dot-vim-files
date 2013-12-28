@@ -201,85 +201,84 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'thinca/vim-ref'
-NeoBundle 'thinca/vim-quickrun'
+" NeoBundle 'thinca/vim-quickrun'
+NeoBundleLazy 'thinca/vim-quickrun', {'autoload': {'mappings': [['sxn', '<Plug>(quickrun']], 'commands': [{'complete': 'customlist,quickrun#complete', 'name': 'QuickRun'}]}}
 NeoBundle 'AutoClose'
-NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'taglist.vim'
 NeoBundle 'mattn/emmet-vim'
-NeoBundle 'Source-Explorer-srcexpl.vim'
+" NeoBundle 'Source-Explorer-srcexpl.vim'
+NeoBundleLazy 'Source-Explorer-srcexpl.vim', {}
 NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
 NeoBundle "itchyny/lightline.vim"
-NeoBundle 'vim-coffee-script'
-NeoBundle 'skwp/vim-rspec'
-NeoBundle 'tpope/vim-cucumber'
-NeoBundle 'basyura/unite-rails'
-NeoBundle "tomasr/molokai"
 NeoBundle "tsaleh/vim-matchit"
-NeoBundle 'desert256.vim'
-NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'closetag.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'vim-jp/vimdoc-ja'
-NeoBundle 'h1mesuke/vim-alignta'
-NeoBundle 'taka84u9/vim-ref-ri'
-NeoBundle 'pasela/unite-webcolorname'
+" NeoBundle 'h1mesuke/vim-alignta'
+NeoBundleLazy 'h1mesuke/vim-alignta', {'autoload': {'unite_sources': ['alignta'], 'commands': [{'complete': 'customlist,s:complete_command_option', 'name': 'Alignta'}, {'complete': 'customlist,s:complete_command_option', 'name': 'Align'}]}}
+" NeoBundle 'taka84u9/vim-ref-ri'
+NeoBundleLazy 'taka84u9/vim-ref-ri', {'autoload': {'commands': ['HtmlHiLink']}}
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'sudo.vim'
+" NeoBundle 'Shougo/vimfiler'
+NeoBundleLazy 'Shougo/vimfiler', {'augroup': 'vimfiler', 'autoload': {'unite_sources': ['vimfiler_drive', 'vimfiler_execute', 'vimfiler_history', 'vimfiler_mask', 'vimfiler_popd', 'vimfiler_sort'], 'mappings': [['n', '<Plug>(vimfiler_']], 'commands': [{'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerCurrentDir'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Read'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFiler'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerBufferDir'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerSimple'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerTab'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Edit'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerExplorer'}, 'VimFilerClose', {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerCreate'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerSplit'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Write'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerDouble'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Source'}]}}
+" NeoBundle 'sudo.vim'
+NeoBundleLazy 'sudo.vim', {'autoload': {'commands': ['SudoRead', 'SudoWrite']}}
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
-NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/pyte'
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'pekepeke/titanium-vim'
-NeoBundle 'pekepeke/unite-fileline'
-NeoBundle 'ujihisa/unite-gem'
 NeoBundle 'vim-scripts/VOoM'
-NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'bkad/CamelCaseMotion'
-NeoBundle 'mklabs/vim-backbone'
-" Railsプロジェクトで,Unite rails_best_practices
-" NeoBundle 'taichouchou2/unite-rails_best_practices',{
+" NeoBundle 'rhysd/clever-f.vim'
+NeoBundleLazy 'rhysd/clever-f.vim', {'autoload': {'mappings': [['sxno', '<Plug>(clever-f-']]}}
+" NeoBundle 'lilydjwg/colorizer'
+NeoBundleLazy 'lilydjwg/colorizer', {'augroup': 'Colorizer', 'autoload': {'mappings': [['n', '<Plug>Colorizer']], 'commands': ['ColorToggle', 'ColorHighlight', 'ColorClear']}}
+" NeoBundle 'Shougo/neocomplcache-rsense', {
+      " \ 'depends': 'Shougo/neocomplcache',
+      " \ 'autoload': { 'filetypes': 'ruby' }}
+" NeoBundleLazy 'taichouchou2/rsense-0.3', {
       " \ 'build' : {
-      " \     'mac' :  'gem install rails_best_practices',
-      " \     'unix' : 'gem install rails_best_practices',
-      " \  }}
-
-" rubyのファイルを開きながら、Unite reek
-" NeoBundle 'taichouchou2/unite-reek',{
-      " \ 'build' : {
-      " \     'mac' :  'gem install reek',
-      " \     'unix' : 'gem install reek',
-      " \  }}
-NeoBundle 'tpope/vim-bundler'
-NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'lilydjwg/colorizer'
-NeoBundle 'Shougo/neocomplcache-rsense', {
-      \ 'depends': 'Shougo/neocomplcache',
-      \ 'autoload': { 'filetypes': 'ruby' }}
-NeoBundleLazy 'taichouchou2/rsense-0.3', {
-      \ 'build' : {
-      \    'mac': 'ruby etc/config.rb > ~/.rsense',
-      \    'unix': 'ruby etc/config.rb > ~/.rsense',
-      \ } }
-" js BDDツール
-NeoBundle 'claco/jasmine.vim'
+      " \    'mac': 'ruby etc/config.rb > ~/.rsense',
+      " \    'unix': 'ruby etc/config.rb > ~/.rsense',
+      " \ } }
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'heavenshell/vim-jsdoc'
-" NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'jpo/vim-railscasts-theme'
-NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
-NeoBundle 'tpope/vim-markdown'
 NeoBundle 'honza/vim-snippets'
-NeoBundle 'seventhsense/nerdtree', 'development'
+" NeoBundle 'seventhsense/nerdtree', 'development'
+NeoBundleLazy 'seventhsense/nerdtree', {'augroup': 'NERDTreeHijackNetrw', 'autoload': {'commands': ['NERDTreeMirror', 'NERDTreeClose', {'complete': 'dir', 'name': 'NERDTree'}, 'NERDTreeFocus', {'complete': 'customlist,nerdtree#completeBookmarks', 'name': 'NERDTreeFromBookmark'}, {'complete': 'dir', 'name': 'NERDTreeToggle'}, 'NERDTreeCWD', 'NERDTreeFind']}}
+" NeoBundle 'LeafCage/nebula.vim'
+NeoBundleLazy 'LeafCage/nebula.vim', {'autoload': {'commands': ['NebulaPutLazy', 'NebulaPutFromClipboard', 'NebulaYankOptions', 'NebulaYankConfig', 'NebulaPutConfig', 'NebulaYankTap']}}
+" Unite source
+NeoBundle 'ujihisa/unite-gem'
+NeoBundle 'pasela/unite-webcolorname'
+NeoBundle 'pekepeke/unite-fileline'
+NeoBundle 'h1mesuke/unite-outline'
+""Language
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'pekepeke/titanium-vim'
+NeoBundle 'tpope/vim-bundler'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'basyura/unite-rails'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'heavenshell/vim-jsdoc'
+NeoBundle 'claco/jasmine.vim'
+NeoBundle 'mklabs/vim-backbone'
+NeoBundle 'AndrewRadev/vim-eco'
+NeoBundle 'vim-coffee-script'
+NeoBundle 'skwp/vim-rspec'
+NeoBundle 'tpope/vim-cucumber'
+NeoBundle 'tpope/vim-markdown'
+""Theme
+" NeoBundle "tomasr/molokai"
+" NeoBundle 'desert256.vim'
+" NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
 
 " NeoBundleLast...
 " NeoBundleEnd...
