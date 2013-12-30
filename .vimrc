@@ -886,7 +886,7 @@ nmap <Leader>re :<C-u>Ref webdict ej<Space>
 au FileType ruby,eruby setl tags+=~/gtags
 
 ""syntastic
-let g:syntastic_javascript_checker = 'jshint'
+let g:syntastic_javascript_checkers = ['jshint']
 " let g:syntastic_mode_map = { 'mode': 'active',
 " \ 'active_filetypes': [],
 " \ 'passive_filetypes': ['javascript'] }
