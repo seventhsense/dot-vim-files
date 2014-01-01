@@ -2,6 +2,9 @@
 set nocompatible
 "256色表示
 set t_Co=256 
+"エンコーディング
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 "ステータスライン表示
 set laststatus=2
 "ステータスライン表示
@@ -201,7 +204,7 @@ NeoBundle 'Shougo/unite.vim'
 " NeoBundle 'Shougo/neocomplcache'
 function! s:meet_neocomplete_requirements()
     return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
-endfunction
+  endfunction
 
 if s:meet_neocomplete_requirements()
     NeoBundle 'Shougo/neocomplete.vim'
@@ -318,6 +321,7 @@ if s:meet_neocomplete_requirements()
   "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
   " Disable AutoComplPop.
   " let g:acp_enableAtStartup = 0
+  echomsg "using neocomplete"
   " Use neocomplete.
   let g:neocomplete#enable_at_startup = 1
   " Use smartcase.
@@ -374,7 +378,7 @@ if s:meet_neocomplete_requirements()
   "let g:neocomplete#enable_insert_char_pre = 1
 
   " AutoComplPop like behavior.
-  "let g:neocomplete#enable_auto_select = 1
+  let g:neocomplete#enable_auto_select = 1
 
   " Shell like behavior(not recommended).
   "set completeopt+=longest
@@ -408,6 +412,7 @@ else
   "------------------------------------
   " neocomplecache.vim
   "------------------------------------
+  echomsg "using neocomplecache"
   " 補完・履歴
   set infercase
   " " AutoComplPopを無効にする
@@ -431,6 +436,9 @@ else
   let g:neocomplcache_enable_quick_match = 1
   " 補完候補の一番先頭を選択状態にする(AutoComplPopと似た動作)
   let g:neocomplcache_enable_auto_select = 1
+
+  ""avoid rails.vim
+  let g:neocomplcache_force_overwrite_completefunc=1
 
   " Define dictionary.
   let g:neocomplcache_dictionary_filetype_lists = {
