@@ -5,6 +5,8 @@ set t_Co=256
 "エンコーディング
 set encoding=utf-8
 set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+"locale 設定
+language ja_JP.UTF8
 "ステータスライン表示
 set laststatus=2
 "ステータスライン表示
@@ -321,7 +323,7 @@ if s:meet_neocomplete_requirements()
   "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
   " Disable AutoComplPop.
   " let g:acp_enableAtStartup = 0
-  echomsg "using neocomplete"
+  " echomsg "using neocomplete"
   " Use neocomplete.
   let g:neocomplete#enable_at_startup = 1
   " Use smartcase.
@@ -329,6 +331,8 @@ if s:meet_neocomplete_requirements()
   " Set minimum syntax keyword length.
   let g:neocomplete#sources#syntax#min_keyword_length = 3
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  " rails.vimとの競合
+  let g:neocomplete#force_overwrite_completefunc=1
 
   " Define dictionary.
   let g:neocomplete#sources#dictionary#dictionaries = {
@@ -412,7 +416,7 @@ else
   "------------------------------------
   " neocomplecache.vim
   "------------------------------------
-  echomsg "using neocomplecache"
+  " echomsg "using neocomplecache"
   " 補完・履歴
   set infercase
   " " AutoComplPopを無効にする
@@ -992,6 +996,7 @@ inoremap <silent> <C-k> k
 
 " vimdoc-ja
 " helptags ~/.vim/bundle/vimdoc-ja/doc
+set helplang=ja,en
 
 "tags
 "ctrl + [のとき選択できるようにする
