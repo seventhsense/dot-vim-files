@@ -307,8 +307,10 @@ NeoBundle 'tpope/vim-markdown'
 " NeoBundle 'vim-scripts/pyte'
 NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
 
-" NeoBundle 'itchyny/calendar.vim'
+" New Plugin
 NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
+NeoBundle 'koron/codic-vim'
+NeoBundle 'rhysd/unite-codic.vim'
 
 " NeoBundleLast...
 " NeoBundleEnd...
