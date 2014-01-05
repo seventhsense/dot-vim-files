@@ -6,7 +6,7 @@ set t_Co=256
 set encoding=utf-8
 set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 "locale 設定
-language ja_JP.UTF8
+language ja_JP.UTF-8
 "ステータスライン表示
 set laststatus=2
 "ステータスライン表示
@@ -306,6 +306,9 @@ NeoBundle 'tpope/vim-markdown'
 " NeoBundle 'jpo/vim-railscasts-theme'
 " NeoBundle 'vim-scripts/pyte'
 NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
+
+" NeoBundle 'itchyny/calendar.vim'
+NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
 
 " NeoBundleLast...
 " NeoBundleEnd...
