@@ -4,7 +4,7 @@ set nocompatible
 set t_Co=256 
 "エンコーディング
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+" set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 "locale 設定
 language ja_JP.UTF-8
 "ステータスライン表示
@@ -63,6 +63,12 @@ endif
  set backspace=indent,eol,start
 " ステータスラインにコマンドを表示
 set showcmd
+
+"Emacs風移動
+noremap <C-a> <Home>
+noremap <C-e> <End>
+noremap <C-d> <Del>
+
 
 "入力モード時、ステータスラインのカラーを変更
 " augroup InsertHook
@@ -224,8 +230,8 @@ NeoBundleLazy 'thinca/vim-ref', {'autoload': {'unite_sources': ['ref'], 'mapping
 " NeoBundle 'thinca/vim-quickrun'
 NeoBundleLazy 'thinca/vim-quickrun', {'autoload': {'mappings': [['sxn', '<Plug>(quickrun']], 'commands': [{'complete': 'customlist,quickrun#complete', 'name': 'QuickRun'}]}}
 NeoBundle 'AutoClose'
-" NeoBundle 'tpope/vim-surround'
-NeoBundleLazy 'tpope/vim-surround', {'autoload': {'mappings': ['<Plug>Ysurround', '<Plug>YSsurround', '<Plug>YSurround', '<Plug>Dsurround', ['i', '<Plug>ISurround'], ['sx', '<Plug>VgSurround'], '<Plug>Yssurround', '<Plug>SurroundRepeat', '<Plug>Csurround', ['i', '<Plug>Isurround'], ['sx', '<Plug>VSurround']]}}
+NeoBundle 'tpope/vim-surround'
+" NeoBundleLazy 'tpope/vim-surround', {'autoload': {'mappings': ['<Plug>Ysurround', '<Plug>YSsurround', '<Plug>YSurround', '<Plug>Dsurround', ['i', '<Plug>ISurround'], ['sx', '<Plug>VgSurround'], '<Plug>Yssurround', '<Plug>SurroundRepeat', '<Plug>Csurround', ['i', '<Plug>Isurround'], ['sx', '<Plug>VSurround']]}}
 NeoBundle 'The-NERD-Commenter'
 " NeoBundle 'taglist.vim'
 NeoBundleLazy 'taglist.vim', {'augroup': 'END', 'autoload': {'commands': [{'complete': 'file', 'name': 'TlistDebug'}, {'complete': 'file', 'name': 'TlistAddFiles'}, 'TlistUndebug', {'complete': 'dir', 'name': 'TlistAddFilesRecursive'}, 'TlistLock', 'TlistOpen', {'complete': 'buffer', 'name': 'TlistShowPrototype'}, 'TlistUnlock', 'TlistHighlightTag', 'Tlist', 'TlistClose', {'complete': 'file', 'name': 'TlistSessionSave'}, {'complete': 'buffer', 'name': 'TlistShowTag'}, 'TlistToggle', 'TlistUpdate', 'TlistMessages', 'TlistSync', {'complete': 'file', 'name': 'TlistSessionLoad'}]}}
@@ -252,8 +258,8 @@ NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-fugitive'
 " NeoBundle 'Shougo/vimfiler'
 NeoBundleLazy 'Shougo/vimfiler', {'augroup': 'vimfiler', 'autoload': {'unite_sources': ['vimfiler_drive', 'vimfiler_execute', 'vimfiler_history', 'vimfiler_mask', 'vimfiler_popd', 'vimfiler_sort'], 'mappings': [['n', '<Plug>(vimfiler_']], 'commands': [{'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerCurrentDir'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Read'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFiler'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerBufferDir'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerSimple'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerTab'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Edit'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerExplorer'}, 'VimFilerClose', {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerCreate'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerSplit'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Write'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerDouble'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Source'}]}}
-" NeoBundle 'sudo.vim'
-NeoBundleLazy 'sudo.vim', {'autoload': {'commands': ['SudoRead', 'SudoWrite']}}
+NeoBundle 'sudo.vim'
+" NeoBundleLazy 'sudo.vim', {'autoload': {'commands': ['SudoRead', 'SudoWrite']}}
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
 " NeoBundle 'vim-scripts/VOoM'
@@ -307,8 +313,12 @@ NeoBundle 'tpope/vim-markdown'
 " NeoBundle 'vim-scripts/pyte'
 NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
 
-" NeoBundle 'itchyny/calendar.vim'
+" New Plugin
 NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
+NeoBundle 'koron/codic-vim'
+NeoBundle 'rhysd/unite-codic.vim'
+NeoBundle 'tpope/vim-vinegar'
+NeoBundle 'Shougo/neosnippet-snippets'
 
 " NeoBundleLast...
 " NeoBundleEnd...
