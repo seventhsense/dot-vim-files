@@ -318,6 +318,7 @@ NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'c
 NeoBundle 'koron/codic-vim'
 NeoBundle 'rhysd/unite-codic.vim'
 NeoBundle 'tpope/vim-vinegar'
+NeoBundle 'Shougo/neosnippet-snippets'
 
 " NeoBundleLast...
 " NeoBundleEnd...
