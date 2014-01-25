@@ -622,7 +622,11 @@ let g:use_emmet_complete_tag = 1
 
 "" unite
 " 入力モードで開始
-let g:unite_enable_start_insert=1
+let g:unite_enable_start_insert = 1
+
+"大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
 
 "mru,reg,buf
 noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
@@ -643,7 +647,7 @@ noremap :ul :<C-u>Unite line<CR>
 noremap :; :<C-u>Unite line<CR>
 
 ""grep
-noremap :g :<C-u>Unite grep<CR>
+noremap :g :<C-u>Unite grep -buffer-name=search-buffer<CR>
 ""file
 noremap :f :<C-u>Unite file_rec<CR>
 
@@ -726,7 +730,7 @@ let g:NERDTreeMouseMode=0
 " let g:Powerline_colorscheme = 'skwp'
 
 """RSPEC実行
-nmap <F11>  :QuickRun 
+nmap <F10>  :QuickRun 
 "quickrunの前設定を初期化する。
 let g:quickrun_config = {}
 
