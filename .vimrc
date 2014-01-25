@@ -647,7 +647,14 @@ noremap :ul :<C-u>Unite line<CR>
 noremap :; :<C-u>Unite line<CR>
 
 ""grep
-noremap :g :<C-u>Unite grep -buffer-name=search-buffer<CR>
+noremap :g :<C-u>Unite grep -buffer-name=search-buffern<CR>
+"agを使えたら使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
 ""file
 noremap :f :<C-u>Unite file_rec<CR>
 
