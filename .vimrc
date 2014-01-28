@@ -322,6 +322,9 @@ NeoBundle 'rhysd/unite-codic.vim'
 NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'renamer.vim'
+NeoBundle 'mattn/jscomplete-vim'
+NeoBundle 'igetgames/vim-backbone-jscomplete'
+NeoBundle 'rking/ag.vim'
 
 " NeoBundleLast...
 " NeoBundleEnd...
