@@ -71,6 +71,23 @@ noremap <C-a> <Home>
 noremap <C-e> <End>
 noremap <C-d> <Del>
 
+"emacs風移動
+"単語単位移動（行末で止まる必要がない場合）
+inoremap <silent> <C-b> <S-Left>
+inoremap <silent> <C-w> <S-Right>
+"行頭へ
+inoremap <silent> <C-a> <C-r>=MyJumptoBol('　。、．，／！？「」')<CR>
+"行末へ
+inoremap <silent> <C-e> <C-r>=MyJumptoEol('　。、．，／！？「」')<CR>
+"現在行をインデント
+inoremap <silent> <Tab>   <C-g>u<C-t>
+inoremap <silent> <S-Tab> <C-g>u<C-d>
+
+"undo
+inoremap <silent> <C-u> <C-g>u<C-r>=MyExecExCommand('undo', 'onemore')<CR>
+
+"新行挿入
+inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col('$'))")<CR><CR>
 
 "入力モード時、ステータスラインのカラーを変更
 " augroup InsertHook
@@ -293,20 +310,26 @@ NeoBundleLazy 'ujihisa/unite-gem', {'autoload': {'unite_sources': ['gem']}}
 NeoBundle 'pasela/unite-webcolorname'
 NeoBundle 'pekepeke/unite-fileline'
 NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'koron/codic-vim'
+NeoBundle 'rhysd/unite-codic.vim'
 ""Language
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'pekepeke/titanium-vim'
+" ruby
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'basyura/unite-rails'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'skwp/vim-rspec'
+NeoBundle 'tpope/vim-cucumber'
+" javascript/coffeescript
+NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'heavenshell/vim-jsdoc'
 NeoBundle 'claco/jasmine.vim'
 NeoBundle 'mklabs/vim-backbone'
 NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'vim-coffee-script'
-NeoBundle 'skwp/vim-rspec'
-NeoBundle 'tpope/vim-cucumber'
+" stylesheet
+NeoBundle 'groenewege/vim-less'
+" other
 NeoBundle 'tpope/vim-markdown'
 ""Theme
 " NeoBundle 'tomasr/molokai'
@@ -317,14 +340,16 @@ NeoBundle 'desert256.vim'
 
 " New Plugin
 NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
-NeoBundle 'koron/codic-vim'
-NeoBundle 'rhysd/unite-codic.vim'
 NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'renamer.vim'
 NeoBundle 'mattn/jscomplete-vim'
 NeoBundle 'igetgames/vim-backbone-jscomplete'
 NeoBundle 'rking/ag.vim'
+NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 't9md/vim-textmanip'
+NeoBundle "kana/vim-textobj-user"
+NeoBundle "osyo-manga/vim-textobj-multiblock"
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -573,7 +598,7 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
 " ユーザー定義スニペット保存ディレクトリ
-let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets,'+$HOME.'/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets'
 
 " for emmet
 let g:user_emmet_settings = {
@@ -644,6 +669,7 @@ noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 
+let g:unite_source_history_yank_file=$HOME.'/.vim/yankring.txt'
 let g:unite_source_history_yank_enable =1  "history/yankの有効化
 nnoremap <silent> :[ :<C-u>Unite history/yank<CR>
 
@@ -715,15 +741,6 @@ let g:SrcExpl_RefreshMapKey = "<Space>"
 let g:SrcExpl_GoBackMapKey  = "<C-b>"
 nmap <F8> :SrcExplToggle<CR>
 
-"" trinity
-" Open and close all the three plugins on the same time
-" nmap <F6>   :TrinityToggleAll<CR>
-" Open and close the srcexpl.vim separately
-" nmap <F4>   :TrinityToggleSourceExplorer<CR>
-" Open and close the taglist.vim separately
-" nmap <F5>  :TrinityToggleTagList<CR>
-" Open and close the NERD_tree.vim separately
-" nmap <F2>  :TrinityToggleNERDTree<CR> 
 
 "NERD_tree.vim
 ""---------------------
@@ -1067,23 +1084,6 @@ au FileType coffee,ruby,javascript,python IndentGuidesEnable
 nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
 
-"emacs風移動
-"単語単位移動（行末で止まる必要がない場合）
-inoremap <silent> <C-b> <S-Left>
-inoremap <silent> <C-w> <S-Right>
-"行頭へ
-inoremap <silent> <C-a> <C-r>=MyJumptoBol('　。、．，／！？「」')<CR>
-"行末へ
-inoremap <silent> <C-e> <C-r>=MyJumptoEol('　。、．，／！？「」')<CR>
-"現在行をインデント
-inoremap <silent> <Tab>   <C-g>u<C-t>
-inoremap <silent> <S-Tab> <C-g>u<C-d>
-
-"undo
-inoremap <silent> <C-u> <C-g>u<C-r>=MyExecExCommand('undo', 'onemore')<CR>
-
-"新行挿入
-inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col('$'))")<CR><CR>
 """"""""""""""""""""""""""""""
 "sepが空でなければ、sepをセパレータとしてジャンプ。
 "見つからなければ見かけの行頭へ。
@@ -1210,12 +1210,26 @@ function! s:vimfiler_context.execute()
         \ })
 endfunction
 
-"vim-airline
-
-""* enable paste detection >
-""  let g:airline_detect_paste=1
-
-""* enable/disable usage of patched powerline font symbols >
-""  let g:airline_powerline_fonts=0
 "" C-pで0レジスタで貼り付け
 vnoremap <silent> <C-p> "0p<CR>
+
+"" textmanip
+xmap <Space>d <Plug>(textmanip-duplicate-down)
+nmap <Space>d <Plug>(textmanip-duplicate-down)
+xmap <Space>D <Plug>(textmanip-duplicate-up)
+nmap <Space>D <Plug>(textmanip-duplicate-up)
+
+xmap <C-k> <Plug>(textmanip-move-up)
+xmap <C-j> <Plug>(textmanip-move-down)
+xmap <C-h> <Plug>(textmanip-move-left)
+xmap <C-l> <Plug>(textmanip-move-right)
+
+" toggle insert/replace with <F9>
+nmap <F9> <Plug>(textmanip-toggle-mode)
+xmap <F9> <Plug>(textmanip-toggle-mode)
+
+"" textobj-multiblock
+omap ab <Plug>(textobj-multiblock-a)
+omap ib <Plug>(textobj-multiblock-i)
+vmap ab <Plug>(textobj-multiblock-a)
+vmap ib <Plug>(textobj-multiblock-i)
