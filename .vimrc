@@ -272,7 +272,8 @@ NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundleLazy 'h1mesuke/vim-alignta', {'autoload': {'unite_sources': ['alignta'], 'commands': [{'complete': 'customlist,s:complete_command_option', 'name': 'Alignta'}, {'complete': 'customlist,s:complete_command_option', 'name': 'Align'}]}}
 " NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundleLazy 'taka84u9/vim-ref-ri', {'autoload': {'commands': ['HtmlHiLink']}}
-NeoBundle 'Lokaltog/vim-easymotion'
+" NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-fugitive'
 " NeoBundle 'Shougo/vimfiler'
@@ -896,6 +897,13 @@ autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 
 "" easymotion
 let g:EasyMotion_leader_key = "<space>"
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_migemo = 1
+nmap f <Plug>(easymotion-s)
+vmap f <Plug>(easymotion-s)
+omap f <Plug>(easymotion-s) " surround.vimとかぶるので`z`
+let g:EasyMotion_startofline=0
+
 
 " let $XIKI_DIR = "~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/"
 " source ~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/etc/vim/xiki.vim
