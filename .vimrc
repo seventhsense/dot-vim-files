@@ -351,6 +351,7 @@ NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 't9md/vim-textmanip'
 NeoBundle "kana/vim-textobj-user"
 NeoBundle "osyo-manga/vim-textobj-multiblock"
+NeoBundle 'othree/html5.vim'
 
 " NeoBundleLast...
 " NeoBundleEnd...
