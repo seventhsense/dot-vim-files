@@ -22,7 +22,9 @@ set hlsearch
 " " ESC2回押してハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "行番号を表示しない
-set nonumber
+" set nonumber
+set number
+set clipboard=autoselect
 "閉じ括弧が入力されたとき、対応する括弧を表示する
 set showmatch
 "カーソルを行頭、行末で止まらないようにする
@@ -308,10 +310,10 @@ NeoBundle 'tpope/vim-cucumber'
 NeoBundle 'tpope/vim-markdown'
 ""Theme
 " NeoBundle 'tomasr/molokai'
-" NeoBundle 'desert256.vim'
+NeoBundle 'desert256.vim'
 " NeoBundle 'jpo/vim-railscasts-theme'
 " NeoBundle 'vim-scripts/pyte'
-NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
+" NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
 
 " New Plugin
 NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
@@ -319,6 +321,7 @@ NeoBundle 'koron/codic-vim'
 NeoBundle 'rhysd/unite-codic.vim'
 NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'renamer.vim'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -328,7 +331,8 @@ filetype plugin indent on     " required!
 " :NeoBundleInstall(!)    - install(update) bundles
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
-colorscheme sexy-railscasts-256
+" colorscheme sexy-railscasts-256
+colorscheme desert256
 " colorscheme railscasts
 
 if s:meet_neocomplete_requirements()
@@ -382,7 +386,7 @@ if s:meet_neocomplete_requirements()
   inoremap <expr><C-y>  neocomplete#close_popup()
   inoremap <expr><C-e>  neocomplete#cancel_popup()
   " Close popup by <Space>.
-  "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+  " inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
   " For cursor moving in insert mode(Not recommended)
   "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
@@ -541,8 +545,6 @@ else
   let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
 
 endif
-" ユーザー定義スニペット保存ディレクトリ
-let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets'
 
 " スニペット
 imap <silent>,, <Plug>(neosnippet_expand_or_jump)
@@ -567,13 +569,9 @@ endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim/snippets'
+" ユーザー定義スニペット保存ディレクトリ
+let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets,'+$HOME.'/.vim/bundle/vim-snippets/snippets'
 
-" for ZenCoding.vim
-" let g:user_zen_settings = {
-      " \ 'lang': 'ja'
-      " \}
-" let g:use_zen_complete_tag = 1
 " for emmet
 let g:user_emmet_settings = {
       \  'lang' : 'ja',
@@ -642,6 +640,10 @@ noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+
+let g:unite_source_history_yank_enable =1  "history/yankの有効化
+nnoremap <silent> :[ :<C-u>Unite history/yank<CR>
+
 ""line
 noremap :ul :<C-u>Unite line<CR>
 noremap :; :<C-u>Unite line<CR>
@@ -824,8 +826,8 @@ noremap :rc :<C-u>Unite rails/controller<CR>
 noremap :rm :<C-u>Unite rails/model<CR>
 noremap :rv :<C-u>Unite rails/view<CR>
 noremap :rh :<C-u>Unite rails/helper<CR>
-noremap :rs :<C-u>Unite rails/stylesheets<CR>
-noremap :rj :<C-u>Unite rails/javascripts<CR>
+noremap :rs :<C-u>Unite rails/stylesheet<CR>
+noremap :rj :<C-u>Unite rails/javascript<CR>
 noremap :rr :<C-u>Unite rails/route<CR>
 noremap :rg :<C-u>Unite rails/gemfile<CR>
 noremap :rt :<C-u>Unite rails/spec<CR>
