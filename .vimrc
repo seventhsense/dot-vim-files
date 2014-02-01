@@ -118,7 +118,7 @@ if &term =~ "xterm"
 endif
 "
 ""バックアップ
-set backupdir=$HOME/.backup
+set backupdir=$HOME/.vim/.backup
 ""空行追加
 ""nnoremap O :<C-u>call append(expand('.'), '')<Cr>j
 " 全角スペースの表示
