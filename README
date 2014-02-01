@@ -13,7 +13,7 @@ ln -s ~/dot-vim-files/.vimrc .
 
 3 mkdir
 
- mkdir ~/.vim/backup ~/.yankring_history ~/.vim/undo -p
+ mkdir ~/.vim/backup ~/.vim/yankring_history ~/.vim/undo -p
 
 4 for ruby and rails
  cp dot-vim-files/snippets ~/.vim/

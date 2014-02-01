@@ -862,7 +862,7 @@ let g:Align_xstrlen = 3
 
 " yankring_historyのディレクトリ設定
 let g:yankring_history_dir = expand('$HOME')
-let g:yankring_history_file = '.yankring_history'"
+let g:yankring_history_file = '/.vim/yankring_history'"
 
 ""qfixhowm
 "let howm_dir = '~/Dropbox/howm'
