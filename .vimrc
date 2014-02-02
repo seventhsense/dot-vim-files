@@ -352,6 +352,9 @@ NeoBundle 't9md/vim-textmanip'
 NeoBundle "kana/vim-textobj-user"
 NeoBundle "osyo-manga/vim-textobj-multiblock"
 NeoBundle 'othree/html5.vim'
+NeoBundle 'hron84/vim-Cheffile'
+NeoBundle 'elzr/vim-json'
+NeoBundle 'osyo-manga/vim-over'
 
 " NeoBundleLast...
 " NeoBundleEnd...
