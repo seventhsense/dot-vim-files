@@ -355,6 +355,8 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'hron84/vim-Cheffile'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'osyo-manga/vim-over'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'superbrothers/vim-vimperator'
 
 " NeoBundleLast...
 " NeoBundleEnd...
