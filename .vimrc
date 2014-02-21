@@ -361,6 +361,8 @@ NeoBundle 'superbrothers/vim-vimperator'
 " NeoBundleLast...
 " NeoBundleEnd...
 filetype plugin indent on     " required!
+
+NeoBundleCheck
 "
 " :NeoBundleList          - list configured bundles
 " :NeoBundleInstall(!)    - install(update) bundles
