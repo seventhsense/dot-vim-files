@@ -51,6 +51,11 @@ if !has('gui_running')
     set ttimeout
     set timeoutlen=100
 endif
+" insertモードから抜ける
+inoremap <silent> jj <ESC>
+inoremap <silent> <C-j> j
+inoremap <silent> kk <ESC>
+inoremap <silent> <C-k> k
 
 " タブの画面上での幅
  set tabstop=2
@@ -357,6 +362,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'superbrothers/vim-vimperator'
+NeoBundle 'gcmt/wildfire.vim'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -971,19 +977,19 @@ let g:syntastic_ruby_checkers = ['rubycop']
 autocmd BufNewFile,BufRead *.eco set filetype=eco
 
 ""CamelCaseMotion
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
+" map <silent> w <Plug>CamelCaseMotion_w
+" map <silent> b <Plug>CamelCaseMotion_b
+" map <silent> e <Plug>CamelCaseMotion_e
+" sunmap w
+" sunmap b
+" sunmap e
 
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
+" omap <silent> iw <Plug>CamelCaseMotion_iw
+" xmap <silent> iw <Plug>CamelCaseMotion_iw
+" omap <silent> ib <Plug>CamelCaseMotion_ib
+" xmap <silent> ib <Plug>CamelCaseMotion_ib
+" omap <silent> ie <Plug>CamelCaseMotion_ie
+" xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " endtagcomment.vim
 " https://gist.github.com/hokaccha/4118281
@@ -1052,11 +1058,6 @@ au BufRead,BufNewFile,BufReadPre *.snip set filetype=snippet
 ""filetype Gemfile
 " au BufRead,BufNewFile Gemfile            setfiletype Gemfile
 
-" insertモードから抜ける
-inoremap <silent> jj <ESC>
-inoremap <silent> <C-j> j
-inoremap <silent> kk <ESC>
-inoremap <silent> <C-k> k
 
 " vimdoc-ja
 " helptags ~/.vim/bundle/vimdoc-ja/doc
