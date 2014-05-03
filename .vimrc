@@ -267,7 +267,7 @@ NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
 NeoBundle "itchyny/lightline.vim"
-NeoBundle "tsaleh/vim-matchit"
+" NeoBundle "tsaleh/vim-matchit"
 NeoBundle 'closetag.vim'
 " NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundleLazy 'vim-scripts/YankRing.vim', {'augroup': 'YankRing', 'autoload': {'commands': ['YRGetElem', 'YRPush', 'YRToggle', 'YRPaste', 'YRShow', 'YRMapsCreate', 'YRGetMultiple', 'YRPop', 'YRMapsDelete', 'YRSearch', 'YRYankCount', 'YRReplace', 'YRYankRange', 'YRCheckClipboard', 'YRDeleteRange', 'YRMapsMacro', 'YRClear']}}
@@ -327,7 +327,7 @@ NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-cucumber'
 " javascript/coffeescript
-NeoBundle 'pekepeke/titanium-vim'
+" NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'heavenshell/vim-jsdoc'
 NeoBundle 'claco/jasmine.vim'
 NeoBundle 'mklabs/vim-backbone'
