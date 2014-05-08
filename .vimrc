@@ -231,6 +231,7 @@ NeoBundle 'Shougo/vimproc', {
 " after install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 
 "Your Bundles here
 " NeoBundle 'Shougo/neocomplcache'
@@ -249,6 +250,7 @@ endif
 
 
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 " NeoBundle 'thinca/vim-ref'
 NeoBundleLazy 'thinca/vim-ref', {'autoload': {'unite_sources': ['ref'], 'mappings': [['sxn', '<Plug>(ref-keyword)']], 'commands': [{'complete': 'customlist,ref#complete', 'name': 'Ref'}, 'RefHistory']}}
 " NeoBundle 'thinca/vim-quickrun'
@@ -314,7 +316,7 @@ NeoBundleLazy 'LeafCage/nebula.vim', {'autoload': {'commands': ['NebulaPutLazy',
 " NeoBundle 'ujihisa/unite-gem'
 NeoBundleLazy 'ujihisa/unite-gem', {'autoload': {'unite_sources': ['gem']}}
 NeoBundle 'pasela/unite-webcolorname'
-NeoBundle 'pekepeke/unite-fileline'
+NeoBundle 'seventhsense/unite-fileline'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'koron/codic-vim'
 NeoBundle 'rhysd/unite-codic.vim'
@@ -326,6 +328,7 @@ NeoBundle 'basyura/unite-rails'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-cucumber'
+NeoBundle 'hron84/vim-Cheffile'
 " javascript/coffeescript
 " NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'heavenshell/vim-jsdoc'
@@ -333,10 +336,17 @@ NeoBundle 'claco/jasmine.vim'
 NeoBundle 'mklabs/vim-backbone'
 NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'vim-coffee-script'
-" stylesheet
+NeoBundle 'mattn/jscomplete-vim'
+NeoBundle 'igetgames/vim-backbone-jscomplete'
+" html/css
+NeoBundle 'othree/html5.vim'
 NeoBundle 'groenewege/vim-less'
+NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'hail2u/vim-css-syntax'
+" NeoBundle 'vim-scripts/css_color.vim'
 " other
 NeoBundle 'tpope/vim-markdown'
+NeoBundle 'superbrothers/vim-vimperator'
 ""Theme
 " NeoBundle 'tomasr/molokai'
 NeoBundle 'desert256.vim'
@@ -347,21 +357,13 @@ NeoBundle 'desert256.vim'
 " New Plugin
 NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
 NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'renamer.vim'
-NeoBundle 'mattn/jscomplete-vim'
-NeoBundle 'igetgames/vim-backbone-jscomplete'
 NeoBundle 'rking/ag.vim'
-NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 't9md/vim-textmanip'
 NeoBundle "kana/vim-textobj-user"
 NeoBundle "osyo-manga/vim-textobj-multiblock"
-NeoBundle 'othree/html5.vim'
-NeoBundle 'hron84/vim-Cheffile'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'osyo-manga/vim-over'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'superbrothers/vim-vimperator'
 NeoBundle 'gcmt/wildfire.vim'
 
 " NeoBundleLast...
@@ -382,7 +384,7 @@ if s:meet_neocomplete_requirements()
   " 新しく追加した neocomplete の設定
   "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
   " Disable AutoComplPop.
-  " let g:acp_enableAtStartup = 0
+  let g:acp_enableAtStartup = 0
   " echomsg "using neocomplete"
   " Use neocomplete.
   let g:neocomplete#enable_at_startup = 1
