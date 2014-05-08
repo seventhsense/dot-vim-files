@@ -3,9 +3,12 @@ My vim files
 
 1 set .vimrc
 
+```
 cd ~
 git clone git://github.com/seventhsense/dot-vim-files.git
 ln -s ~/dot-vim-files/.vimrc .
+```
+
 
 2 install ctags
 
