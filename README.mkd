@@ -1,35 +1,54 @@
-My vim files
+# My vim files
 
 
-1 set .vimrc
+## 1 set .vimrc
 
+```
 cd ~
 git clone git://github.com/seventhsense/dot-vim-files.git
 ln -s ~/dot-vim-files/.vimrc .
+```
 
-2 install ctags
+## 2 install ctags
 
- sudo apt-get install ctags
+```
+sudo apt-get install ctags
+```
 
-3 mkdir
+## 3 mkdir
 
+```
  mkdir ~/.vim/backup ~/.vim/yankring_history ~/.vim/undo -p
+```
 
-4 for ruby and rails
+## 4 for ruby and rails
+
+```
  cp dot-vim-files/snippets ~/.vim/
  cp dot-vim-files/dict ~/.vim/
+``` 
 
-5 Install plugins
 
+## 5 Install plugins
+
+```
 mkdir -p ~/.vim/bundle
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+```
 
 Launch `vim`, run `:NeoBundleInstall`    
     ( ref https://github.com/Shougo/neobundle.vim )
 
 or
-vim +NeoBundleInstall +q
 
-6 Install jshint
+```
+vim +NeoBundleInstall +q
+```
+
+
+## 6 Install jshint
+
+```
 npm install jshint -g
+```
 
