@@ -94,6 +94,9 @@ inoremap <silent> <C-u> <C-g>u<C-r>=MyExecExCommand('undo', 'onemore')<CR>
 "新行挿入
 inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col('$'))")<CR><CR>
 
+"スペースoで現在のバッファ以外を閉じる
+nnoremap <Space>o :only<CR>
+
 "入力モード時、ステータスラインのカラーを変更
 " augroup InsertHook
 " autocmd!
