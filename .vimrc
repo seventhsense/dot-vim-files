@@ -94,6 +94,9 @@ inoremap <silent> <C-u> <C-g>u<C-r>=MyExecExCommand('undo', 'onemore')<CR>
 "新行挿入
 inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col('$'))")<CR><CR>
 
+"スペースoで現在のバッファ以外を閉じる
+nnoremap <Space>o :only<CR>
+
 "入力モード時、ステータスラインのカラーを変更
 " augroup InsertHook
 " autocmd!
@@ -253,8 +256,8 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 " NeoBundle 'thinca/vim-ref'
 NeoBundleLazy 'thinca/vim-ref', {'autoload': {'unite_sources': ['ref'], 'mappings': [['sxn', '<Plug>(ref-keyword)']], 'commands': [{'complete': 'customlist,ref#complete', 'name': 'Ref'}, 'RefHistory']}}
-" NeoBundle 'thinca/vim-quickrun'
-NeoBundleLazy 'thinca/vim-quickrun', {'autoload': {'mappings': [['sxn', '<Plug>(quickrun']], 'commands': [{'complete': 'customlist,quickrun#complete', 'name': 'QuickRun'}]}}
+NeoBundle 'thinca/vim-quickrun'
+" NeoBundleLazy 'thinca/vim-quickrun', {'autoload': {'mappings': [['sxn', '<Plug>(quickrun']], 'commands': [{'complete': 'customlist,quickrun#complete', 'name': 'QuickRun'}]}}
 NeoBundle 'AutoClose'
 NeoBundle 'tpope/vim-surround'
 " NeoBundleLazy 'tpope/vim-surround', {'autoload': {'mappings': ['<Plug>Ysurround', '<Plug>YSsurround', '<Plug>YSurround', '<Plug>Dsurround', ['i', '<Plug>ISurround'], ['sx', '<Plug>VgSurround'], '<Plug>Yssurround', '<Plug>SurroundRepeat', '<Plug>Csurround', ['i', '<Plug>Isurround'], ['sx', '<Plug>VSurround']]}}
@@ -786,7 +789,11 @@ let g:NERDTreeMouseMode=0
 """RSPEC実行
 nmap <F10>  :QuickRun 
 "quickrunの前設定を初期化する。
-let g:quickrun_config = {}
+let g:quickrun_config = {
+\  "_" : { "split" : ''}}
+
+set splitbelow
+set splitright
 
 "(ファイル名)_spec.rb このファイルタイプをRSpecファイルと認識する。
 augroup QrunRSpec
@@ -979,7 +986,7 @@ au FileType ruby,eruby setl tags+=~/gtags
 let g:syntastic_javascript_checkers = ['jshint']
 " let g:syntastic_mode_map = { 'mode': 'passive', 
               " \ 'active_filetypes': ['ruby']}
-let g:syntastic_ruby_checkers = ['rubycop']
+let g:syntastic_ruby_checkers = ['rubocop']
 " let g:syntastic_quiet_messages = {'levels': 'warnings'}
 " let g:syntastic_mode_map = { 'mode': 'active',
 " \ 'active_filetypes': [],
