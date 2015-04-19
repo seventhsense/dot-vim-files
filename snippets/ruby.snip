@@ -23,7 +23,7 @@ abbr        do |var| end
     end
 
 snippet     block
-abbr        { |var| }
+abbr        { }
     {
         ${1}
     }
@@ -86,7 +86,7 @@ prev_word   '^'
 
 snippet     params
 abbr        params[:${1:id}]
-  params[:${1:id}]${2}
+  params[:${1:id}]
 
 snippet     flash
 abbr        flash[:${1:id}]
@@ -102,7 +102,7 @@ abbr        skip_filter :${1:method_name},:only => [:index,:new,:create,:show,:d
 
 snippet     render_partial
 abbr        render :partial => "${1:partial_name}"
-  render :partial => "${1:partial_name}"${2:}
+  render :partial => "${1:partial_name}"
 
 snippet     redirect_to
 abbr        redirect_to ${1:action_controller_url}
@@ -116,3 +116,14 @@ snippet     logger-line
 abbr        logger.debug "-----"
   logger.debug "------------------------------------------------------------"
 
+snippet     end
+abbr        end
+  end
+
+snippet     localization
+abbr        l(:message)
+  l(:${1:message})
+
+snippet     translate
+abbr        t(:message, symbol: "data")
+  l(:${1:message}, ${2:symbol}: "${3:data}")

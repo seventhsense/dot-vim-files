@@ -209,6 +209,7 @@ augroup END
 " NeoBundle
 
 filetype plugin indent off     " required!
+let g:neobundle#types#git#default_protocol = 'git'
 
 if has('vim_starting')
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -248,8 +249,6 @@ else
     NeoBundle 'Shougo/neocomplcache.vim'
 endif
 
-
-
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 " NeoBundle 'thinca/vim-ref'
@@ -270,7 +269,7 @@ NeoBundle 'ctags.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'smartchr'
 NeoBundle "itchyny/lightline.vim"
-" NeoBundle "tsaleh/vim-matchit"
+NeoBundle "vim-scripts/matchit.zip"
 NeoBundle 'closetag.vim'
 " NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundleLazy 'vim-scripts/YankRing.vim', {'augroup': 'YankRing', 'autoload': {'commands': ['YRGetElem', 'YRPush', 'YRToggle', 'YRPaste', 'YRShow', 'YRMapsCreate', 'YRGetMultiple', 'YRPop', 'YRMapsDelete', 'YRSearch', 'YRYankCount', 'YRReplace', 'YRYankRange', 'YRCheckClipboard', 'YRDeleteRange', 'YRMapsMacro', 'YRClear']}}
@@ -348,6 +347,7 @@ NeoBundle 'hail2u/vim-css-syntax'
 " other
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'superbrothers/vim-vimperator'
+NeoBundle 'ekalinin/Dockerfile.vim'
 ""Theme
 " NeoBundle 'tomasr/molokai'
 NeoBundle 'desert256.vim'
@@ -366,6 +366,9 @@ NeoBundle "osyo-manga/vim-textobj-multiblock"
 NeoBundle 'elzr/vim-json'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'gcmt/wildfire.vim'
+NeoBundle 'kakkyz81/evervim'
+NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
+NeoBundle 'mustache/vim-mustache-handlebars'
 
 " NeoBundleLast...
 " NeoBundleEnd...
@@ -391,6 +394,7 @@ if s:meet_neocomplete_requirements()
   let g:neocomplete#enable_at_startup = 1
   " Use smartcase.
   let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#enable_fuzzy_completion = 1
   " Set minimum syntax keyword length.
   let g:neocomplete#sources#syntax#min_keyword_length = 3
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
@@ -686,6 +690,9 @@ noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+
+"file_rec
+noremap :/ :<C-u>Unite file_rec/async:! file/new -buffer-name=file_rec<CR>
 
 let g:unite_source_history_yank_file=$HOME.'/.vim/yankring.txt'
 let g:unite_source_history_yank_enable =1  "history/yankの有効化
@@ -1257,3 +1264,19 @@ omap ab <Plug>(textobj-multiblock-a)
 omap ib <Plug>(textobj-multiblock-i)
 vmap ab <Plug>(textobj-multiblock-a)
 vmap ib <Plug>(textobj-multiblock-i)
+
+"" vim-json
+let g:vim_json_syntax_conceal = 0
+
+"" evervim
+" 環境依存や非公開設定ファイルの読み込み
+if filereadable(expand('~/.vimrc.local'))
+source ~/.vimrc.local
+endif
+
+"" autoprefixer
+" vnoremap ap : <c-u>call PrefixVisualMyCSS()<cr>
+" nnoremap ap : <c-u>call PrefixMyCSS()<cr>
+" command! Prefix call PrefixMyCSS()
+"" mustache.vim
+let g:mustache_abbreviations = 1
