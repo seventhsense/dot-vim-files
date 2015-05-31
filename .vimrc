@@ -372,6 +372,7 @@ NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'kakkyz81/evervim'
 NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
 NeoBundle 'mustache/vim-mustache-handlebars'
+NeoBundle 'sunaku/vim-ruby-minitest'
 
 " NeoBundleLast...
 " NeoBundleEnd...
