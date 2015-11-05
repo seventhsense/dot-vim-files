@@ -224,6 +224,7 @@ endif
 " required! 
 " recommended to install
 ""vimproc auto compile
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
@@ -374,6 +375,7 @@ NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'sunaku/vim-ruby-minitest'
 
+call neobundle#end()
 " NeoBundleLast...
 " NeoBundleEnd...
 filetype plugin indent on     " required!
@@ -985,8 +987,8 @@ au FileType ruby,eruby setl tags+=~/gtags
 
 ""syntastic
 let g:syntastic_javascript_checkers = ['jshint']
-" let g:syntastic_mode_map = { 'mode': 'passive', 
-              " \ 'active_filetypes': ['ruby']}
+let g:syntastic_mode_map = { 'mode': 'active', 
+              \ 'active_filetypes': ['ruby']}
 let g:syntastic_ruby_checkers = ['rubocop']
 " let g:syntastic_quiet_messages = {'levels': 'warnings'}
 " let g:syntastic_mode_map = { 'mode': 'active',
@@ -1288,3 +1290,8 @@ endif
 " command! Prefix call PrefixMyCSS()
 "" mustache.vim
 let g:mustache_abbreviations = 1
+
+"" python settings
+autocmd FileType python setl autoindent
+autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
