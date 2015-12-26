@@ -13,7 +13,7 @@ ln -s ~/dot-vim-files/.vimrc .
 
 ```
 sudo apt-get install ctags
-sudo apt-get install build-essentials
+sudo apt-get install build-essential
 ```
 
 ## 3 mkdir
