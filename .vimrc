@@ -212,7 +212,7 @@ augroup END
 " NeoBundle
 
 filetype plugin indent off     " required!
-let g:neobundle#types#git#default_protocol = 'git'
+"let g:neobundle#types#git#default_protocol = 'git'
 
 if has('vim_starting')
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -257,7 +257,7 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 " NeoBundle 'thinca/vim-ref'
 NeoBundleLazy 'thinca/vim-ref', {'autoload': {'unite_sources': ['ref'], 'mappings': [['sxn', '<Plug>(ref-keyword)']], 'commands': [{'complete': 'customlist,ref#complete', 'name': 'Ref'}, 'RefHistory']}}
-NeoBundle 'thinca/vim-quickrun'
+" NeoBundle 'thinca/vim-quickrun'
 " NeoBundleLazy 'thinca/vim-quickrun', {'autoload': {'mappings': [['sxn', '<Plug>(quickrun']], 'commands': [{'complete': 'customlist,quickrun#complete', 'name': 'QuickRun'}]}}
 NeoBundle 'AutoClose'
 NeoBundle 'tpope/vim-surround'
@@ -598,7 +598,7 @@ else
   imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
 
   " NeoComplCache-rsense
-  let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
+  " let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
 
 endif
 
@@ -685,6 +685,7 @@ let g:unite_enable_smart_case = 1
 "mru,reg,buf
 noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
 noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+" noremap :: :<C-u>Unite neomru/file<CR>
 noremap :ur :<C-u>Unite register -buffer-name=register<CR>
 noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
 
@@ -789,85 +790,6 @@ let g:NERDTreeMouseMode=0
 ""let g:Powerline_symbols  =  'fancy'
 " let g:Powerline_colorscheme = 'skwp'
 
-"""RSPEC実行
-nmap <F10>  :QuickRun 
-"quickrunの前設定を初期化する。
-let g:quickrun_config = {
-\  "_" : { "split" : ''}}
-
-set splitbelow
-set splitright
-
-"(ファイル名)_spec.rb このファイルタイプをRSpecファイルと認識する。
-augroup QrunRSpec
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-augroup END 
-
-let rspec_outputter = quickrun#outputter#buffer#new()
-
-function! rspec_outputter.init(session)
-  call call(quickrun#outputter#buffer#new().init, [a:session], self)
-endfunction
-
-function! rspec_outputter.finish(session)
-  highlight default RSpecGreen ctermfg = Green cterm = none
-  highlight default RSpecRed    ctermfg = Red   cterm = none
-  highlight default RSpecComment ctermfg = Cyan  cterm = none
-  highlight default RSpecNormal  ctermfg = White cterm = none
-  call matchadd("RSpecGreen", "^[\.F]*\.[\.F]*$")
-  call matchadd("RSpecGreen", "^.*, 0 failures$")
-  call matchadd("RSpecRed", "F")
-  call matchadd("RSpecRed", "^.*, [1-9]* failures.*$")
-  call matchadd("RSpecRed", "^.*, 1 failure.*$")
-  call matchadd("RSpecRed", "^ *(.*$")
-  call matchadd("RSpecRed", "^ *expected.*$")
-  call matchadd("RSpecRed", "^ *got.*$")
-  call matchadd("RSpecRed", "^ *Failure/Error:.*$")
-  call matchadd("RSpecRed", "^.*(FAILED - [0-9]*)$")
-  call matchadd("RSpecRed", "^rspec .*:.*$")
-  call matchadd("RSpecComment", " # .*$")
-  call matchadd("RSpecNormal", "^Failures:")
-  call matchadd("RSpecNormal", "^Finished")
-  call matchadd("RSpecNormal", "^Failed")
-
-  call call(quickrun#outputter#buffer#new().finish,  [a:session], self)
-endfunction
-
-call quickrun#register_outputter("rspec_outputter", rspec_outputter)
-
-"quickrunの動作をvimprocに指定する。
-let g:quickrun_config._ = {'runner' : 'vimproc'}
-
-" bundleを利用する設定。
-let g:quickrun_config['rspec/bundle'] = {
-      \ 'type': 'rspec/bundle',
-      \ 'command': 'rspec',
-      \ 'exec': 'bundle exec %c %s',
-      \ 'outputter': 'rspec_outputter',
-      \ 'split': ''
-      \}
-
-" 通常で利用する設定。
-let g:quickrun_config['rspec/normal'] = {
-      \ 'type': 'rspec/normal',
-      \ 'command': 'rspec',
-      \ 'exec': '%c %s',
-      \ 'outputter': 'rspec_outputter',
-      \ 'vsplit': ''
-      \}
-
-"※重要
-"※ここで動作を変更する
-"どの場面で使うか（rubyかrailsか）によってコマンドが変わるので
-"手動でコメントアウトをつけたり外したりして利用している。
-function! RSpecQuickrun()
-  " 通常の場合。（rubyなど）
-  ""let b:quickrun_config = {'type' : 'rspec/normal'}
-  " bundle、Gemfileを利用している場合。（railsなど）
-  let b:quickrun_config = {'type' : 'rspec/bundle'}
-endfunction
-autocmd BufReadPost *_spec.rb call RSpecQuickrun()
 
 ""set autochdir
 
@@ -933,9 +855,13 @@ autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 let g:EasyMotion_leader_key = "<space>"
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_migemo = 1
-nmap f <Plug>(easymotion-s)
-vmap f <Plug>(easymotion-s)
-omap f <Plug>(easymotion-s) " surround.vimとかぶるので`z`
+nmap f <Plug>(easymotion-s2)
+vmap f <Plug>(easymotion-s2)
+omap f <Plug>(easymotion-s2) " surround.vimとかぶるので`z`
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
+
 let g:EasyMotion_startofline=0
 
 
