@@ -1,3 +1,4 @@
+set shell=/bin/sh
 "互換モード解除
 set nocompatible
 "256色表示
@@ -333,6 +334,7 @@ NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'skwp/vim-rspec'
 NeoBundle 'tpope/vim-cucumber'
 NeoBundle 'hron84/vim-Cheffile'
+NeoBundle 'sunaku/vim-ruby-minitest'
 " javascript/coffeescript
 " NeoBundle 'pekepeke/titanium-vim'
 NeoBundle 'heavenshell/vim-jsdoc'
@@ -342,6 +344,7 @@ NeoBundle 'AndrewRadev/vim-eco'
 NeoBundle 'vim-coffee-script'
 NeoBundle 'mattn/jscomplete-vim'
 NeoBundle 'igetgames/vim-backbone-jscomplete'
+NeoBundle 'mustache/vim-mustache-handlebars'
 " html/css
 NeoBundle 'othree/html5.vim'
 NeoBundle 'groenewege/vim-less'
@@ -372,8 +375,6 @@ NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'kakkyz81/evervim'
 NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'sunaku/vim-ruby-minitest'
 
 call neobundle#end()
 " NeoBundleLast...
@@ -920,6 +921,7 @@ let g:syntastic_ruby_checkers = ['rubocop']
 " let g:syntastic_mode_map = { 'mode': 'active',
 " \ 'active_filetypes': [],
 " \ 'passive_filetypes': ['javascript'] }
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 
 ""vim-eco
 autocmd BufNewFile,BufRead *.eco set filetype=eco
