@@ -1,51 +1,51 @@
+language ja_JP.UTF-8 " locale 設定
 set shell=/bin/sh
-"互換モード解除
-set nocompatible
-"256色表示
-set t_Co=256 
-"エンコーディング
-set encoding=utf-8
-" set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
-"locale 設定
-language ja_JP.UTF-8
-"ステータスライン表示
-set laststatus=2
-"ステータスライン表示
-set showtabline=2
-"タブの代わりに空白文字を挿入する
-set expandtab
-"" 検索時に大文字小文字を無視 (noignorecase:無視しない)
-set ignorecase
-"インクリメンタルサーチを行う
-set incsearch
-" 検索結果ハイライト
-set hlsearch
-" " ESC2回押してハイライトを消す
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
-"行番号を表示しない
-" set nonumber
-set number
+set nocompatible     " 互換モード解除
+set t_Co=256         " 256色表示
+set encoding=utf-8   " エンコーディング
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set laststatus=2     " ステータスライン表示
+set showtabline=2    " ステータスライン表示
+set list             " 不可視文字表示
+set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
+set expandtab        " タブの代わりに空白文字を挿入する
+set ignorecase       " 検索時に大文字小文字を無視 (noignorecase:無視しない)
+set incsearch        " インクリメンタルサーチを行う
+set hlsearch         " 検索結果ハイライト
+" set nonumber         " 行番号を表示しない
+set number           " 行番号を表示する
 set clipboard=autoselect
-"閉じ括弧が入力されたとき、対応する括弧を表示する
-set showmatch
-"カーソルを行頭、行末で止まらないようにする
-set whichwrap=b,s,h,l,<,>,[,]
+set showmatch        "閉じ括弧が入力されたとき、対応する括弧を表示する
+set whichwrap=b,s,h,l,<,>,[,] "カーソルを行頭、行末で止まらないようにする
 "横幅
-""set columns=120
-"シンタックス
-syntax on
+"set columns=120
 "コマンド補完
 set wildmenu
 set wildmode=list:longest
 set completeopt=menu,preview,menuone
 "カレント行ハイライト
 set cursorline
+" set cursorcolumn
+" タブの画面上での幅
+set tabstop=2
+set shiftwidth=2
+set smarttab
+set expandtab " タブをスペースに展開する (expandtab:展開する)
+set autoindent " 自動的にインデントする (noautoindent:インデントしない)
+set smartindent
+" バックスペースでインデントや改行を削除できるようにする
+set backspace=indent,eol,start
+set showcmd " ステータスラインにコマンドを表示
+set confirm    " 保存されていないファイルがあるときは終了前に保存確認
+set hidden     " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
+set autoread   "外部でファイルに変更がされた場合は読みなおす
+set nobackup   " ファイル保存時にバックアップファイルを作らない
+set noswapfile " ファイル編集中にスワップファイルを作らない
+" ESC2回押してハイライトを消す
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+"シンタックス
+syntax on
 
-"十字キ <Up>
-""imap ーの入力を受け付ける
-""imap  <Down>
-""imap  <Right>
-""imap <Left>
 "ESCが遅い対策
 if !has('gui_running')
     set notimeout
@@ -57,20 +57,6 @@ inoremap <silent> jj <ESC>
 inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
-
-" タブの画面上での幅
- set tabstop=2
- set shiftwidth=2
- set smarttab
-" タブをスペースに展開する (expandtab:展開する)
- set expandtab
-" 自動的にインデントする (noautoindent:インデントしない)
- set autoindent
- set smartindent
-" バックスペースでインデントや改行を削除できるようにする
- set backspace=indent,eol,start
-" ステータスラインにコマンドを表示
-set showcmd
 
 "Emacs風移動
 noremap <C-a> <Home>
@@ -97,13 +83,6 @@ inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col(
 
 "スペースoで現在のバッファ以外を閉じる
 nnoremap <Space>o :only<CR>
-
-"入力モード時、ステータスラインのカラーを変更
-" augroup InsertHook
-" autocmd!
-" autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
-" autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
-" augroup END
 ""マウス対応
 set mouse=a
 set ttymouse=xterm2
@@ -128,8 +107,6 @@ endif
 "
 ""バックアップ
 set backupdir=$HOME/.vim/backup
-""空行追加
-""nnoremap O :<C-u>call append(expand('.'), '')<Cr>j
 " 全角スペースの表示
  highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
  au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
@@ -141,69 +118,6 @@ nnoremap <Tab><Tab> gT
 for i in range(1, 9)
   execute 'nnoremap <Tab>' . i . ' ' . i . 'gt'
 endfor
-" タブ番号表示
-" set tabline=%!MyTabLine()
- 
-" function! MyTabLine()
-  " let s = ''
-  " for i in range(tabpagenr('$'))
-    " " select the highlighting
-    " if i + 1 == tabpagenr()
-      " let s .= '%#TabLineSel#'
-    " else
-      " let s .= '%#TabLine#'
-    " endif
- 
-    " " set the tab page number (for mouse clicks)
-    " let s .= '%' . (i + 1) . 'T'
- 
-    " " the label is made by MyTabLabel()
-    " let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
-  " endfor
- 
-  " " after the last tab fill with TabLineFill and reset tab page nr
-  " let s .= '%#TabLineFill#%T'
- 
-  " " right-align the label to close the current tab page
-  " if tabpagenr('$') > 1
-    " let s .= '%=%#TabLine#%999XClose'
-  " endif
- 
-  " return s
-" endfunction
- 
-" let g:use_Powerline_dividers = 1
- 
-" function! MyTabLabel(n)
-    " let buflist = tabpagebuflist(a:n)
-    " let winnr = tabpagewinnr(a:n)
-    " let altbuf = bufname(buflist[winnr - 1])
- 
-    " " $HOME を消す
-    " let altbuf = substitute(altbuf, expand('$HOME/'), '', '')
- 
-    " " カレントタブ以外はパスを短くする
-    " if tabpagenr() != a:n
-        " let altbuf = substitute(altbuf, '^.*/', '', '')
-        " let altbuf = substitute(altbuf, '^.\zs.*\ze\.[^.]\+$', '', '')
-    " endif
- 
-    " " vim-powerline のグリフを使う
-    " if g:use_Powerline_dividers
-        " let dividers = g:Pl#Parser#Symbols[g:Powerline_symbols].dividers
-        " let left_div = nr2char(get(dividers[3], 0, 124))
-        " let right_div = nr2char(get(dividers[1], 0, 124))
-        " let altbuf = left_div . altbuf . right_div
-    " else
-        " let altbuf = '|' . altbuf . '|'
-    " endif
- 
-    " " タブ番号を付加
-    " let altbuf = a:n . ':' . altbuf
- 
-    " return altbuf
-" endfunction
-"
 "" ファイルをひらいたとき最後にカーソルがあった場所にカーソルを移動する
 augroup vimrcEx
   au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -786,12 +700,6 @@ let g:NERDTreeMouseMode=0
 ""smartchr設定
 ""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
-""Powerline設定
-""python from powerline.ext.vim import source_plugin; source_plugin()
-""let g:Powerline_symbols  =  'fancy'
-" let g:Powerline_colorscheme = 'skwp'
-
-
 ""set autochdir
 
 ""unite-outline
@@ -1007,7 +915,6 @@ au BufRead,BufNewFile,BufReadPre *.snip set filetype=snippet
 
 ""filetype Gemfile
 " au BufRead,BufNewFile Gemfile            setfiletype Gemfile
-
 
 " vimdoc-ja
 " helptags ~/.vim/bundle/vimdoc-ja/doc
