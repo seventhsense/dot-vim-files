@@ -1123,10 +1123,13 @@ endif
 " vnoremap ap : <c-u>call PrefixVisualMyCSS()<cr>
 " nnoremap ap : <c-u>call PrefixMyCSS()<cr>
 " command! Prefix call PrefixMyCSS()
-"" mustache.vim
+" mustache.vim
 let g:mustache_abbreviations = 1
 
 "" python settings
 autocmd FileType python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
+" wildfire
+let g:wildfire_objects = ["iw","is", "i'", 'i"', "i)", "i]", "i}", "ip", "it"]
