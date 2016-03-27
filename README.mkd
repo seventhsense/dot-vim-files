@@ -48,9 +48,21 @@ vim +NeoBundleInstall +q
 ```
 
 
-## 6 Install jshint
+## for syntastic
+### Install jshint
 
 ```
 npm install jshint -g
 ```
 
+### Install rubocop
+
+```
+gem install rubocop
+```
+
+### install pyflakes, pep8
+
+```
+pip install pyflakes pep8
+```
