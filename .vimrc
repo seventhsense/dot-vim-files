@@ -174,7 +174,7 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundleLazy 'thinca/vim-ref', {'autoload': {'unite_sources': ['ref'], 'mappings': [['sxn', '<Plug>(ref-keyword)']], 'commands': [{'complete': 'customlist,ref#complete', 'name': 'Ref'}, 'RefHistory']}}
 " NeoBundle 'thinca/vim-quickrun'
 " NeoBundleLazy 'thinca/vim-quickrun', {'autoload': {'mappings': [['sxn', '<Plug>(quickrun']], 'commands': [{'complete': 'customlist,quickrun#complete', 'name': 'QuickRun'}]}}
-NeoBundle 'AutoClose'
+NeoBundle 'cohama/lexima.vim'
 NeoBundle 'tpope/vim-surround'
 " NeoBundleLazy 'tpope/vim-surround', {'autoload': {'mappings': ['<Plug>Ysurround', '<Plug>YSsurround', '<Plug>YSurround', '<Plug>Dsurround', ['i', '<Plug>ISurround'], ['sx', '<Plug>VgSurround'], '<Plug>Yssurround', '<Plug>SurroundRepeat', '<Plug>Csurround', ['i', '<Plug>Isurround'], ['sx', '<Plug>VSurround']]}}
 NeoBundle 'The-NERD-Commenter'
@@ -1116,7 +1116,7 @@ let g:vim_json_syntax_conceal = 0
 "" evervim
 " 環境依存や非公開設定ファイルの読み込み
 if filereadable(expand('~/.vimrc.local'))
-source ~/.vimrc.local
+  source ~/.vimrc.local
 endif
 
 "" autoprefixer
