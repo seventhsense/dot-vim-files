@@ -289,6 +289,7 @@ NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'kakkyz81/evervim'
 NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
+NeoBundle 'rhysd/committia.vim'
 
 call neobundle#end()
 " NeoBundleLast...
