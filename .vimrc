@@ -290,6 +290,7 @@ NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'kakkyz81/evervim'
 NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
 NeoBundle 'rhysd/committia.vim'
+NeoBundle 'miyakogi/seiya.vim'
 
 call neobundle#end()
 " NeoBundleLast...
@@ -1164,3 +1165,5 @@ function! g:committia_hooks.edit_open(info)
     imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
 
 endfunction
+
+let g:seiya_auto_enable=1
