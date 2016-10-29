@@ -291,6 +291,7 @@ NeoBundle 'kakkyz81/evervim'
 NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
 NeoBundle 'rhysd/committia.vim'
 NeoBundle 'miyakogi/seiya.vim'
+NeoBundle 'evanmiller/nginx-vim-syntax'
 
 call neobundle#end()
 " NeoBundleLast...
