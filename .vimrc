@@ -1170,3 +1170,7 @@ function! g:committia_hooks.edit_open(info)
 endfunction
 
 let g:seiya_auto_enable=1
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
