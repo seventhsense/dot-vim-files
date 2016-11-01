@@ -259,6 +259,7 @@ NeoBundle 'vim-coffee-script'
 NeoBundle 'mattn/jscomplete-vim'
 NeoBundle 'igetgames/vim-backbone-jscomplete'
 NeoBundle 'mustache/vim-mustache-handlebars'
+NeoBundle 'elzr/vim-json'
 " html/css
 NeoBundle 'othree/html5.vim'
 NeoBundle 'groenewege/vim-less'
@@ -269,12 +270,14 @@ NeoBundle 'hail2u/vim-css-syntax'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'superbrothers/vim-vimperator'
 NeoBundle 'ekalinin/Dockerfile.vim'
+NeoBundle 'evanmiller/nginx-vim-syntax'
 ""Theme
 " NeoBundle 'tomasr/molokai'
-NeoBundle 'desert256.vim'
+" NeoBundle 'desert256.vim'
 " NeoBundle 'jpo/vim-railscasts-theme'
 " NeoBundle 'vim-scripts/pyte'
 " NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
+NeoBundle 'cocopon/iceberg.vim'
 
 " New Plugin
 NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
@@ -284,14 +287,12 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 't9md/vim-textmanip'
 NeoBundle "kana/vim-textobj-user"
 NeoBundle "osyo-manga/vim-textobj-multiblock"
-NeoBundle 'elzr/vim-json'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'kakkyz81/evervim'
 NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
 NeoBundle 'rhysd/committia.vim'
 NeoBundle 'miyakogi/seiya.vim'
-NeoBundle 'evanmiller/nginx-vim-syntax'
 
 call neobundle#end()
 " NeoBundleLast...
@@ -305,7 +306,8 @@ NeoBundleCheck
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 " colorscheme sexy-railscasts-256
-colorscheme desert256
+" colorscheme desert256
+colorscheme iceberg
 " colorscheme railscasts
 
 if s:meet_neocomplete_requirements()
