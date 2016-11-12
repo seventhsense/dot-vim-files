@@ -293,6 +293,7 @@ NeoBundle 'kakkyz81/evervim'
 NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
 NeoBundle 'rhysd/committia.vim'
 NeoBundle 'miyakogi/seiya.vim'
+NeoBundle 'dzeban/vim-log-syntax'
 
 call neobundle#end()
 " NeoBundleLast...
@@ -1128,6 +1129,7 @@ endif
 " vnoremap ap : <c-u>call PrefixVisualMyCSS()<cr>
 " nnoremap ap : <c-u>call PrefixMyCSS()<cr>
 " command! Prefix call PrefixMyCSS()
+
 " mustache.vim
 let g:mustache_abbreviations = 1
 
@@ -1169,7 +1171,8 @@ function! g:committia_hooks.edit_open(info)
 
 endfunction
 
-let g:seiya_auto_enable=1
+"" seiya.vim 半透明化
+" let g:seiya_auto_enable=1
 
 let g:lightline = {
       \ 'colorscheme': 'wombat',
