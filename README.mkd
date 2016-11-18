@@ -36,7 +36,7 @@ Just Launch `vim`
 
 and dein.vim and plugins will be automatically installed.
 
-## for syntastic
+## 6 for syntastic
 ### Install jshint
 
 ```
