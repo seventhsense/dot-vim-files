@@ -12,8 +12,6 @@ hook_post_update = '''
   endif
   let g:dein#plugin.build = cmd
 '''
-
-# after install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 [[plugins]]
 repo = 'Shougo/vimshell'
 [[plugins]]
@@ -24,15 +22,17 @@ repo = 'Shougo/neomru.vim'
 # Your Bundles here
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
-
 [[plugins]]
 repo = 'Shougo/neosnippet'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 [[plugins]]
+repo = 'honza/vim-snippets'
+[[plugins]]
 repo = 'thinca/vim-ref'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
+# 閉じカッコを入力
 [[plugins]]
 repo = 'cohama/lexima.vim'
 [[plugins]]
@@ -52,8 +52,6 @@ repo = 'scrooloose/syntastic'
 [[plugins]]
 repo = 'smartchr'
 [[plugins]]
-repo = "itchyny/lightline.vim"
-[[plugins]]
 repo = "vim-scripts/matchit.zip"
 [[plugins]]
 repo = 'closetag.vim'
@@ -65,12 +63,11 @@ repo = 'vim-jp/vimdoc-ja'
 repo = 'h1mesuke/vim-alignta'
 [[plugins]]
 repo = 'taka84u9/vim-ref-ri'
+# fキーで移動
 [[plugins]]
-repo = 'haya14busa/vim-easymotion'
+repo = 'easymotion/vim-easymotion'
 [[plugins]]
 repo = 'sjl/gundo.vim'
-[[plugins]]
-repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'Shougo/vimfiler'
 [[plugins]]
@@ -78,37 +75,14 @@ repo = 'sudo.vim'
 [[plugins]]
 repo = 'mattn/webapi-vim'
 [[plugins]]
-repo = 'mattn/gist-vim'
-[[plugins]]
 repo = 'vim-scripts/VOoM'
 [[plugins]]
 repo = 'bkad/CamelCaseMotion'
 [[plugins]]
-repo = 'rhysd/clever-f.vim'
-[[plugins]]
 repo = 'lilydjwg/colorizer'
-# [[plugins]]
-# repo = 'Shougo/neocomplcache-rsense', {
-      # \ 'depends': 'Shougo/neocomplcache',
-      # \ 'autoload': { 'filetypes': 'ruby' }}
-# [[plugins]]
-# repo =Lazy 'taichouchou2/rsense-0.3', {
-      # \ 'build' : {
-      # \    'mac': 'ruby etc/config.rb > ~/.rsense',
-      # \    'unix': 'ruby etc/config.rb > ~/.rsense',
-      # \ } }
-# indentの深さに色を付ける
-[[plugins]]
-repo = 'nathanaelkane/vim-indent-guides'
-[[plugins]]
-repo = 'sgur/vim-gitgutter'
-[[plugins]]
-repo = 'honza/vim-snippets'
 [[plugins]]
 repo = 'seventhsense/nerdtree'
 rev  = 'development'
-[[plugins]]
-repo = 'LeafCage/nebula.vim'
 # Unite source
 [[plugins]]
 repo = 'ujihisa/unite-gem'
@@ -116,8 +90,9 @@ repo = 'ujihisa/unite-gem'
 repo = 'pasela/unite-webcolorname'
 [[plugins]]
 repo = 'seventhsense/unite-fileline'
-[[plugins]]
-repo = 'h1mesuke/unite-outline'
+# [[plugins]]
+# repo = 'h1mesuke/unite-outline'
+# 辞書を引く
 [[plugins]]
 repo = 'koron/codic-vim'
 [[plugins]]
@@ -141,8 +116,6 @@ repo = 'hron84/vim-Cheffile'
 [[plugins]]
 repo = 'sunaku/vim-ruby-minitest'
 # javascript/coffeescript
-[[plugins]]
-repo = 'pekepeke/titanium-vim'
 [[plugins]]
 repo = 'heavenshell/vim-jsdoc'
 [[plugins]]
@@ -172,7 +145,7 @@ repo = 'cakebaker/scss-syntax.vim'
 repo = 'hail2u/vim-css-syntax'
 [[plugins]]
 repo = 'vim-scripts/css_color.vim'
-# other
+## other
 [[plugins]]
 repo = 'tpope/vim-markdown'
 [[plugins]]
@@ -181,6 +154,11 @@ repo = 'superbrothers/vim-vimperator'
 repo = 'ekalinin/Dockerfile.vim'
 [[plugins]]
 repo = 'evanmiller/nginx-vim-syntax'
+[[plugins]]
+repo = 'dzeban/vim-log-syntax'
+[[plugins]]
+repo = 'cespare/vim-toml'
+
 ## Theme
 # [[plugins]]
 # repo = 'tomasr/molokai'
@@ -195,15 +173,7 @@ repo = 'evanmiller/nginx-vim-syntax'
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 
-# New Plugin
-# [[plugins]]
-# repo =Lazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
-[[plugins]]
-repo = 'tpope/vim-vinegar'
-[[plugins]]
-repo = 'renamer.vim'
-[[plugins]]
-repo = 'rking/ag.vim'
+## text object
 [[plugins]]
 repo = 't9md/vim-textmanip'
 [[plugins]]
@@ -212,17 +182,43 @@ repo = "kana/vim-textobj-user"
 repo = "osyo-manga/vim-textobj-multiblock"
 [[plugins]]
 repo = 'osyo-manga/vim-over'
+# いい感じにテキストオブジェクトを扱う
 [[plugins]]
 repo = 'gcmt/wildfire.vim'
+
+## SNS, Network
 [[plugins]]
 repo = 'kakkyz81/evervim'
 [[plugins]]
-repo = 'Ioannis-Kapoulas/vim-autoprefixer'
+repo = 'mattn/gist-vim'
+
+## UI
+[[plugins]]
+repo = "itchyny/lightline.vim"
+# 背景透過
+[[plugins]]
+repo = 'miyakogi/seiya.vim'
+# indentの深さに色を付ける
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+
+## Git
+# More Pleasant Editing on Commit message
 [[plugins]]
 repo = 'rhysd/committia.vim'
 [[plugins]]
-repo = 'miyakogi/seiya.vim'
+repo = 'tpope/vim-fugitive'
 [[plugins]]
-repo = 'dzeban/vim-log-syntax'
+repo = 'sgur/vim-gitgutter'
+
+# New Plugin
+# [[plugins]]
+# repo =Lazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
+# [[plugins]]
+# repo = 'tpope/vim-vinegar'
 [[plugins]]
-repo = 'cespare/vim-toml'
+repo = 'renamer.vim'
+[[plugins]]
+repo = 'rking/ag.vim'
+[[plugins]]
+repo = 'Ioannis-Kapoulas/vim-autoprefixer'

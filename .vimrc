@@ -447,9 +447,9 @@ let g:NERDTreeMouseMode=0
 ""set autochdir
 
 ""unite-outline
-noremap :uo :<C-u>Unite outline<CR>
-noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
-noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
+" noremap :uo :<C-u>Unite outline<CR>
+" noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
+" noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
 
 ""unite-rails
 noremap :rc :<C-u>Unite rails/controller<CR>
@@ -471,11 +471,6 @@ let g:Align_xstrlen = 3
 " yankring_historyのディレクトリ設定
 let g:yankring_history_dir = expand('$HOME')
 let g:yankring_history_file = '/.vim/yankring_history'"
-
-""qfixhowm
-"let howm_dir = '~/Dropbox/howm'
-"let howm_fileencoding = 'utf-8'
-"let howm_fileformat = 'unix'
 
 ""gundo.vim 
 nnoremap <F3> :GundoToggle<CR>
@@ -516,7 +511,6 @@ xmap g/ <Plug>(easymotion-sn)
 omap g/ <Plug>(easymotion-tn)
 
 let g:EasyMotion_startofline=0
-
 
 " let $XIKI_DIR = "~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/"
 " source ~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/etc/vim/xiki.vim
