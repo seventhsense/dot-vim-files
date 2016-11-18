@@ -115,19 +115,6 @@ repo = 'igetgames/vim-backbone-jscomplete'
 repo = 'mustache/vim-mustache-handlebars'
 [[plugins]]
 repo = 'elzr/vim-json'
-# html/css
-[[plugins]]
-repo = 'othree/html5.vim'
-[[plugins]]
-repo = 'groenewege/vim-less'
-[[plugins]]
-repo = 'cakebaker/scss-syntax.vim'
-[[plugins]]
-repo = 'hail2u/vim-css-syntax'
-[[plugins]]
-repo = 'vim-scripts/css_color.vim'
-[[plugins]]
-repo = 'Ioannis-Kapoulas/vim-autoprefixer'
 ## other
 [[plugins]]
 repo = 'tpope/vim-markdown'

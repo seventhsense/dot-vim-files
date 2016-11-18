@@ -33,6 +33,7 @@ sudo apt-get install build-essential
 ## 5 Install plugins
 
 Just Launch `vim` 
+
 and dein.vim and plugins will be automatically installed.
 
 ## for syntastic
