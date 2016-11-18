@@ -1,0 +1,13 @@
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_if = 1
+on_source = ['unite.vim', 'denite.nvim']
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+depends = 'neomru.vim'
+
+[[plugins]]
+repo = 'osyo-manga/vim-monster'
+on_ft = 'ruby'
+

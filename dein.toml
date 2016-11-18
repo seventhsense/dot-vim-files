@@ -14,10 +14,6 @@ hook_post_update = '''
 '''
 [[plugins]]
 repo = 'Shougo/vimshell'
-[[plugins]]
-repo = 'Shougo/unite.vim'
-[[plugins]]
-repo = 'Shougo/neomru.vim'
 
 # Your Bundles here
 [[plugins]]

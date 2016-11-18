@@ -23,9 +23,8 @@ set whichwrap=b,s,h,l,<,>,[,] "カーソルを行頭、行末で止まらない�
 set wildmenu
 set wildmode=list:longest
 set completeopt=menu,preview,menuone
-"カレント行ハイライト
-set cursorline
-" set cursorcolumn
+set cursorline "カレント行ハイライト
+set cursorcolumn
 " タブの画面上での幅
 set tabstop=2
 set shiftwidth=2
@@ -33,8 +32,7 @@ set smarttab
 set expandtab " タブをスペースに展開する (expandtab:展開する)
 set autoindent " 自動的にインデントする (noautoindent:インデントしない)
 set smartindent
-" バックスペースでインデントや改行を削除できるようにする
-set backspace=indent,eol,start
+set backspace=indent,eol,start " バックスペースでインデントや改行を削除できるようにする
 set showcmd " ステータスラインにコマンドを表示
 set confirm    " 保存されていないファイルがあるときは終了前に保存確認
 set hidden     " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
@@ -104,7 +102,6 @@ if &term =~ "xterm"
   cnoremap <special> <Esc>[200~ <nop>
   cnoremap <special> <Esc>[201~ <nop>
 endif
-"
 ""バックアップ
 set backupdir=$HOME/.vim/backup
 " 全角スペースの表示
@@ -123,7 +120,6 @@ augroup vimrcEx
   au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
   \ exe "normal g`\"" | endif
 augroup END
-
 
 "" dein.vim
 " プラグインが実際にインストールされるディレクトリ
@@ -163,12 +159,14 @@ if dein#check_install()
   call dein#install()
 endif
 
+" Color Scheme
 " colorscheme sexy-railscasts-256
 " colorscheme desert256
 colorscheme iceberg
 " colorscheme railscasts
 
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" NeoComplete
+" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " echomsg "using neocomplete"
@@ -192,74 +190,74 @@ let g:neocomplete#sources#dictionary#dictionaries = {
   \ 'scheme' : $HOME.'/.gosh_completions'
     \ }
 
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-  " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-  " Recommended key-mappings.
-  " <CR>: close popup and save indent.
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
   " return neocomplete#close_popup()
   " For no inserting <CR> key.
   return pumvisible() ? "\<C-y>" : "\<CR>"
-  endfunction
-  " <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-  " inoremap <expr><C-y>  neocomplete#close_popup()
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
-  " Close popup by <Space>.
-  " inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+" Close popup by <Space>.
+" inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-  " For cursor moving in insert mode(Not recommended)
-  "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-  "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-  "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-  "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-  " Or set this.
-  "let g:neocomplete#enable_cursor_hold_i = 1
-  " Or set this.
-  "let g:neocomplete#enable_insert_char_pre = 1
+" For cursor moving in insert mode(Not recommended)
+"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+" Or set this.
+"let g:neocomplete#enable_cursor_hold_i = 1
+" Or set this.
+"let g:neocomplete#enable_insert_char_pre = 1
 
-  " AutoComplPop like behavior.
-  let g:neocomplete#enable_auto_select = 1
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
 
-  " Shell like behavior(not recommended).
-  "set completeopt+=longest
-  "let g:neocomplete#enable_auto_select = 1
-  "let g:neocomplete#disable_auto_complete = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-  " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType ruby set omnifunc=rubycomplete#Complete
-  autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby set omnifunc=rubycomplete#Complete
+autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
 
-  " Enable heavy omni completion.
-  if !exists('g:neocomplete#sources#omni#input_patterns')
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-  " let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+endif
+" let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-  " For perlomni.vim setting.
-  " https://github.com/c9s/perlomni.vim
-  " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " スニペット
 imap <silent>,, <Plug>(neosnippet_expand_or_jump)
@@ -277,7 +275,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-
 
 " ほかのスニペットをつかう
 " Enable snipMate compatibility feature.
@@ -432,7 +429,6 @@ let g:SrcExpl_RefreshMapKey = "<Space>"
 let g:SrcExpl_GoBackMapKey  = "<C-b>"
 nmap <F8> :SrcExplToggle<CR>
 
-
 "NERD_tree.vim
 ""---------------------
 nnoremap <f2> :NERDTreeToggle<CR>
@@ -483,7 +479,7 @@ endif
 ""コメントした後に挿入するスペースの数
 let NERDSpaceDelims = 1
 " キーマップの変更。<Leader>=\+cでコメント化と解除を行う。
-"コメントされていれば、コメントを外し、コメントされてなければコメント化する。
+" コメントされていれば、コメントを外し、コメントされてなければコメント化する。
 nmap <Leader>c <Plug>NERDCommenterToggle
 vmap <Leader>c <Plug>NERDCommenterToggle
 
@@ -492,8 +488,6 @@ let g:gist_show_privates = 1
 let g:gist_post_private = 1
 
 "" vim-coffee-script
-" au BufRead,BufNewFile *.coffee            set filetype=coffee
-" au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 " vimにcoffeeファイルタイプを認識させる
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 " インデントを設定
@@ -651,9 +645,6 @@ au BufRead,BufNewFile *_steps.rb            set filetype=cucumber.ruby
 ""filetype snippet
 au BufRead,BufNewFile,BufReadPre *.snip set filetype=snippet
 
-""filetype Gemfile
-" au BufRead,BufNewFile Gemfile            setfiletype Gemfile
-
 " vimdoc-ja
 " helptags ~/.vim/bundle/vimdoc-ja/doc
 set helplang=ja,en
@@ -765,7 +756,7 @@ function! MyExecExCommand(cmd, ...)
   return ''
 endfunction
 
-"VimFiler"
+" VimFiler
 " let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 " Edit file by tabedit.
