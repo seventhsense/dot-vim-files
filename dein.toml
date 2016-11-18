@@ -1,4 +1,6 @@
 [[plugins]]
+repo = 'Shougo/dein.vim'
+[[plugins]]
 repo = 'Shougo/vimproc'
 hook_post_update = '''
   if dein#util#_is_windows()
@@ -14,31 +16,12 @@ hook_post_update = '''
 '''
 [[plugins]]
 repo = 'Shougo/vimshell'
-
-# Your Bundles here
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-[[plugins]]
-repo = 'Shougo/neosnippet'
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-[[plugins]]
-repo = 'honza/vim-snippets'
 [[plugins]]
 repo = 'thinca/vim-ref'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-# 閉じカッコを入力
-[[plugins]]
-repo = 'cohama/lexima.vim'
-[[plugins]]
-repo = 'tpope/vim-surround'
-[[plugins]]
-repo = 'The-NERD-Commenter'
 [[plugins]]
 repo = 'taglist.vim'
-[[plugins]]
-repo = 'mattn/emmet-vim'
 [[plugins]]
 repo = 'Source-Explorer-srcexpl.vim'
 [[plugins]]
@@ -46,22 +29,7 @@ repo = 'ctags.vim'
 [[plugins]]
 repo = 'scrooloose/syntastic'
 [[plugins]]
-repo = 'smartchr'
-[[plugins]]
-repo = "vim-scripts/matchit.zip"
-[[plugins]]
-repo = 'closetag.vim'
-[[plugins]]
-repo = 'vim-scripts/YankRing.vim'
-[[plugins]]
 repo = 'vim-jp/vimdoc-ja'
-[[plugins]]
-repo = 'h1mesuke/vim-alignta'
-[[plugins]]
-repo = 'taka84u9/vim-ref-ri'
-# fキーで移動
-[[plugins]]
-repo = 'easymotion/vim-easymotion'
 [[plugins]]
 repo = 'sjl/gundo.vim'
 [[plugins]]
@@ -72,27 +40,44 @@ repo = 'sudo.vim'
 repo = 'mattn/webapi-vim'
 [[plugins]]
 repo = 'vim-scripts/VOoM'
-[[plugins]]
-repo = 'bkad/CamelCaseMotion'
-[[plugins]]
-repo = 'lilydjwg/colorizer'
+# [[plugins]] # 重い
+# repo = 'lilydjwg/colorizer'
 [[plugins]]
 repo = 'seventhsense/nerdtree'
 rev  = 'development'
-# Unite source
 [[plugins]]
-repo = 'ujihisa/unite-gem'
+repo = 'taka84u9/vim-ref-ri'
 [[plugins]]
-repo = 'pasela/unite-webcolorname'
+repo = 'vim-scripts/YankRing.vim'
 [[plugins]]
-repo = 'seventhsense/unite-fileline'
-# [[plugins]]
-# repo = 'h1mesuke/unite-outline'
-# 辞書を引く
+repo = 'h1mesuke/vim-alignta'
 [[plugins]]
-repo = 'koron/codic-vim'
+repo = 'renamer.vim'
 [[plugins]]
-repo = 'rhysd/unite-codic.vim'
+repo = 'rking/ag.vim'
+[[plugins]]
+repo = 'tpope/vim-surround'
+[[plugins]]
+repo = 'The-NERD-Commenter'
+
+## movement plugins
+[[plugins]] # 対応するカッコに移動
+repo = "vim-scripts/matchit.zip"
+[[plugins]]
+repo = 'bkad/CamelCaseMotion'
+[[plugins]] # fキーで移動
+repo = 'easymotion/vim-easymotion'
+
+## input plugins
+[[plugins]] # 閉じカッコを入力
+repo = 'cohama/lexima.vim'
+[[plugins]]
+repo = 'mattn/emmet-vim'
+[[plugins]]
+repo = 'smartchr'
+[[plugins]]
+repo = 'closetag.vim'
+
 # Language
 # ruby
 [[plugins]]
@@ -141,6 +126,8 @@ repo = 'cakebaker/scss-syntax.vim'
 repo = 'hail2u/vim-css-syntax'
 [[plugins]]
 repo = 'vim-scripts/css_color.vim'
+[[plugins]]
+repo = 'Ioannis-Kapoulas/vim-autoprefixer'
 ## other
 [[plugins]]
 repo = 'tpope/vim-markdown'
@@ -152,8 +139,6 @@ repo = 'ekalinin/Dockerfile.vim'
 repo = 'evanmiller/nginx-vim-syntax'
 [[plugins]]
 repo = 'dzeban/vim-log-syntax'
-[[plugins]]
-repo = 'cespare/vim-toml'
 
 ## Theme
 # [[plugins]]
@@ -168,6 +153,12 @@ repo = 'cespare/vim-toml'
 # repo = 'davidkariuki/sexy-railscasts-256-theme'
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
+hook_add = '''
+  set background=dark
+  " colorscheme 設定は source 後に行う必要があるので VimEnter で行う。
+  " 但し Colorscheme イベントの発生が抑制されないよう nented を付ける。
+  au MyAutoCmd VimEnter * nested colorscheme iceberg
+'''
 
 ## text object
 [[plugins]]
@@ -178,8 +169,7 @@ repo = "kana/vim-textobj-user"
 repo = "osyo-manga/vim-textobj-multiblock"
 [[plugins]]
 repo = 'osyo-manga/vim-over'
-# いい感じにテキストオブジェクトを扱う
-[[plugins]]
+[[plugins]] # いい感じにテキストオブジェクトを扱う
 repo = 'gcmt/wildfire.vim'
 
 ## SNS, Network
@@ -191,16 +181,13 @@ repo = 'mattn/gist-vim'
 ## UI
 [[plugins]]
 repo = "itchyny/lightline.vim"
-# 背景透過
-[[plugins]]
+[[plugins]] # 背景透過
 repo = 'miyakogi/seiya.vim'
-# indentの深さに色を付ける
-[[plugins]]
+[[plugins]] # indentの深さに色を付ける
 repo = 'nathanaelkane/vim-indent-guides'
 
 ## Git
-# More Pleasant Editing on Commit message
-[[plugins]]
+[[plugins]] # More Pleasant Editing on Commit message
 repo = 'rhysd/committia.vim'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
@@ -208,13 +195,3 @@ repo = 'tpope/vim-fugitive'
 repo = 'sgur/vim-gitgutter'
 
 # New Plugin
-# [[plugins]]
-# repo =Lazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
-# [[plugins]]
-# repo = 'tpope/vim-vinegar'
-[[plugins]]
-repo = 'renamer.vim'
-[[plugins]]
-repo = 'rking/ag.vim'
-[[plugins]]
-repo = 'Ioannis-Kapoulas/vim-autoprefixer'

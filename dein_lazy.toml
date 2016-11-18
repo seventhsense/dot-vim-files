@@ -1,13 +1,56 @@
+# Unite source
 [[plugins]]
 repo = 'Shougo/neomru.vim'
 on_if = 1
 on_source = ['unite.vim', 'denite.nvim']
-
+[[plugins]]
+repo = 'ujihisa/unite-gem'
+on_if = 1
+on_source = ['unite.vim', 'denite.nvim']
+[[plugins]]
+repo = 'pasela/unite-webcolorname'
+on_if = 1
+on_source = ['unite.vim', 'denite.nvim']
+[[plugins]]
+repo = 'seventhsense/unite-fileline'
+on_if = 1
+on_source = ['unite.vim', 'denite.nvim']
+[[plugins]]
+repo = 'Shougo/unite-outline'
+on_source = 'unite.vim'
+[[plugins]] # 辞書を引く
+repo = 'koron/codic-vim'
+[[plugins]]
+repo = 'rhysd/unite-codic.vim'
+on_if = 1
+on_source = ['unite.vim', 'denite.nvim']
+# Unite.vim
 [[plugins]]
 repo = 'Shougo/unite.vim'
 depends = 'neomru.vim'
+on_cmd = 'Unite'
+
+# completion & snippets
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+if = "has('lua')"
+on_event = 'InsertEnter'
+[[plugins]]
+repo = 'Shougo/neosnippet'
+depends = ['neosnippet-snippets']
+on_event = 'InsertCharPre'
+on_ft = 'snippet'
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_source = 'neosnippet.vim'
+[[plugins]]
+repo = 'honza/vim-snippets'
+on_source = 'neosnippet.vim'
 
 [[plugins]]
 repo = 'osyo-manga/vim-monster'
 on_ft = 'ruby'
 
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']

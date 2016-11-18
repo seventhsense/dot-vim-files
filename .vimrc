@@ -122,6 +122,11 @@ augroup vimrcEx
 augroup END
 
 "" dein.vim
+" reset augroup
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
 " プラグインが実際にインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
 " dein.vim 本体
@@ -158,12 +163,6 @@ endif
 if dein#check_install()
   call dein#install()
 endif
-
-" Color Scheme
-" colorscheme sexy-railscasts-256
-" colorscheme desert256
-colorscheme iceberg
-" colorscheme railscasts
 
 " NeoComplete
 " Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
@@ -356,7 +355,6 @@ noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 
 "file_rec
 noremap :/ :<C-u>Unite file_rec/async:! file/new -buffer-name=file_rec<CR>
-
 let g:unite_source_history_yank_file=$HOME.'/.vim/yankring.txt'
 let g:unite_source_history_yank_enable =1  "history/yankの有効化
 nnoremap <silent> :[ :<C-u>Unite history/yank<CR>
@@ -429,7 +427,8 @@ let g:SrcExpl_RefreshMapKey = "<Space>"
 let g:SrcExpl_GoBackMapKey  = "<C-b>"
 nmap <F8> :SrcExplToggle<CR>
 
-"NERD_tree.vim
+""---------------------
+"" NERD_tree.vim
 ""---------------------
 nnoremap <f2> :NERDTreeToggle<CR>
 ""最後に残ったウィンドウがNERDTREEのみのときはvimを閉じる
@@ -443,9 +442,9 @@ let g:NERDTreeMouseMode=0
 ""set autochdir
 
 ""unite-outline
-" noremap :uo :<C-u>Unite outline<CR>
-" noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
-" noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
+noremap :uo :<C-u>Unite outline<CR>
+noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
+noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
 
 ""unite-rails
 noremap :rc :<C-u>Unite rails/controller<CR>
