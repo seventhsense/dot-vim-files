@@ -66,12 +66,16 @@ repo = 'groenewege/vim-less'
 on_ft = 'less'
 [[plugins]]
 repo = 'cakebaker/scss-syntax.vim'
+on_ft = 'scss'
 [[plugins]]
 repo = 'hail2u/vim-css-syntax'
-[[plugins]]
-repo = 'vim-scripts/css_color.vim'
+on_ft = ['css', 'scss']
+# [[plugins]]
+# repo = 'vim-scripts/css_color.vim'
+# on_ft = ['css', 'scss']
 [[plugins]]
 repo = 'Ioannis-Kapoulas/vim-autoprefixer'
+on_ft = ['css', 'scss']
 
 [[plugins]]
 repo = 'osyo-manga/vim-monster'
