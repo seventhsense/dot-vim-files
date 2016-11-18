@@ -30,23 +30,10 @@ sudo apt-get install build-essential
  ln -s dot-vim-files/dict .
 ``` 
 
-
 ## 5 Install plugins
 
-```
-mkdir -p ~/.vim/bundle
-git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-```
-
-Launch `vim`, run `:NeoBundleInstall`    
-    ( ref https://github.com/Shougo/neobundle.vim )
-
-or
-
-```
-vim +NeoBundleInstall +q
-```
-
+Just Launch `vim` 
+and dein.vim and plugins will be automatically installed.
 
 ## for syntastic
 ### Install jshint
