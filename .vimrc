@@ -124,236 +124,91 @@ augroup vimrcEx
   \ exe "normal g`\"" | endif
 augroup END
 
-" NeoBundle
 
-filetype plugin indent off     " required!
-"let g:neobundle#types#git#default_protocol = 'git'
+"" dein.vim
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-if has('vim_starting')
-	set runtimepath+=~/.vim/bundle/neobundle.vim/
-	call neobundle#begin(expand('~/.vim/bundle/'))
-  NeoBundleFetch 'Shougo/neobundle.vim'
-  call neobundle#end()
-endif
-" let NeoBundle manage NeoBundle
-" required! 
-" recommended to install
-""vimproc auto compile
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-" after install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-
-"Your Bundles here
-" NeoBundle 'Shougo/neocomplcache'
-function! s:meet_neocomplete_requirements()
-    return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
-  endfunction
-
-if s:meet_neocomplete_requirements()
-    NeoBundle 'Shougo/neocomplete.vim'
-    NeoBundleFetch 'Shougo/neocomplcache.vim'
-else
-    NeoBundleFetch 'Shougo/neocomplete.vim'
-    NeoBundle 'Shougo/neocomplcache.vim'
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-" NeoBundle 'thinca/vim-ref'
-NeoBundleLazy 'thinca/vim-ref', {'autoload': {'unite_sources': ['ref'], 'mappings': [['sxn', '<Plug>(ref-keyword)']], 'commands': [{'complete': 'customlist,ref#complete', 'name': 'Ref'}, 'RefHistory']}}
-" NeoBundle 'thinca/vim-quickrun'
-" NeoBundleLazy 'thinca/vim-quickrun', {'autoload': {'mappings': [['sxn', '<Plug>(quickrun']], 'commands': [{'complete': 'customlist,quickrun#complete', 'name': 'QuickRun'}]}}
-NeoBundle 'cohama/lexima.vim'
-NeoBundle 'tpope/vim-surround'
-" NeoBundleLazy 'tpope/vim-surround', {'autoload': {'mappings': ['<Plug>Ysurround', '<Plug>YSsurround', '<Plug>YSurround', '<Plug>Dsurround', ['i', '<Plug>ISurround'], ['sx', '<Plug>VgSurround'], '<Plug>Yssurround', '<Plug>SurroundRepeat', '<Plug>Csurround', ['i', '<Plug>Isurround'], ['sx', '<Plug>VSurround']]}}
-NeoBundle 'The-NERD-Commenter'
-" NeoBundle 'taglist.vim'
-NeoBundleLazy 'taglist.vim', {'augroup': 'END', 'autoload': {'commands': [{'complete': 'file', 'name': 'TlistDebug'}, {'complete': 'file', 'name': 'TlistAddFiles'}, 'TlistUndebug', {'complete': 'dir', 'name': 'TlistAddFilesRecursive'}, 'TlistLock', 'TlistOpen', {'complete': 'buffer', 'name': 'TlistShowPrototype'}, 'TlistUnlock', 'TlistHighlightTag', 'Tlist', 'TlistClose', {'complete': 'file', 'name': 'TlistSessionSave'}, {'complete': 'buffer', 'name': 'TlistShowTag'}, 'TlistToggle', 'TlistUpdate', 'TlistMessages', 'TlistSync', {'complete': 'file', 'name': 'TlistSessionLoad'}]}}
-NeoBundle 'mattn/emmet-vim'
-" NeoBundleLazy 'mattn/emmet-vim', {'autoload': {'commands': ['Emmet', 'EmmetInstall']}}
-" NeoBundle 'Source-Explorer-srcexpl.vim'
-NeoBundleLazy 'Source-Explorer-srcexpl.vim', {}
-NeoBundle 'ctags.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'smartchr'
-NeoBundle "itchyny/lightline.vim"
-NeoBundle "vim-scripts/matchit.zip"
-NeoBundle 'closetag.vim'
-" NeoBundle 'vim-scripts/YankRing.vim'
-NeoBundleLazy 'vim-scripts/YankRing.vim', {'augroup': 'YankRing', 'autoload': {'commands': ['YRGetElem', 'YRPush', 'YRToggle', 'YRPaste', 'YRShow', 'YRMapsCreate', 'YRGetMultiple', 'YRPop', 'YRMapsDelete', 'YRSearch', 'YRYankCount', 'YRReplace', 'YRYankRange', 'YRCheckClipboard', 'YRDeleteRange', 'YRMapsMacro', 'YRClear']}}
-NeoBundle 'vim-jp/vimdoc-ja'
-" NeoBundleLazy 'vim-jp/vimdoc-ja', {'autoload': {'commands': ['help']}}
-" NeoBundle 'h1mesuke/vim-alignta'
-NeoBundleLazy 'h1mesuke/vim-alignta', {'autoload': {'unite_sources': ['alignta'], 'commands': [{'complete': 'customlist,s:complete_command_option', 'name': 'Alignta'}, {'complete': 'customlist,s:complete_command_option', 'name': 'Align'}]}}
-" NeoBundle 'taka84u9/vim-ref-ri'
-NeoBundleLazy 'taka84u9/vim-ref-ri', {'autoload': {'commands': ['HtmlHiLink']}}
-" NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'haya14busa/vim-easymotion'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'tpope/vim-fugitive'
-" NeoBundle 'Shougo/vimfiler'
-NeoBundleLazy 'Shougo/vimfiler', {'augroup': 'vimfiler', 'autoload': {'unite_sources': ['vimfiler_drive', 'vimfiler_execute', 'vimfiler_history', 'vimfiler_mask', 'vimfiler_popd', 'vimfiler_sort'], 'mappings': [['n', '<Plug>(vimfiler_']], 'commands': [{'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerCurrentDir'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Read'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFiler'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerBufferDir'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerSimple'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerTab'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Edit'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerExplorer'}, 'VimFilerClose', {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerCreate'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerSplit'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Write'}, {'complete': 'customlist,vimfiler#complete', 'name': 'VimFilerDouble'}, {'complete': 'customlist,vimfiler#complete', 'name': 'Source'}]}}
-NeoBundle 'sudo.vim'
-" NeoBundleLazy 'sudo.vim', {'autoload': {'commands': ['SudoRead', 'SudoWrite']}}
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'mattn/gist-vim'
-" NeoBundle 'vim-scripts/VOoM'
-NeoBundleLazy 'vim-scripts/VOoM', {'autoload': {'commands': ['VoomReloadVim', 'VoomFoldingCleanup', {'complete': 'custom,voom#Complete', 'name': 'Voom'}, 'Voominfo', {'complete': 'custom,voom#Complete', 'name': 'VoomToggle'}, 'Voomquit', 'Voomtoggle', 'VoomFoldingSave', 'VoomReloadAll', 'Voomexec', 'VoomSort', 'Voomhelp', 'VoomFoldingRestore', 'Voomgrep', 'Voomlog', 'Voomunl', 'VoomQuitAll']}}
-NeoBundle 'bkad/CamelCaseMotion'
-" NeoBundle 'rhysd/clever-f.vim'
-NeoBundleLazy 'rhysd/clever-f.vim', {'autoload': {'mappings': [['sxno', '<Plug>(clever-f-']]}}
-" NeoBundle 'lilydjwg/colorizer'
-NeoBundleLazy 'lilydjwg/colorizer', {'augroup': 'Colorizer', 'autoload': {'mappings': [['n', '<Plug>Colorizer']], 'commands': ['ColorToggle', 'ColorHighlight', 'ColorClear']}}
-" NeoBundle 'Shougo/neocomplcache-rsense', {
-      " \ 'depends': 'Shougo/neocomplcache',
-      " \ 'autoload': { 'filetypes': 'ruby' }}
-" NeoBundleLazy 'taichouchou2/rsense-0.3', {
-      " \ 'build' : {
-      " \    'mac': 'ruby etc/config.rb > ~/.rsense',
-      " \    'unix': 'ruby etc/config.rb > ~/.rsense',
-      " \ } }
-" indentの深さに色を付ける
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'sgur/vim-gitgutter'
-NeoBundle 'honza/vim-snippets'
-" NeoBundle 'seventhsense/nerdtree', 'development'
-NeoBundleLazy 'seventhsense/nerdtree', {'augroup': 'NERDTreeHijackNetrw', 'autoload': {'commands': ['NERDTreeMirror', 'NERDTreeClose', {'complete': 'dir', 'name': 'NERDTree'}, 'NERDTreeFocus', {'complete': 'customlist,nerdtree#completeBookmarks', 'name': 'NERDTreeFromBookmark'}, {'complete': 'dir', 'name': 'NERDTreeToggle'}, 'NERDTreeCWD', 'NERDTreeFind']}}
-" NeoBundle 'LeafCage/nebula.vim'
-NeoBundleLazy 'LeafCage/nebula.vim', {'autoload': {'commands': ['NebulaPutLazy', 'NebulaPutFromClipboard', 'NebulaYankOptions', 'NebulaYankConfig', 'NebulaPutConfig', 'NebulaYankTap']}}
-" Unite source
-" NeoBundle 'ujihisa/unite-gem'
-NeoBundleLazy 'ujihisa/unite-gem', {'autoload': {'unite_sources': ['gem']}}
-NeoBundle 'pasela/unite-webcolorname'
-NeoBundle 'seventhsense/unite-fileline'
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'koron/codic-vim'
-NeoBundle 'rhysd/unite-codic.vim'
-""Language
-" ruby
-NeoBundle 'tpope/vim-bundler'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'basyura/unite-rails'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'skwp/vim-rspec'
-NeoBundle 'tpope/vim-cucumber'
-NeoBundle 'hron84/vim-Cheffile'
-NeoBundle 'sunaku/vim-ruby-minitest'
-" javascript/coffeescript
-" NeoBundle 'pekepeke/titanium-vim'
-NeoBundle 'heavenshell/vim-jsdoc'
-NeoBundle 'claco/jasmine.vim'
-NeoBundle 'mklabs/vim-backbone'
-NeoBundle 'AndrewRadev/vim-eco'
-NeoBundle 'vim-coffee-script'
-NeoBundle 'mattn/jscomplete-vim'
-NeoBundle 'igetgames/vim-backbone-jscomplete'
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'elzr/vim-json'
-" html/css
-NeoBundle 'othree/html5.vim'
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'hail2u/vim-css-syntax'
-" NeoBundle 'vim-scripts/css_color.vim'
-" other
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'superbrothers/vim-vimperator'
-NeoBundle 'ekalinin/Dockerfile.vim'
-NeoBundle 'evanmiller/nginx-vim-syntax'
-""Theme
-" NeoBundle 'tomasr/molokai'
-" NeoBundle 'desert256.vim'
-" NeoBundle 'jpo/vim-railscasts-theme'
-" NeoBundle 'vim-scripts/pyte'
-" NeoBundle 'davidkariuki/sexy-railscasts-256-theme'
-NeoBundle 'cocopon/iceberg.vim'
+" 設定開始
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" New Plugin
-NeoBundleLazy 'itchyny/calendar.vim', {'autoload': {'commands': [{'complete': 'customlist,calendar#argument#complete', 'name': 'Calendar'}]}}
-NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'renamer.vim'
-NeoBundle 'rking/ag.vim'
-NeoBundle 't9md/vim-textmanip'
-NeoBundle "kana/vim-textobj-user"
-NeoBundle "osyo-manga/vim-textobj-multiblock"
-NeoBundle 'osyo-manga/vim-over'
-NeoBundle 'gcmt/wildfire.vim'
-NeoBundle 'kakkyz81/evervim'
-NeoBundle 'Ioannis-Kapoulas/vim-autoprefixer'
-NeoBundle 'rhysd/committia.vim'
-NeoBundle 'miyakogi/seiya.vim'
-NeoBundle 'dzeban/vim-log-syntax'
+  " プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイル（後述）を用意しておく
+  let g:rc_dir    = expand('~/dot-vim-files')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
-call neobundle#end()
-" NeoBundleLast...
-" NeoBundleEnd...
-filetype plugin indent on     " required!
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-NeoBundleCheck
-"
-" :NeoBundleList          - list configured bundles
-" :NeoBundleInstall(!)    - install(update) bundles
-" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+  " 設定終了
+  call dein#end()
+  call dein#save_state()
+endif
+
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
 
 " colorscheme sexy-railscasts-256
 " colorscheme desert256
 colorscheme iceberg
 " colorscheme railscasts
 
-if s:meet_neocomplete_requirements()
-  " 新しく追加した neocomplete の設定
-  "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-  " Disable AutoComplPop.
-  let g:acp_enableAtStartup = 0
-  " echomsg "using neocomplete"
-  " Use neocomplete.
-  let g:neocomplete#enable_at_startup = 1
-  " Use smartcase.
-  let g:neocomplete#enable_smart_case = 1
-  " use fuzzy comletion
-  let g:neocomplete#enable_fuzzy_completion = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-  " rails.vimとの競合
-  let g:neocomplete#force_overwrite_completefunc=1
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" echomsg "using neocomplete"
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" use fuzzy comletion
+let g:neocomplete#enable_fuzzy_completion = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" rails.vimとの競合
+let g:neocomplete#force_overwrite_completefunc=1
 
-  " Define dictionary.
-  let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'ruby' : $HOME.'/.ruby.dict',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+  \ 'default' : '',
+  \ 'vimshell' : $HOME.'/.vimshell_hist',
+  \ 'ruby' : $HOME.'/.ruby.dict',
+  \ 'scheme' : $HOME.'/.gosh_completions'
+    \ }
 
-  " Define keyword.
-  if !exists('g:neocomplete#keyword_patterns')
+    " Define keyword.
+    if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
   " Plugin key-mappings.
   inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
   " Recommended key-mappings.
   " <CR>: close popup and save indent.
   inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
   function! s:my_cr_function()
-    " return neocomplete#close_popup()
-    " For no inserting <CR> key.
-    return pumvisible() ? "\<C-y>" : "\<CR>"
+  " return neocomplete#close_popup()
+  " For no inserting <CR> key.
+  return pumvisible() ? "\<C-y>" : "\<CR>"
   endfunction
   " <TAB>: completion.
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -361,7 +216,7 @@ if s:meet_neocomplete_requirements()
   inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
   inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
   " inoremap <expr><C-y>  neocomplete#close_popup()
-  inoremap <expr><C-e>  neocomplete#cancel_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
   " Close popup by <Space>.
   " inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
@@ -395,7 +250,7 @@ if s:meet_neocomplete_requirements()
 
   " Enable heavy omni completion.
   if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
+  let g:neocomplete#sources#omni#input_patterns = {}
   endif
   " let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
   "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
@@ -405,123 +260,6 @@ if s:meet_neocomplete_requirements()
   " For perlomni.vim setting.
   " https://github.com/c9s/perlomni.vim
   " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-else
-  " 今までの neocomplcache の設定
-  "------------------------------------
-  " neocomplecache.vim
-  "------------------------------------
-  " echomsg "using neocomplecache"
-  " 補完・履歴
-  set infercase
-  " " AutoComplPopを無効にする
-  " let g:acp_enableAtStartup = 0
-  " NeoComplCacheを有効にする
-  let g:neocomplcache_enable_at_startup = 1
-  " smarrt case有効化。 大文字が入力されるまで大文字小文字の区別を無視する
-  let g:neocomplcache_enable_smart_case = 1
-  " camel caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
-  let g:neocomplcache_enable_camel_case_completion = 1
-  " _(アンダーバー)区切りの補完を有効化
-  let g:neocomplcache_enable_underbar_completion = 1
-  " シンタックスをキャッシュするときの最小文字長を3に
-  let g:neocomplcache_min_syntax_length = 3
-  " cache skip
-  let g:neocomplcache_skip_auto_completion_time = '0.3'
-
-  " neocomplcacheを自動的にロックするバッファ名のパターン
-  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-  " -入力による候補番号の表示
-  let g:neocomplcache_enable_quick_match = 1
-  " 補完候補の一番先頭を選択状態にする(AutoComplPopと似た動作)
-  let g:neocomplcache_enable_auto_select = 1
-
-  ""avoid rails.vim
-  let g:neocomplcache_force_overwrite_completefunc=1
-
-  " Define dictionary.
-  let g:neocomplcache_dictionary_filetype_lists = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scala' : $HOME.'/.vim/bundle/vim-scala/dict/scala.dict',
-        \ 'java' : $HOME.'/.vim/dict/java.dict',
-        \ 'c' : $HOME.'/.vim/dict/c.dict',
-        \ 'cpp' : $HOME.'/.vim/dict/cpp.dict',
-        \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
-        \ 'ocaml' : $HOME.'/.vim/dict/ocaml.dict',
-        \ 'perl' : $HOME.'/.vim/dict/perl.dict',
-        \ 'php' : $HOME.'/.vim/dict/php.dict',
-        \ 'scheme' : $HOME.'/.vim/dict/scheme.dict',
-        \ 'ruby' : $HOME.'/.vim/dict/ruby.dict',
-        \ 'vm' : $HOME.'/.vim/dict/vim.dict'
-        \ }
-
-  " Define keyword.
-  if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-  endif
-  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-  " 補完を選択しpopupを閉じる
-  inoremap <expr><C-y> neocomplcache#close_popup()
-  " 補完をキャンセルしpopupを閉じる
-  inoremap <expr><C-e> neocomplcache#cancel_popup()
-  " TABで補完できるようにする
-  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-  " undo
-  inoremap <expr><C-g>     neocomplcache#undo_completion()
-  " 補完候補の共通部分までを補完する
-  inoremap <expr><C-l> neocomplcache#complete_common_string()
-  " C-kを押すと行末まで削除
-  inoremap <C-k> <C-o>D
-  " C-nでneocomplcache補完
-  inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
-  " C-pでkeyword補完
-  inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
-  " 補完候補が出ていたら確定、なければ改行
-  ""inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
-
-  " <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-  inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcache#manual_omni_complete()
-
-  " FileType毎のOmni補完を設定
-  autocmd FileType python set omnifunc=pythoncomplete#Complete
-  autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-  autocmd FileType c set omnifunc=ccomplete#Complete
-  autocmd FileType ruby set omnifunc=rubycomplete#Complete
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-  endif
-  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-
-  let g:neocomplcache_enable_fuzzy_completion = 0
-
-  let g:neocomplcache_source_rank = {
-        \ 'snippets_complete' : 5,
-        \ 'dictionary_complete' : 8,
-        \ 'jscomplete' : 500,
-        \ }
-
-  " domも含める
-  let g:jscomplete_use = ['dom']
-
-  imap <C-q> <Plug>(neocomplcache_start_unite_quick_match)
-
-  " NeoComplCache-rsense
-  " let g:neocomplcache#sources#rsense#home_directory = expand('~/.bundle/rsense-0.3')
-
-endif
 
 " スニペット
 imap <silent>,, <Plug>(neosnippet_expand_or_jump)
