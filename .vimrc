@@ -36,9 +36,10 @@ set backspace=indent,eol,start " バックスペースでインデントや改�
 set showcmd " ステータスラインにコマンドを表示
 set confirm    " 保存されていないファイルがあるときは終了前に保存確認
 set hidden     " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
-set autoread   "外部でファイルに変更がされた場合は読みなおす
+set autoread   " 外部でファイルに変更がされた場合は読みなおす
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
+set backupdir=$HOME/.vim/backup "バックアップ
 " ESC2回押してハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "シンタックス
@@ -102,8 +103,6 @@ if &term =~ "xterm"
   cnoremap <special> <Esc>[200~ <nop>
   cnoremap <special> <Esc>[201~ <nop>
 endif
-""バックアップ
-set backupdir=$HOME/.vim/backup
 " 全角スペースの表示
  highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
  au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
@@ -283,7 +282,7 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 " ユーザー定義スニペット保存ディレクトリ
 let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets'
 
-" for emmet
+" emmet
 let g:user_emmet_settings = {
       \  'lang' : 'ja',
       \  'html' : {
@@ -415,27 +414,6 @@ autocmd FileType javascript let b:surround_{char2nr("l")} = "console.log(\r)"
 "ビジュアルモード時kで「」の囲い込み
 let g:surround_107 = "「\r」" " 107 = k
 
-"" Source Explorer
-"自動でプレビューを表示する。TODO:うざくなってきたら手動にする。またはソースを追う時だけ自動に変更する。
-let g:SrcExpl_RefreshTime   = 1
-"プレビューウインドウの高さ
-let g:SrcExpl_WinHeight     = 9
-"tagsは自動で作成する
-let g:SrcExpl_UpdateTags    = 1
-"マッピング
-let g:SrcExpl_RefreshMapKey = "<Space>"
-let g:SrcExpl_GoBackMapKey  = "<C-b>"
-nmap <F8> :SrcExplToggle<CR>
-
-""---------------------
-"" NERD_tree.vim
-""---------------------
-nnoremap <f2> :NERDTreeToggle<CR>
-""最後に残ったウィンドウがNERDTREEのみのときはvimを閉じる
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let g:NERDTreeDirArrows=0
-let g:NERDTreeMouseMode=0
-
 ""smartchr設定
 ""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
@@ -460,53 +438,15 @@ noremap :rt :<C-u>Unite rails/spec<CR>
 ""unite-ref-ri
 " noremap :rr :<C-u>Unite ref/ri<CR>
 
-""Align
-let g:Align_xstrlen = 3
-
 " yankring_historyのディレクトリ設定
 let g:yankring_history_dir = expand('$HOME')
-let g:yankring_history_file = '/.vim/yankring_history'"
-
-""gundo.vim 
-nnoremap <F3> :GundoToggle<CR>
-if has('persistent_undo')
-  set undofile
-  set undodir=./.vimundo,~/.vim/undo
-endif
-
-""NERD-COMMENTER
-""コメントした後に挿入するスペースの数
-let NERDSpaceDelims = 1
-" キーマップの変更。<Leader>=\+cでコメント化と解除を行う。
-" コメントされていれば、コメントを外し、コメントされてなければコメント化する。
-nmap <Leader>c <Plug>NERDCommenterToggle
-vmap <Leader>c <Plug>NERDCommenterToggle
-
-""gist.vim
-let g:gist_show_privates = 1
-let g:gist_post_private = 1
+let g:yankring_history_file = '/.vim/yankring_history'
 
 "" vim-coffee-script
 " vimにcoffeeファイルタイプを認識させる
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 " インデントを設定
 autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
-
-"" easymotion
-let g:EasyMotion_leader_key = "<space>"
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_use_migemo = 1
-nmap f <Plug>(easymotion-s2)
-vmap f <Plug>(easymotion-s2)
-omap f <Plug>(easymotion-s2) " surround.vimとかぶるので`z`
-nmap g/ <Plug>(easymotion-sn)
-xmap g/ <Plug>(easymotion-sn)
-omap g/ <Plug>(easymotion-tn)
-
-let g:EasyMotion_startofline=0
-
-" let $XIKI_DIR = "~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/"
-" source ~/.rvm/gems/ruby-1.9.3-p194/gems/xiki-0.6.5/etc/vim/xiki.vim
 
 "" vim-less
 au BufRead,BufNewFile *.less		set filetype=less
@@ -551,34 +491,8 @@ nmap <Leader>re :<C-u>Ref webdict ej<Space>
 
 au FileType ruby,eruby setl tags+=~/gtags
 
-""syntastic
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_mode_map = { 'mode': 'active', 
-              \ 'active_filetypes': ['ruby']}
-let g:syntastic_ruby_checkers = ['rubocop']
-" let g:syntastic_quiet_messages = {'levels': 'warnings'}
-" let g:syntastic_mode_map = { 'mode': 'active',
-" \ 'active_filetypes': [],
-" \ 'passive_filetypes': ['javascript'] }
-let g:syntastic_python_checkers = ['pyflakes', 'pep8']
-
 ""vim-eco
 autocmd BufNewFile,BufRead *.eco set filetype=eco
-
-""CamelCaseMotion
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
-
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " endtagcomment.vim
 " https://gist.github.com/hokaccha/4118281
@@ -670,23 +584,6 @@ function! JasmineSetting()
   command! JasmineMake :call jasmine#make()
 endfunction
 au BufRead,BufNewFile,BufReadPre *.coffee,*.js call JasmineSetting()
-
-"------------------------------------
-" indent_guides
-"------------------------------------
-" インデントの深さに色を付ける
-let g:indent_guides_start_level=2
-let g:indent_guides_auto_colors=0
-let g:indent_guides_enable_on_vim_startup=0
-let g:indent_guides_color_change_percent=20
-let g:indent_guides_guide_size=1
-let g:indent_guides_space_guides=1
-
-hi IndentGuidesOdd  ctermbg=235
-hi IndentGuidesEven ctermbg=237
-au FileType coffee,ruby,javascript,python IndentGuidesEnable
-nmap <silent><Leader>ig <Plug>IndentGuidesToggle
-
 
 """"""""""""""""""""""""""""""
 "sepが空でなければ、sepをセパレータとしてジャンプ。
@@ -817,31 +714,9 @@ endfunction
 "" C-pで0レジスタで貼り付け
 vnoremap <silent> <C-p> "0p<CR>
 
-"" textmanip
-xmap <Space>d <Plug>(textmanip-duplicate-down)
-nmap <Space>d <Plug>(textmanip-duplicate-down)
-xmap <Space>D <Plug>(textmanip-duplicate-up)
-nmap <Space>D <Plug>(textmanip-duplicate-up)
-
-xmap <C-k> <Plug>(textmanip-move-up)
-xmap <C-j> <Plug>(textmanip-move-down)
-xmap <C-h> <Plug>(textmanip-move-left)
-xmap <C-l> <Plug>(textmanip-move-right)
-
-" toggle insert/replace with <F9>
-nmap <F9> <Plug>(textmanip-toggle-mode)
-xmap <F9> <Plug>(textmanip-toggle-mode)
-
-"" textobj-multiblock
-omap ab <Plug>(textobj-multiblock-a)
-omap ib <Plug>(textobj-multiblock-i)
-vmap ab <Plug>(textobj-multiblock-a)
-vmap ib <Plug>(textobj-multiblock-i)
-
 "" vim-json
 let g:vim_json_syntax_conceal = 0
 
-"" evervim
 " 環境依存や非公開設定ファイルの読み込み
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
@@ -859,9 +734,6 @@ let g:mustache_abbreviations = 1
 autocmd FileType python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
-
-" wildfire
-let g:wildfire_objects = ["iw","is", "i'", 'i"', "i)", "i]", "i}", "ip", "it"]
 
 " committia.vim
 " You can get the information about the windows with first argument as a dictionary.
@@ -892,13 +764,6 @@ function! g:committia_hooks.edit_open(info)
     imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
 
 endfunction
-
-"" seiya.vim 半透明化
-" let g:seiya_auto_enable=1
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
 
 " * での検索や text-object 等での選択時に - で切らない
 setlocal iskeyword& iskeyword+=-

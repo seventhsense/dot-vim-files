@@ -16,8 +16,6 @@ hook_post_update = '''
 '''
 [[plugins]]
 repo = 'thinca/vim-ref'
-[[plugins]]
-repo = 'thinca/vim-quickrun'
 # [[plugins]]
 # repo = 'taglist.vim'
 # [[plugins]]
@@ -26,12 +24,20 @@ repo = 'thinca/vim-quickrun'
 # repo = 'ctags.vim'
 [[plugins]]
 repo = 'scrooloose/syntastic'
+hook_add = '''
+  ""syntastic
+  let g:syntastic_ruby_checkers = ['rubocop']
+  let g:syntastic_javascript_checkers = ['jshint']
+  let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+  let g:syntastic_mode_map = { 'mode': 'active', 
+                \ 'active_filetypes': ['ruby'],
+                \ 'passive_filetypes': []}
+  " let g:syntastic_quiet_messages = {'levels': 'warnings'}
+'''
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 [[plugins]]
 repo = 'Shougo/vimfiler'
-[[plugins]]
-repo = 'mattn/webapi-vim'
 # [[plugins]] # 重い
 # repo = 'lilydjwg/colorizer'
 [[plugins]]
@@ -44,14 +50,53 @@ repo = 'rking/ag.vim'
 repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'The-NERD-Commenter'
+hook_add = '''
+  ""NERD-COMMENTER
+  ""コメントした後に挿入するスペースの数
+  let NERDSpaceDelims = 1
+  " キーマップの変更。<Leader>=\+cでコメント化と解除を行う。
+  " コメントされていれば、コメントを外し、コメントされてなければコメント化する。
+  nmap <Leader>c <Plug>NERDCommenterToggle
+  vmap <Leader>c <Plug>NERDCommenterToggle
+'''
 
 ## movement plugins
 [[plugins]] # 対応するカッコに移動
 repo = "vim-scripts/matchit.zip"
 [[plugins]]
 repo = 'bkad/CamelCaseMotion'
+hook_add = '''
+  ""CamelCaseMotion
+  map <silent> w <Plug>CamelCaseMotion_w
+  map <silent> b <Plug>CamelCaseMotion_b
+  map <silent> e <Plug>CamelCaseMotion_e
+  sunmap w
+  sunmap b
+  sunmap e
+
+  omap <silent> iw <Plug>CamelCaseMotion_iw
+  xmap <silent> iw <Plug>CamelCaseMotion_iw
+  omap <silent> ib <Plug>CamelCaseMotion_ib
+  xmap <silent> ib <Plug>CamelCaseMotion_ib
+  omap <silent> ie <Plug>CamelCaseMotion_ie
+  xmap <silent> ie <Plug>CamelCaseMotion_ie
+'''
 [[plugins]] # fキーで移動
 repo = 'easymotion/vim-easymotion'
+hook_add = '''
+  "" easymotion
+  let g:EasyMotion_leader_key = "<space>"
+  let g:EasyMotion_smartcase = 1
+  let g:EasyMotion_use_migemo = 1
+  nmap f <Plug>(easymotion-s2)
+  vmap f <Plug>(easymotion-s2)
+  omap f <Plug>(easymotion-s2) " surround.vimとかぶるので`z`
+  nmap g/ <Plug>(easymotion-sn)
+  xmap g/ <Plug>(easymotion-sn)
+  omap g/ <Plug>(easymotion-tn)
+
+  let g:EasyMotion_startofline=0
+'''
 
 ## input plugins
 [[plugins]] # 閉じカッコを入力
@@ -60,8 +105,6 @@ repo = 'cohama/lexima.vim'
 repo = 'mattn/emmet-vim'
 [[plugins]]
 repo = 'smartchr'
-[[plugins]]
-repo = 'closetag.vim'
 
 # Language
 # ruby
@@ -133,24 +176,78 @@ hook_add = '''
 ## text object
 [[plugins]] # c-hjkl 選択範囲を移動
 repo = 't9md/vim-textmanip'
+hook_add = '''
+  "" textmanip
+  xmap <Space>d <Plug>(textmanip-duplicate-down)
+  nmap <Space>d <Plug>(textmanip-duplicate-down)
+  xmap <Space>D <Plug>(textmanip-duplicate-up)
+  nmap <Space>D <Plug>(textmanip-duplicate-up)
+
+  xmap <C-k> <Plug>(textmanip-move-up)
+  xmap <C-j> <Plug>(textmanip-move-down)
+  xmap <C-h> <Plug>(textmanip-move-left)
+  xmap <C-l> <Plug>(textmanip-move-right)
+
+  " toggle insert/replace with <F9>
+  nmap <F9> <Plug>(textmanip-toggle-mode)
+  xmap <F9> <Plug>(textmanip-toggle-mode)
+'''
 [[plugins]]
 repo = "kana/vim-textobj-user"
 [[plugins]]
 repo = "osyo-manga/vim-textobj-multiblock"
+hook_add = '''
+  "" textobj-multiblock
+  omap ab <Plug>(textobj-multiblock-a)
+  omap ib <Plug>(textobj-multiblock-i)
+  vmap ab <Plug>(textobj-multiblock-a)
+  vmap ib <Plug>(textobj-multiblock-i)
+'''
 [[plugins]] # いい感じにテキストオブジェクトを扱う
 repo = 'gcmt/wildfire.vim'
+hook_add = '''
+  " wildfire
+  let g:wildfire_objects = ["iw","is", "i'", 'i"', "i)", "i]", "i}", "ip", "it"]
+'''
 
 ## SNS, Network
 # [[plugins]]
 # repo = 'kakkyz81/evervim'
 # [[plugins]]
 # repo = 'mattn/gist-vim'
+# on_add = '''
+  # ""gist.vim
+  # let g:gist_show_privates = 1
+  # let g:gist_post_private = 1
+# '''
+[[plugins]]
+repo = 'mattn/webapi-vim'
 
 ## UI
 [[plugins]]
 repo = "itchyny/lightline.vim"
+hook_add = '''
+  let g:lightline = {
+        \ 'colorscheme': 'wombat',
+        \ }
+'''
 [[plugins]] # indentの深さに色を付ける
 repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+  " indent_guides
+  " インデントの深さに色を付ける
+  let g:indent_guides_start_level=2
+  let g:indent_guides_auto_colors=0
+  let g:indent_guides_enable_on_vim_startup=0
+  let g:indent_guides_color_change_percent=20
+  let g:indent_guides_guide_size=1
+  let g:indent_guides_space_guides=1
+
+  hi IndentGuidesOdd  ctermbg=235
+  hi IndentGuidesEven ctermbg=237
+  au FileType coffee,ruby,javascript,python IndentGuidesEnable
+  nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+'''
 
 ## Git
 [[plugins]] # More Pleasant Editing on Commit message

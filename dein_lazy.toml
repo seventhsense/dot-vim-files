@@ -1,9 +1,16 @@
 [[plugins]]
+repo = 'thinca/vim-quickrun'
+on_cmd = 'QuickRun'
+[[plugins]]
 repo = 'vim-scripts/VOoM'
 on_cmd = 'Voom'
 [[plugins]] # 背景透過
 repo = 'miyakogi/seiya.vim'
 on_cmd = 'SeiyaEnable'
+hook_add = '''
+  "" seiya.vim 半透明化
+  " let g:seiya_auto_enable=1
+'''
 [[plugins]] # 置換をプレビュー
 repo = 'osyo-manga/vim-over'
 on_cmd = 'OverCommandLine'
@@ -16,14 +23,34 @@ on_cmd = 'VimShell'
 [[plugins]]
 repo = 'sjl/gundo.vim'
 on_cmd = 'GundoToggle'
+hook_add = '''
+  ""gundo.vim 
+  nnoremap <F3> :GundoToggle<CR>
+  if has('persistent_undo')
+    set undofile
+    set undodir=./.vimundo,~/.vim/undo
+  endif
+'''
 [[plugins]]
 repo = 'seventhsense/nerdtree'
 rev  = 'development'
 on_cmd = 'NERDTreeToggle'
+hook_add = '''
+  "" NERD_tree.vim
+  nnoremap <f2> :NERDTreeToggle<CR>
+  ""最後に残ったウィンドウがNERDTREEのみのときはvimを閉じる
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  let g:NERDTreeDirArrows=0
+  let g:NERDTreeMouseMode=0
+'''
 [[plugins]]
 repo = 'h1mesuke/vim-alignta'
 on_if = 1
 on_cmd = 'Alignta'
+on_add = '''
+  ""Align
+  let g:Align_xstrlen = 3
+'''
 # Unite source
 [[plugins]]
 repo = 'basyura/unite-rails'

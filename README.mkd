@@ -10,9 +10,9 @@ ln -s ~/dot-vim-files/.vimrc .
 ```
 
 ## 2 install ctags && build-essentials
-
+    
 ```
-sudo apt-get install ctags
+sudo apt-get install cmigemo
 sudo apt-get install build-essential
 ```
 
