@@ -566,19 +566,19 @@ let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 autocmd BufNewFile,BufRead *.eco set filetype=eco
 
 ""CamelCaseMotion
-" map <silent> w <Plug>CamelCaseMotion_w
-" map <silent> b <Plug>CamelCaseMotion_b
-" map <silent> e <Plug>CamelCaseMotion_e
-" sunmap w
-" sunmap b
-" sunmap e
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
 
-" omap <silent> iw <Plug>CamelCaseMotion_iw
-" xmap <silent> iw <Plug>CamelCaseMotion_iw
-" omap <silent> ib <Plug>CamelCaseMotion_ib
-" xmap <silent> ib <Plug>CamelCaseMotion_ib
-" omap <silent> ie <Plug>CamelCaseMotion_ie
-" xmap <silent> ie <Plug>CamelCaseMotion_ie
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " endtagcomment.vim
 " https://gist.github.com/hokaccha/4118281
@@ -899,3 +899,6 @@ endfunction
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
+
+" * での検索や text-object 等での選択時に - で切らない
+setlocal iskeyword& iskeyword+=-

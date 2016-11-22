@@ -1,4 +1,13 @@
 [[plugins]]
+repo = 'vim-scripts/VOoM'
+on_cmd = 'Voom'
+[[plugins]] # 背景透過
+repo = 'miyakogi/seiya.vim'
+on_cmd = 'SeiyaEnable'
+[[plugins]] # 置換をプレビュー
+repo = 'osyo-manga/vim-over'
+on_cmd = 'OverCommandLine'
+[[plugins]]
 repo = 'sudo.vim'
 on_cmd = ['SudoWrite', 'SudoRead']
 [[plugins]]
@@ -13,8 +22,13 @@ rev  = 'development'
 on_cmd = 'NERDTreeToggle'
 [[plugins]]
 repo = 'h1mesuke/vim-alignta'
+on_if = 1
 on_cmd = 'Alignta'
 # Unite source
+[[plugins]]
+repo = 'basyura/unite-rails'
+on_if = 1
+on_source = ['unite.vim', 'denite.nvim']
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
 on_if = 1
@@ -96,6 +110,10 @@ on_ft = ['css', 'scss']
 [[plugins]]
 repo = 'osyo-manga/vim-monster'
 on_ft = 'ruby'
+[[plugins]]
+repo = 'tpope/vim-bundler'
+on_ft = 'ruby'
+on_cmd = 'Bundle'
 
 [[plugins]]
 repo = 'cespare/vim-toml'

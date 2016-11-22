@@ -18,12 +18,12 @@ hook_post_update = '''
 repo = 'thinca/vim-ref'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-[[plugins]]
-repo = 'taglist.vim'
+# [[plugins]]
+# repo = 'taglist.vim'
 # [[plugins]]
 # repo = 'Source-Explorer-srcexpl.vim'
-[[plugins]]
-repo = 'ctags.vim'
+# [[plugins]]
+# repo = 'ctags.vim'
 [[plugins]]
 repo = 'scrooloose/syntastic'
 [[plugins]]
@@ -35,8 +35,6 @@ repo = 'mattn/webapi-vim'
 # [[plugins]] # 重い
 # repo = 'lilydjwg/colorizer'
 [[plugins]]
-repo = 'taka84u9/vim-ref-ri'
-[[plugins]]
 repo = 'vim-scripts/YankRing.vim'
 [[plugins]]
 repo = 'renamer.vim'
@@ -46,8 +44,6 @@ repo = 'rking/ag.vim'
 repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'The-NERD-Commenter'
-[[plugins]]
-repo = 'vim-scripts/VOoM'
 
 ## movement plugins
 [[plugins]] # 対応するカッコに移動
@@ -70,11 +66,7 @@ repo = 'closetag.vim'
 # Language
 # ruby
 [[plugins]]
-repo = 'tpope/vim-bundler'
-[[plugins]]
 repo = 'tpope/vim-rails'
-[[plugins]]
-repo = 'basyura/unite-rails'
 [[plugins]]
 repo = 'vim-ruby/vim-ruby'
 [[plugins]]
@@ -85,6 +77,8 @@ repo = 'tpope/vim-cucumber'
 repo = 'hron84/vim-Cheffile'
 [[plugins]]
 repo = 'sunaku/vim-ruby-minitest'
+[[plugins]]
+repo = 'taka84u9/vim-ref-ri'
 # javascript/coffeescript
 [[plugins]]
 repo = 'heavenshell/vim-jsdoc'
@@ -137,28 +131,24 @@ hook_add = '''
 '''
 
 ## text object
-[[plugins]]
+[[plugins]] # c-hjkl 選択範囲を移動
 repo = 't9md/vim-textmanip'
 [[plugins]]
 repo = "kana/vim-textobj-user"
 [[plugins]]
 repo = "osyo-manga/vim-textobj-multiblock"
-[[plugins]]
-repo = 'osyo-manga/vim-over'
 [[plugins]] # いい感じにテキストオブジェクトを扱う
 repo = 'gcmt/wildfire.vim'
 
 ## SNS, Network
-[[plugins]]
-repo = 'kakkyz81/evervim'
-[[plugins]]
-repo = 'mattn/gist-vim'
+# [[plugins]]
+# repo = 'kakkyz81/evervim'
+# [[plugins]]
+# repo = 'mattn/gist-vim'
 
 ## UI
 [[plugins]]
 repo = "itchyny/lightline.vim"
-[[plugins]] # 背景透過
-repo = 'miyakogi/seiya.vim'
 [[plugins]] # indentの深さに色を付ける
 repo = 'nathanaelkane/vim-indent-guides'
 
