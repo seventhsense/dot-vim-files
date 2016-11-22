@@ -1,3 +1,19 @@
+[[plugins]]
+repo = 'sudo.vim'
+on_cmd = ['SudoWrite', 'SudoRead']
+[[plugins]]
+repo = 'Shougo/vimshell'
+on_cmd = 'VimShell'
+[[plugins]]
+repo = 'sjl/gundo.vim'
+on_cmd = 'GundoToggle'
+[[plugins]]
+repo = 'seventhsense/nerdtree'
+rev  = 'development'
+on_cmd = 'NERDTreeToggle'
+[[plugins]]
+repo = 'h1mesuke/vim-alignta'
+on_cmd = 'Alignta'
 # Unite source
 [[plugins]]
 repo = 'Shougo/neoyank.vim'

@@ -15,15 +15,13 @@ hook_post_update = '''
   let g:dein#plugin.build = cmd
 '''
 [[plugins]]
-repo = 'Shougo/vimshell'
-[[plugins]]
 repo = 'thinca/vim-ref'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 [[plugins]]
 repo = 'taglist.vim'
-[[plugins]]
-repo = 'Source-Explorer-srcexpl.vim'
+# [[plugins]]
+# repo = 'Source-Explorer-srcexpl.vim'
 [[plugins]]
 repo = 'ctags.vim'
 [[plugins]]
@@ -31,26 +29,15 @@ repo = 'scrooloose/syntastic'
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 [[plugins]]
-repo = 'sjl/gundo.vim'
-[[plugins]]
 repo = 'Shougo/vimfiler'
 [[plugins]]
-repo = 'sudo.vim'
-[[plugins]]
 repo = 'mattn/webapi-vim'
-[[plugins]]
-repo = 'vim-scripts/VOoM'
 # [[plugins]] # 重い
 # repo = 'lilydjwg/colorizer'
-[[plugins]]
-repo = 'seventhsense/nerdtree'
-rev  = 'development'
 [[plugins]]
 repo = 'taka84u9/vim-ref-ri'
 [[plugins]]
 repo = 'vim-scripts/YankRing.vim'
-[[plugins]]
-repo = 'h1mesuke/vim-alignta'
 [[plugins]]
 repo = 'renamer.vim'
 [[plugins]]
@@ -59,6 +46,8 @@ repo = 'rking/ag.vim'
 repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'The-NERD-Commenter'
+[[plugins]]
+repo = 'vim-scripts/VOoM'
 
 ## movement plugins
 [[plugins]] # 対応するカッコに移動
