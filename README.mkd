@@ -54,3 +54,10 @@ gem install rubocop
 ```
 pip install pyflakes pep8
 ```
+
+## 7 for vim-ref
+
+```
+gem install refe2
+bitclust setup
+```
