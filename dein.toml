@@ -49,8 +49,20 @@ repo = 'Shougo/vimfiler'
 on_source = 'source ~/dot-vim-files/plugin_settings/vimfiler_setting.vim'
 # [[plugins]] # 重い
 # repo = 'lilydjwg/colorizer'
+#[[plugins]]
+#repo = 'vim-scripts/YankRing.vim'
 [[plugins]]
-repo = 'vim-scripts/YankRing.vim'
+repo = 'LeafCage/yankround.vim'
+hook_add = '''
+  nmap p <Plug>(yankround-p)
+  xmap p <Plug>(yankround-p)
+  nmap P <Plug>(yankround-P)
+  nmap gp <Plug>(yankround-gp)
+  xmap gp <Plug>(yankround-gp)
+  nmap gP <Plug>(yankround-gP)
+  nmap <C-p> <Plug>(yankround-prev)
+  nmap <C-n> <Plug>(yankround-next)
+'''
 [[plugins]]
 repo = 'rking/ag.vim'
 [[plugins]]
@@ -59,9 +71,6 @@ hook_add = 'source ~/dot-vim-files/plugin_settings/surround_setting.vim'
 [[plugins]]
 repo = 'The-NERD-Commenter'
 hook_add = '''
-  ""NERD-COMMENTER
-  ""コメントした後に挿入するスペースの数
-  let NERDSpaceDelims = 1
   " キーマップの変更。<Leader>=\+cでコメント化と解除を行う。
   " コメントされていれば、コメントを外し、コメントされてなければコメント化する。
   nmap <Leader>c <Plug>NERDCommenterToggle
@@ -131,7 +140,7 @@ repo = 'hron84/vim-Cheffile'
 [[plugins]]
 repo = 'sunaku/vim-ruby-minitest'
 [[plugins]]
-repo = 'taka84u9/vim-ref-ri'
+repo = 'yuku-t/vim-ref-ri'
 # javascript/coffeescript
 [[plugins]]
 repo = 'heavenshell/vim-jsdoc'

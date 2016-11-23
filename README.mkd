@@ -9,18 +9,16 @@ git clone git://github.com/seventhsense/dot-vim-files.git
 ln -s ~/dot-vim-files/.vimrc .
 ```
 
-## 2 install ctags && build-essentials
-    
+## 2 install build-essentials
+to make vimproc
+
 ```
-sudo apt-get install cmigemo
 sudo apt-get install build-essential
 ```
 
 ## 3 mkdir
 
-```
- mkdir ~/.vim/backup ~/.vim/yankring_history ~/.vim/undo -p
-```
+automatically mkdir
 
 ## 4 for ruby and rails
 
@@ -60,4 +58,10 @@ pip install pyflakes pep8
 ```
 gem install refe2
 bitclust setup
+```
+
+## 8 for cmigemo
+
+```
+sudo apt-get install cmigemo
 ```

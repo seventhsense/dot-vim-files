@@ -2,6 +2,8 @@
 " let $PATH = $PATH . ':/opt/local/bin' 
 " let g:ref_rubyreference_path = '~/Documents/Reference/rubyrefm'
 " let g:ref_rubyreference_cmd = 'w3m -dump %s'
+let g:ref_open = 'split'
+" let g:ref_refe_cmd = "rurema"
 let g:ref_use_vimproc=1
 let g:ref_refe_version=2
 nmap ,rr :<C-u>Ref refe<Space>

@@ -80,9 +80,13 @@ autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
 
 " Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+  "let g:neocomplete#sources#omni#input_patterns = {}
+"endif
+" vim-monsterを有効にする
+let g:neocomplete#sources#omni#input_patterns = {
+\  'ruby': '[^. *\t]\.\w*\|\h\w*::'
+\}
 " let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'

@@ -45,6 +45,15 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "シンタックス
 syntax on
 
+" mkdir
+if !isdirectory("~/.vim/backup")
+  call mkdir("~/.vim/backup", "p")
+endif
+
+if !isdirectory("~/.vim/undo")
+  call mkdir("~/.vim/undo", "p")
+endif
+
 "ESCが遅い対策
 if !has('gui_running')
     set notimeout
@@ -172,8 +181,12 @@ endif
 " noremap :rr :<C-u>Unite ref/ri<CR>
 
 " yankring_historyのディレクトリ設定
-let g:yankring_history_dir = expand('$HOME')
-let g:yankring_history_file = '/.vim/yankring_history'
+"let g:yankring_history_dir = expand('$HOME')
+"let g:yankring_history_file = '/.vim/yankring_history'
+
+" NERD-COMMENTER
+""コメントした後に挿入するスペースの数
+let NERDSpaceDelims = 1
 
 "" vim-coffee-script
 " vimにcoffeeファイルタイプを認識させる
