@@ -16,6 +16,7 @@ hook_post_update = '''
 '''
 [[plugins]]
 repo = 'thinca/vim-ref'
+hook_add = 'source ~/dot-vim-files/plugin_settings/vim-ref_setting.vim'
 # [[plugins]]
 # repo = 'taglist.vim'
 # [[plugins]]
