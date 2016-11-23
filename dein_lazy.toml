@@ -59,6 +59,18 @@ on_add = '''
 repo = 'basyura/unite-rails'
 on_if = 1
 on_source = ['unite.vim', 'denite.nvim']
+hook_add = '''
+  ""unite-rails
+  noremap :rc :<C-u>Unite rails/controller<CR>
+  noremap :rm :<C-u>Unite rails/model<CR>
+  noremap :rv :<C-u>Unite rails/view<CR>
+  noremap :rh :<C-u>Unite rails/helper<CR>
+  noremap :rs :<C-u>Unite rails/stylesheet<CR>
+  noremap :rj :<C-u>Unite rails/javascript<CR>
+  noremap :rr :<C-u>Unite rails/route<CR>
+  noremap :rg :<C-u>Unite rails/gemfile<CR>
+  noremap :rt :<C-u>Unite rails/spec<CR>
+'''
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
 on_if = 1
@@ -89,6 +101,13 @@ on_source = ['unite.vim', 'denite.nvim']
 [[plugins]]
 repo = 'Shougo/unite-outline'
 on_source = 'unite.vim'
+hook_add = '''
+  ""unite-outline
+  noremap :uo :<C-u>Unite outline<CR>
+  noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
+  noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
+'''
+
 [[plugins]] # 辞書を引く
 repo = 'koron/codic-vim'
 [[plugins]]
@@ -100,17 +119,20 @@ on_source = ['unite.vim', 'denite.nvim']
 repo = 'Shougo/unite.vim'
 depends = 'neomru.vim'
 on_cmd = 'Unite'
+hook_add = 'source ~/dot-vim-files/plugin_settings/unite_setting.vim'
 
 # completion & snippets
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
 if = "has('lua')"
 on_event = 'InsertEnter'
+hook_add = 'source ~/dot-vim-files/plugin_settings/neocomplete_setting.vim'
 [[plugins]]
 repo = 'Shougo/neosnippet'
 depends = ['neosnippet-snippets']
 on_event = 'InsertCharPre'
 on_ft = 'snippet'
+hook_add = 'source ~/dot-vim-files/plugin_settings/neosnippet_setting.vim'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 on_source = 'neosnippet.vim'
@@ -120,6 +142,12 @@ on_source = 'neosnippet.vim'
 # html/css
 [[plugins]]
 repo = 'othree/html5.vim'
+on_ft = ['html', 'htm']
+[[plugins]]
+repo = 'haya14busa/endtagcomment.vim'
+hook_add = '''
+  nmap ,t <Plug>(endtagcomment)
+'''
 on_ft = ['html', 'htm']
 [[plugins]]
 repo = 'groenewege/vim-less'

@@ -163,277 +163,10 @@ if dein#check_install()
   call dein#install()
 endif
 
-" NeoComplete
-" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" echomsg "using neocomplete"
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" use fuzzy comletion
-let g:neocomplete#enable_fuzzy_completion = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" rails.vimとの競合
-let g:neocomplete#force_overwrite_completefunc=1
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-  \ 'default' : '',
-  \ 'vimshell' : $HOME.'/.vimshell_hist',
-  \ 'ruby' : $HOME.'/.ruby.dict',
-  \ 'scheme' : $HOME.'/.gosh_completions'
-    \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  " return neocomplete#close_popup()
-  " For no inserting <CR> key.
-  return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-" inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
-autocmd FileType javascript,coffee set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType javascript,coffee set omnifunc=jscomplete#CompleteJS
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-" let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-" スニペット
-imap <silent>,, <Plug>(neosnippet_expand_or_jump)
-smap <silent>,, <Plug>(neosnippet_expand_or_jump))
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" ほかのスニペットをつかう
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-" ユーザー定義スニペット保存ディレクトリ
-let g:neosnippet#snippets_directory=$HOME.'/.vim/snippets'
-
-" emmet
-let g:user_emmet_settings = {
-      \  'lang' : 'ja',
-      \  'html' : {
-      \    'filters' : 'html',
-      \    'indentation' : ' '
-      \  },
-      \  'perl' : {
-      \    'indentation' : '  ',
-      \    'aliases' : {
-      \      'req' : "require '|'"
-      \    },
-      \    'snippets' : {
-      \      'use' : "use strict\nuse warnings\n\n",
-      \      'w' : "warn \"${cursor}\";",
-      \    },
-      \  },
-      \  'php' : {
-      \    'extends' : 'html',
-      \    'filters' : 'html,c',
-      \  },
-      \  'css' : {
-      \    'filters' : 'fc',
-      \  },
-      \  'javascript' : {
-      \    'snippets' : {
-      \      'jq' : "$(function() {\n\t${cursor}${child}\n});",
-      \      'jq:each' : "$.each(arr, function(index, item)\n\t${child}\n});",
-      \      'fn' : "(function() {\n\t${cursor}\n})();",
-      \      'tm' : "setTimeout(function() {\n\t${cursor}\n}, 100);",
-      \    },
-      \  },
-      \ 'java' : {
-      \  'indentation' : '    ',
-      \  'snippets' : {
-      \   'main': "public static void main(String[] args) {\n\t|\n}",
-      \   'println': "System.out.println(\"|\");",
-      \   'class': "public class | {\n}\n",
-      \  }
-      \ },
-      \ 'custom_expands1' : {
-      \    '^\%(lorem\|lipsum\)\(\d*\)$' : function('emmet#lorem#ja#expand'),
-      \  }
-      \}
-let g:use_emmet_complete_tag = 1
-
-"" unite
-" 入力モードで開始
-let g:unite_enable_start_insert = 1
-
-"大文字小文字を区別しない
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
-
-"mru,reg,buf
-noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-" noremap :: :<C-u>Unite neomru/file<CR>
-noremap :ur :<C-u>Unite register -buffer-name=register<CR>
-noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
-
-"file current_dir
-noremap :ufc :<C-u>Unite file -buffer-name=file<CR>
-noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
-
-"file file_current_dir
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
-noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
-
-"file_rec
-noremap :/ :<C-u>Unite file_rec/async:! file/new -buffer-name=file_rec<CR>
-let g:unite_source_history_yank_file=$HOME.'/.vim/yankring.txt'
-let g:unite_source_history_yank_enable =1  "history/yankの有効化
-nnoremap <silent> :[ :<C-u>Unite history/yank<CR>
-
-""line
-noremap :ul :<C-u>Unite line<CR>
-noremap :; :<C-u>Unite line<CR>
-
-""grep
-noremap :g :<C-u>Unite grep -buffer-name=search-buffern<CR>
-"agを使えたら使う
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-""file
-noremap :f :<C-u>Unite file_rec<CR>
-
-"" vim command 一覧
-noremap :<CR> :<C-u>Unite command mapping<CR>
-
-" c-jはescとする
-au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
-
-" ESCキーを2回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-
-"" surround
-"------------------------------------
-" surround.vim
-"------------------------------------
-" s, ssで選択範囲を指定文字でくくる
-nmap s <Plug>Ysurround
-nmap ss <Plug>Yssurround
-autocmd FileType php let b:surround_{char2nr("?")} = "<?php \r ?>"
-autocmd FileType ruby let b:surround_{char2nr("i")} = "if \1condition: \1 \r end"
-autocmd FileType ruby let b:surround_{char2nr("d")} = "def \1method: \1 \r end"
-autocmd FileType ruby let b:surround_{char2nr("w")} = "while \1condition: \1 do \r end"
-autocmd FileType ruby let b:surround_{char2nr("t")} = "\1times: \1.times do \r end"
-autocmd FileType ruby let b:surround_{char2nr("g")} = "group \1group: \1 do \r end"
-autocmd FileType ruby let b:surround_{char2nr("l")} = "logger.debug \r"
-autocmd FileType ruby let b:surround_{char2nr("L")} = "logger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug '--------------------------------------------------'\nlogger.debug \r"
-autocmd FileType ruby.rspec let b:surround_{char2nr("I")} = "it \"\1sentense: \1\" do \r end"
-autocmd FileType ruby.rspec let b:surround_{char2nr("D")} = "describe \"\1sentense: \1\" do \r end"
-autocmd FileType coffee let b:surround_{char2nr("I")} = "it \"\1sentense: \1\" do \r"
-autocmd FileType coffee let b:surround_{char2nr("D")} = "describe \"\1sentense: \1\" do \r"
-
-autocmd FileType eruby let b:surround_{char2nr("i")} = "<% if \1confition: \1 %> \r <% end %>"
-autocmd FileType eruby let b:surround_{char2nr("e")} = "<% \1valiable: \1.each do |\2local: \2| %> \r <% end %>"
-autocmd FileType coffee let b:surround_{char2nr("i")} = "if \1condition: \1 \r"
-autocmd FileType coffee let b:surround_{char2nr("l")} = "console.log \r"
-autocmd FileType javascript let b:surround_{char2nr("f")} = "function(\1locals: \1)({\r})"
-autocmd FileType javascript let b:surround_{char2nr("l")} = "console.log(\r)"
-
-"ビジュアルモード時kで「」の囲い込み
-let g:surround_107 = "「\r」" " 107 = k
-
 ""smartchr設定
 ""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
 
 ""set autochdir
-
-""unite-outline
-noremap :uo :<C-u>Unite outline<CR>
-noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
-noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
-
-""unite-rails
-noremap :rc :<C-u>Unite rails/controller<CR>
-noremap :rm :<C-u>Unite rails/model<CR>
-noremap :rv :<C-u>Unite rails/view<CR>
-noremap :rh :<C-u>Unite rails/helper<CR>
-noremap :rs :<C-u>Unite rails/stylesheet<CR>
-noremap :rj :<C-u>Unite rails/javascript<CR>
-noremap :rr :<C-u>Unite rails/route<CR>
-noremap :rg :<C-u>Unite rails/gemfile<CR>
-noremap :rt :<C-u>Unite rails/spec<CR>
 
 ""unite-ref-ri
 " noremap :rr :<C-u>Unite ref/ri<CR>
@@ -500,14 +233,10 @@ au BufRead,BufNewFile *_steps.rb            set filetype=cucumber.ruby
 ""filetype snippet
 au BufRead,BufNewFile,BufReadPre *.snip set filetype=snippet
 
-" vimdoc-ja
-" helptags ~/.vim/bundle/vimdoc-ja/doc
-set helplang=ja,en
-
 "tags
 "ctrl + [のとき選択できるようにする
 " tagsジャンプの時に複数ある時は一覧表示                                        
-nnoremap <C-]> g<C-]> 
+" nnoremap <C-]> g<C-]> 
 
 ""保存時にtagsを実行
 " autocmd BufWrite * :TagsGenerate
@@ -594,70 +323,8 @@ function! MyExecExCommand(cmd, ...)
   return ''
 endfunction
 
-" VimFiler
-" let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
-" Edit file by tabedit.
-let g:vimfiler_edit_action = 'edit'
-" Like Textmate icons.
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-" nmap <F2> :VimFiler -split -horizontal -project -toggle -quit<CR> 
-autocmd FileType vimfiler nnoremap <buffer><silent>/  :<C-u>Unite file -default-action=vimfiler<CR>
-autocmd FileType vimfiler nnoremap <silent><buffer> e :call <SID>vimfiler_tree_edit('open')<CR>
-
-function! s:vimfiler_tree_edit(method) "{{{4
-  " let file = vimfiler#get_file()
-  " if empty(file) || empty(a:method) | return | endif
-  " let path = file.action__path
-  " wincmd p
-  " execute a:method
-  " exe 'edit' path
-  if empty(a:method) | return | endif
-  let linenr = line('.')
-  let context = s:vimfiler_create_action_context(a:method, linenr)
-  wincmd p
-  " call vimfiler#mappings#do_action(a:method, linenr)
-  call context.execute()
-  unlet context
-endfunction
-
-function! s:vimfiler_create_action_context(action, ...) " {{{4
-  let cursor_linenr = get(a:000, 0, line('.'))
-  let vimfiler = vimfiler#get_current_vimfiler()
-  let marked_files = vimfiler#get_marked_files()
-  if empty(marked_files)
-    let marked_files = [ vimfiler#get_file(cursor_linenr) ]
-  endif
-
-  let context = s:vimfiler_context.new({
-        \ 'action' : a:action,
-        \ 'files' : marked_files,
-        \ 'current_dir' : vimfiler.current_dir,
-        \ })
-  return context
-endfunction
-
-let s:vimfiler_context = {} " {{{4
-function! s:vimfiler_context.new(...)
-  let dict = get(a:000, 0, {})
-  return extend(dict, self)
-endfunction
-
-function! s:vimfiler_context.execute()
-  call unite#mappings#do_action(self.action, self.files, {
-        \ 'vimfiler__current_directory' : self.current_dir,
-        \ })
-endfunction
-
 "" C-pで0レジスタで貼り付け
 vnoremap <silent> <C-p> "0p<CR>
-
-"" vim-json
-let g:vim_json_syntax_conceal = 0
 
 " 環境依存や非公開設定ファイルの読み込み
 if filereadable(expand('~/.vimrc.local'))
@@ -669,43 +336,10 @@ endif
 " nnoremap ap : <c-u>call PrefixMyCSS()<cr>
 " command! Prefix call PrefixMyCSS()
 
-" mustache.vim
-let g:mustache_abbreviations = 1
-
 "" python settings
 autocmd FileType python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
-
-" committia.vim
-" You can get the information about the windows with first argument as a dictionary.
-"
-"   KEY              VALUE                      AVAILABILITY
-"-----------------------------------------------------------------------------------
-"   vcs            : vcs type (e.g. 'git')   -> all hooks
-"   edit_winnr     : winnr of edit window    -> ditto
-"   edit_bufnr     : bufnr of edit window    -> ditto
-"   diff_winnr     : winnr of diff window    -> ditto
-"   diff_bufnr     : bufnr of diff window    -> ditto
-"   status_winnr   : winnr of status window  -> all hooks except for 'diff_open' hook
-"   status_bufnr   : bufnr of status window  -> ditto
-
-let g:committia_hooks = {}
-function! g:committia_hooks.edit_open(info)
-    " Additional settings
-    setlocal spell
-
-    " If no commit message, start with insert mode
-    if a:info.vcs ==# 'git' && getline(1) ==# ''
-        startinsert
-    end
-
-    " Scroll the diff window from insert mode
-    " Map <C-n> and <C-p>
-    imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
-    imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
-
-endfunction
 
 " * での検索や text-object 等での選択時に - で切らない
 setlocal iskeyword& iskeyword+=-
