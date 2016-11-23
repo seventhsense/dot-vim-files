@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'renamer.vim'
+on_cmd = 'Renamer'
+[[plugins]]
 repo = 'thinca/vim-quickrun'
 on_cmd = 'QuickRun'
 [[plugins]]
@@ -145,3 +148,5 @@ on_cmd = 'Bundle'
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
+
+

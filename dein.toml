@@ -43,8 +43,6 @@ repo = 'Shougo/vimfiler'
 [[plugins]]
 repo = 'vim-scripts/YankRing.vim'
 [[plugins]]
-repo = 'renamer.vim'
-[[plugins]]
 repo = 'rking/ag.vim'
 [[plugins]]
 repo = 'tpope/vim-surround'
@@ -92,7 +90,9 @@ hook_add = '''
   "" easymotion
   let g:EasyMotion_leader_key = "<space>"
   let g:EasyMotion_smartcase = 1
-  let g:EasyMotion_use_migemo = 1
+  if executable('cmigemo')
+    let g:EasyMotion_use_migemo = 1
+  endif
   nmap f <Plug>(easymotion-s2)
   vmap f <Plug>(easymotion-s2)
   omap f <Plug>(easymotion-s2) " surround.vimとかぶるので`z`
@@ -253,6 +253,11 @@ hook_add = '''
   au FileType coffee,ruby,javascript,python IndentGuidesEnable
   nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 '''
+[[plugins]] #内容ごとにsyntaxを変える
+repo = 'Shougo/context_filetype.vim'
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = ['Shougo/context_filetype.vim']
 
 ## Git
 [[plugins]] # More Pleasant Editing on Commit message
