@@ -146,6 +146,7 @@ repo = 'yuku-t/vim-ref-ri'
 repo = 'heavenshell/vim-jsdoc'
 [[plugins]]
 repo = 'claco/jasmine.vim'
+hook_add = 'source ~/dot-vim-files/plugin_settings/jasmine_setting.vim'
 [[plugins]]
 repo = 'mklabs/vim-backbone'
 [[plugins]]

@@ -39,20 +39,18 @@ set hidden     " 保存されていないファイルがあるときでも別の
 set autoread   " 外部でファイルに変更がされた場合は読みなおす
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
-set backupdir=$HOME/.vim/backup "バックアップ
-" ESC2回押してハイライトを消す
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
-"シンタックス
-syntax on
+nmap <Esc><Esc> :nohlsearch<CR><Esc> " ESC2回押してハイライトを消す
+syntax on " シンタックス オン
 
 " mkdir
 if !isdirectory($HOME."/.vim/backup")
   call mkdir($HOME."/.vim/backup", "p")
 endif
-
 if !isdirectory($HOME."/.vim/undo")
   call mkdir($HOME."/.vim/undo", "p")
 endif
+
+set backupdir=$HOME/.vim/backup "バックアップ
 
 "ESCが遅い対策
 if !has('gui_running')
@@ -85,7 +83,6 @@ inoremap <silent> <S-Tab> <C-g>u<C-d>
 
 "undo
 inoremap <silent> <C-u> <C-g>u<C-r>=MyExecExCommand('undo', 'onemore')<CR>
-
 "新行挿入
 inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col('$'))")<CR><CR>
 
@@ -197,8 +194,6 @@ autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 "" vim-less
 au BufRead,BufNewFile *.less		set filetype=less
 
-au FileType ruby,eruby setl tags+=~/gtags
-
 ""vim-eco
 autocmd BufNewFile,BufRead *.eco set filetype=eco
 
@@ -216,21 +211,7 @@ au BufRead,BufNewFile,BufReadPre *.snip set filetype=snippet
 ""保存時にtagsを実行
 " autocmd BufWrite * :TagsGenerate
 
-"------------------------------------
-" jasmine.vim
-"------------------------------------
-" ファイルタイプを変更
-function! JasmineSetting()
-  au BufRead,BufNewFile *Helper.js,*Spec.js  set filetype=jasmine.javascript
-  au BufRead,BufNewFile *Helper.coffee,*Spec.coffee  set filetype=jasmine.coffee
-  au BufRead,BufNewFile,BufReadPre *Helper.coffee,*Spec.coffee  let b:quickrun_config = {'type' : 'coffee'}
-  call jasmine#load_snippets()
-  map <buffer> <leader>m :JasmineRedGreen<CR>
-  command! JasmineRedGreen :call jasmine#redgreen()
-  command! JasmineMake :call jasmine#make()
-endfunction
-au BufRead,BufNewFile,BufReadPre *.coffee,*.js call JasmineSetting()
-
+au FileType ruby,eruby setl tags+=~/gtags
 """"""""""""""""""""""""""""""
 "sepが空でなければ、sepをセパレータとしてジャンプ。
 "見つからなければ見かけの行頭へ。
