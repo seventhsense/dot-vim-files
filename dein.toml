@@ -99,23 +99,7 @@ hook_add = '''
 '''
 [[plugins]] # fキーで移動
 repo = 'easymotion/vim-easymotion'
-hook_add = '''
-  "" easymotion
-  let g:EasyMotion_leader_key = "<space>"
-  let g:EasyMotion_smartcase = 1
-  if executable('cmigemo')
-    let g:EasyMotion_use_migemo = 1
-  endif
-  nmap f <Plug>(easymotion-s2)
-  vmap f <Plug>(easymotion-s2)
-  omap f <Plug>(easymotion-s2) " surround.vimとかぶるので`z`
-  nmap g/ <Plug>(easymotion-sn)
-  xmap g/ <Plug>(easymotion-sn)
-  omap g/ <Plug>(easymotion-tn)
-
-  let g:EasyMotion_startofline=0
-'''
-
+hook_add = 'source ~/dot-vim-files/plugin_settings/easymotion_setting.vim'
 ## input plugins
 [[plugins]] # 閉じカッコを入力
 repo = 'cohama/lexima.vim'
