@@ -59,6 +59,11 @@ hook_add = '''
   nmap <Leader>c <Plug>NERDCommenterToggle
   vmap <Leader>c <Plug>NERDCommenterToggle
 '''
+[[plugins]]
+repo = 'haya14busa/endtagcomment.vim'
+hook_add = '''
+  nmap ,t <Plug>(endtagcomment)
+'''
 
 ## movement plugins
 [[plugins]] # 対応するカッコに移動
