@@ -40,7 +40,6 @@ set autoread   " 外部でファイルに変更がされた場合は読みなお
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
 nmap <Esc><Esc> :nohlsearch<CR><Esc> " ESC2回押してハイライトを消す
-syntax on " シンタックス オン
 ""set autochdir
 " マウス対応
 set mouse=a
@@ -108,6 +107,8 @@ endif
 
 " dein.vim
 source ~/dot-vim-files/plugin_settings/dein_setting.vim
+
+syntax on " シンタックス オン
 
 " NERD-COMMENTER
 " コメントした後に挿入するスペースの数
