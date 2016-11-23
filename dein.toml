@@ -124,6 +124,10 @@ repo = 'mattn/emmet-vim'
 hook_add = 'source ~/dot-vim-files/plugin_settings/emmet_setting.vim'
 [[plugins]]
 repo = 'smartchr'
+hook_add = '''
+  ""smartchr設定
+  ""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
+'''
 
 # Language
 # ruby

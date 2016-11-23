@@ -164,6 +164,12 @@ on_ft = ['css', 'scss']
 [[plugins]]
 repo = 'Ioannis-Kapoulas/vim-autoprefixer'
 on_ft = ['css', 'scss']
+hook_add = '''
+  "" autoprefixer
+  vnoremap ap : <c-u>call PrefixVisualMyCSS()<cr>
+  nnoremap ap : <c-u>call PrefixMyCSS()<cr>
+  command! Prefix call PrefixMyCSS()
+'''
 
 [[plugins]]
 repo = 'osyo-manga/vim-monster'

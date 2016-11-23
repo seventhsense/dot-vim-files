@@ -1,6 +1,5 @@
 # My vim files
 
-
 ## 1 set .vimrc
 
 ```
@@ -16,25 +15,13 @@ to make vimproc
 sudo apt-get install build-essential
 ```
 
-## 3 mkdir
-
-automatically mkdir
-
-## 4 for ruby and rails
-
-```
- cd ~/.vim
- ln -s dot-vim-files/snippets .
- ln -s dot-vim-files/dict .
-``` 
-
-## 5 Install plugins
+## 3 Install plugins
 
 Just Launch `vim` 
 
 and dein.vim and plugins will be automatically installed.
 
-## 6 for syntastic
+## 4 for syntastic
 ### Install jshint
 
 ```
@@ -53,14 +40,14 @@ gem install rubocop
 pip install pyflakes pep8
 ```
 
-## 7 for vim-ref
+## 5 for vim-ref
 
 ```
 gem install refe2
 bitclust setup
 ```
 
-## 8 for cmigemo
+## 6 for cmigemo
 
 ```
 sudo apt-get install cmigemo
