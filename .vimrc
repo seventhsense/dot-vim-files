@@ -177,10 +177,6 @@ endif
 ""unite-ref-ri
 " noremap :rr :<C-u>Unite ref/ri<CR>
 
-" yankring_historyのディレクトリ設定
-"let g:yankring_history_dir = expand('$HOME')
-"let g:yankring_history_file = '/.vim/yankring_history'
-
 " NERD-COMMENTER
 ""コメントした後に挿入するスペースの数
 let NERDSpaceDelims = 1
