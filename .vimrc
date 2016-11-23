@@ -45,22 +45,7 @@ syntax on " シンタックス オン
 " マウス対応
 set mouse=a
 set ttymouse=xterm2
-
-" mkdir & ln
-" if !isdirectory($HOME."/.vim/backup")
-  " call mkdir($HOME."/.vim/backup", "p")
-" endif
-if !isdirectory($HOME."/.vim/undo")
-  call mkdir($HOME."/.vim/undo", "p")
-endif
-
-if !isdirectory($HOME."/.vim/snippets")
-  !ln -s ~/dot-vim-files/snippets ~/.vim/
-endif
-if !isdirectory($HOME."/.vim/dict")
-  !ln -s ~/dot-vim-files/dict ~/.vim/
-endif
-
+"
 "ESCが遅い対策
 if !has('gui_running')
     set notimeout
@@ -107,12 +92,18 @@ augroup vimrcEx
   \ exe "normal g`\"" | endif
 augroup END
 
-"" C-pで0レジスタで貼り付け
+" C-pで0レジスタで貼り付け
 vnoremap <silent> <C-p> "0p<CR>
 
-" 環境依存や非公開設定ファイルの読み込み
-if filereadable(expand('~/.vimrc.local'))
-  source ~/.vimrc.local
+" mkdir & ln
+if !isdirectory($HOME."/.vim/undo")
+  call mkdir($HOME."/.vim/undo", "p")
+endif
+if !isdirectory($HOME."/.vim/snippets")
+  !ln -s ~/dot-vim-files/snippets ~/.vim/
+endif
+if !isdirectory($HOME."/.vim/dict")
+  !ln -s ~/dot-vim-files/dict ~/.vim/
 endif
 
 " dein.vim
@@ -126,3 +117,8 @@ let NERDSpaceDelims = 1
 autocmd FileType python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
+" 環境依存や非公開設定ファイルの読み込み
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
