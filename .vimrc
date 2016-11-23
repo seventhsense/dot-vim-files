@@ -41,6 +41,7 @@ set nobackup   " ファイル保存時にバックアップファイルを作ら
 set noswapfile " ファイル編集中にスワップファイルを作らない
 nmap <Esc><Esc> :nohlsearch<CR><Esc> " ESC2回押してハイライトを消す
 syntax on " シンタックス オン
+""set autochdir
 
 " mkdir
 if !isdirectory($HOME."/.vim/backup")
@@ -58,37 +59,11 @@ if !has('gui_running')
     set ttimeout
     set timeoutlen=100
 endif
-" insertモードから抜ける
-inoremap <silent> jj <ESC>
-inoremap <silent> <C-j> j
-inoremap <silent> kk <ESC>
-inoremap <silent> <C-k> k
 
-"Emacs風移動
-noremap <C-a> <Home>
-noremap <C-e> <End>
-noremap <C-d> <Del>
-
-"emacs風移動
-"単語単位移動（行末で止まる必要がない場合）
-inoremap <silent> <C-b> <S-Left>
-inoremap <silent> <C-w> <S-Right>
-"行頭へ
-inoremap <silent> <C-a> <C-r>=MyJumptoBol('　。、．，／！？「」')<CR>
-"行末へ
-inoremap <silent> <C-e> <C-r>=MyJumptoEol('　。、．，／！？「」')<CR>
-"現在行をインデント
-inoremap <silent> <Tab>   <C-g>u<C-t>
-inoremap <silent> <S-Tab> <C-g>u<C-d>
-
-"undo
-inoremap <silent> <C-u> <C-g>u<C-r>=MyExecExCommand('undo', 'onemore')<CR>
-"新行挿入
-inoremap <silent> <C-o> <C-g>u<C-r>=MyExecExCommand("call cursor(line('.'), col('$'))")<CR><CR>
-
-"スペースoで現在のバッファ以外を閉じる
+" スペースoで現在のバッファ以外を閉じる
 nnoremap <Space>o :only<CR>
-""マウス対応
+
+" マウス対応
 set mouse=a
 set ttymouse=xterm2
 
@@ -109,6 +84,7 @@ if &term =~ "xterm"
   cnoremap <special> <Esc>[200~ <nop>
   cnoremap <special> <Esc>[201~ <nop>
 endif
+
 " 全角スペースの表示
  highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
  au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
@@ -125,6 +101,13 @@ augroup vimrcEx
   au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
   \ exe "normal g`\"" | endif
 augroup END
+"" C-pで0レジスタで貼り付け
+vnoremap <silent> <C-p> "0p<CR>
+
+" 環境依存や非公開設定ファイルの読み込み
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
 
 "" dein.vim
 " reset augroup
@@ -169,14 +152,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-""smartchr設定
-""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
-
-""set autochdir
-
-""unite-ref-ri
-" noremap :rr :<C-u>Unite ref/ri<CR>
-
 " NERD-COMMENTER
 ""コメントした後に挿入するスペースの数
 let NERDSpaceDelims = 1
@@ -199,99 +174,9 @@ au BufRead,BufNewFile *_steps.rb            set filetype=cucumber.ruby
 ""filetype snippet
 au BufRead,BufNewFile,BufReadPre *.snip set filetype=snippet
 
-"tags
-"ctrl + [のとき選択できるようにする
-" tagsジャンプの時に複数ある時は一覧表示                                        
-" nnoremap <C-]> g<C-]> 
-
-""保存時にtagsを実行
-" autocmd BufWrite * :TagsGenerate
-
 au FileType ruby,eruby setl tags+=~/gtags
-""""""""""""""""""""""""""""""
-"sepが空でなければ、sepをセパレータとしてジャンプ。
-"見つからなければ見かけの行頭へ。
-"カーソル位置が見かけの行頭の場合は真の行頭へ。
-""""""""""""""""""""""""""""""
-function! MyJumptoBol(sep)
-  if col('.') == 1
-    call cursor(line('.')-1, col('$'))
-    call cursor(line('.'), col('$'))
-    return ''
-  endif
-  if matchend(strpart(getline('.'), 0, col('.')), '[[:blank:]]\+') >= col('.')-1
-    silent exec 'normal! 0'
-    return ''
-  endif
-  if a:sep != ''
-    call search('[^'.a:sep.']\+', 'bW', line("."))
-    if col('.') == 1
-      silent exec 'normal! ^'
-    endif
-    return ''
-  endif
-  exec 'normal! ^'
-  return ''
-endfunction
-
-""""""""""""""""""""""""""""""
-"sepが空でなければ、sepをセパレータとしてジャンプ。
-"見つからなければ行末へ。
-""""""""""""""""""""""""""""""
-function! MyJumptoEol(sep)
-  if col('.') == col('$')
-    silent exec 'normal! w'
-    return ''
-  endif
-
-  if a:sep != ''
-    let prevcol = col('.')
-    call search('['.a:sep.']\+[^'.a:sep.']', 'eW', line("."))
-    if col('.') != prevcol
-      return ''
-    endif
-  endif
-  call cursor(line('.'), col('$'))
-  return ''
-endfunction
-
-""""""""""""""""""""""""""""""
-"IMEの状態とカーソル位置保存のため<C-r>を使用してコマンドを実行。
-""""""""""""""""""""""""""""""
-function! MyExecExCommand(cmd, ...)
-  let saved_ve = &virtualedit
-  let index = 1
-  while index <= a:0
-    if a:{index} == 'onemore'
-      silent setlocal virtualedit+=onemore
-    endif
-    let index = index + 1
-  endwhile
-
-  silent exec a:cmd
-  if a:0 > 0
-    silent exec 'setlocal virtualedit='.saved_ve
-  endif
-  return ''
-endfunction
-
-"" C-pで0レジスタで貼り付け
-vnoremap <silent> <C-p> "0p<CR>
-
-" 環境依存や非公開設定ファイルの読み込み
-if filereadable(expand('~/.vimrc.local'))
-  source ~/.vimrc.local
-endif
-
-"" autoprefixer
-" vnoremap ap : <c-u>call PrefixVisualMyCSS()<cr>
-" nnoremap ap : <c-u>call PrefixMyCSS()<cr>
-" command! Prefix call PrefixMyCSS()
 
 "" python settings
 autocmd FileType python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
-
-" * での検索や text-object 等での選択時に - で切らない
-setlocal iskeyword& iskeyword+=-
