@@ -3,7 +3,7 @@ set shell=/bin/sh
 set nocompatible     " 互換モード解除
 set t_Co=256         " 256色表示
 set encoding=utf-8   " エンコーディング
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set laststatus=2     " ステータスライン表示
 set showtabline=2    " タブライン表示
 set list             " 不可視文字表示
