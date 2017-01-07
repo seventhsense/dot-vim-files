@@ -42,7 +42,7 @@ if executable('ag')
 endif
 
 ""file
-noremap :f :<C-u>Unite file_rec<CR>
+" noremap :f :<C-u>Unite file_rec<CR>
 
 "" vim command 一覧
 noremap :<CR> :<C-u>Unite command mapping<CR>

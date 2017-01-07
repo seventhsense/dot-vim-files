@@ -74,9 +74,9 @@ if &term =~ "xterm"
 endif
 
 " 全角スペースの表示
- highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
- au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
- au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')"
+ " highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
+ " au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
+ " au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')"
 
 " タブ機能
 nnoremap <S-Tab> gt
@@ -123,3 +123,6 @@ autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
+
+" インデントオン
+filetype plugin indent on
