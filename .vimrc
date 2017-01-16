@@ -15,6 +15,7 @@ set hlsearch         " 検索結果ハイライト
 " set nonumber         " 行番号を表示しない
 set number           " 行番号を表示する
 set clipboard=autoselect
+set clipboard+=unnamedplus
 set showmatch        "閉じ括弧が入力されたとき、対応する括弧を表示する
 set whichwrap=b,s,h,l,<,>,[,] "カーソルを行頭、行末で止まらないようにする
 "横幅
