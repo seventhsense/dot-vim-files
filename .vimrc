@@ -108,7 +108,6 @@ endif
 " dein.vim
 source ~/dot-vim-files/plugin_settings/dein_setting.vim
 
-syntax on " シンタックス オン
 
 " NERD-COMMENTER
 " コメントした後に挿入するスペースの数
@@ -126,3 +125,5 @@ endif
 
 " インデントオン
 filetype plugin indent on
+filetype plugin on
+syntax on " シンタックス オン
