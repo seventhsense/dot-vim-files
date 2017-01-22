@@ -2,17 +2,13 @@ snippet class Backbone.View
 abbr class Backbone.View
   class ${1:className} extends Backbone.View
 
-snippet class Marionette.ItemView
-abbr class Marionette.ItemView
-  class ${1:className} extends Backbone.Marionette.ItemView
+snippet class Marionette.View
+abbr class Marionette.View
+  class ${1:className} extends Backbone.Marionette.View
 
 snippet class Marionette.CollectionView
 abbr class Marionette.CollectionView
   class ${1:className} extends Backbone.Marionette.CollectionView
-
-snippet class Marionette.LayoutView
-abbr class Marionette.LayoutView
-  class ${1:className} extends Backbone.Marionette.LayoutView
 
 snippet class Backbone.Router
 abbr class Backbone.Router
@@ -46,4 +42,4 @@ snippet render
 abbr render
   render: ->
     ${1:@$el.html @temlate}
-    this
+    @
