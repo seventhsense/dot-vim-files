@@ -69,7 +69,7 @@ repo = 'rking/ag.vim'
 repo = 'tpope/vim-surround'
 hook_add = 'source ~/dot-vim-files/plugin_settings/surround_setting.vim'
 [[plugins]]
-repo = 'The-NERD-Commenter'
+repo = 'vim-scripts/The-NERD-Commenter'
 hook_add = '''
   " キーマップの変更。<Leader>=\+cでコメント化と解除を行う。
   " コメントされていれば、コメントを外し、コメントされてなければコメント化する。
@@ -107,7 +107,7 @@ repo = 'cohama/lexima.vim'
 repo = 'mattn/emmet-vim'
 hook_add = 'source ~/dot-vim-files/plugin_settings/emmet_setting.vim'
 [[plugins]]
-repo = 'smartchr'
+repo = 'vim-scripts/smartchr'
 hook_add = '''
   ""smartchr設定
   ""inoremap <expr> = smartchr#one_of('=',' = ', ' == ', ' === ')
@@ -140,7 +140,7 @@ repo = 'mklabs/vim-backbone'
 [[plugins]]
 repo = 'AndrewRadev/vim-eco'
 [[plugins]]
-repo = 'vim-coffee-script'
+repo = 'vim-scripts/vim-coffee-script'
 [[plugins]]
 repo = 'mattn/jscomplete-vim'
 [[plugins]]
@@ -164,8 +164,8 @@ repo = 'tpope/vim-markdown'
 repo = 'superbrothers/vim-vimperator'
 [[plugins]]
 repo = 'ekalinin/Dockerfile.vim'
-[[plugins]]
-repo = 'evanmiller/nginx-vim-syntax'
+# [[plugins]]
+# repo = 'evanmiller/nginx-vim-syntax'
 [[plugins]]
 repo = 'dzeban/vim-log-syntax'
 
@@ -190,41 +190,7 @@ hook_add = '''
 '''
 
 ## text object
-[[plugins]] # c-hjkl 選択範囲を移動
-repo = 't9md/vim-textmanip'
-hook_add = '''
-  "" textmanip
-  xmap <Space>d <Plug>(textmanip-duplicate-down)
-  nmap <Space>d <Plug>(textmanip-duplicate-down)
-  xmap <Space>D <Plug>(textmanip-duplicate-up)
-  nmap <Space>D <Plug>(textmanip-duplicate-up)
 
-  xmap <C-k> <Plug>(textmanip-move-up)
-  xmap <C-j> <Plug>(textmanip-move-down)
-  xmap <C-h> <Plug>(textmanip-move-left)
-  xmap <C-l> <Plug>(textmanip-move-right)
-
-  " toggle insert/replace with <F9>
-  nmap <F9> <Plug>(textmanip-toggle-mode)
-  xmap <F9> <Plug>(textmanip-toggle-mode)
-'''
-[[plugins]]
-repo = "kana/vim-textobj-user"
-[[plugins]]
-repo = "osyo-manga/vim-textobj-multiblock"
-hook_add = '''
-  "" textobj-multiblock
-  omap ab <Plug>(textobj-multiblock-a)
-  omap ib <Plug>(textobj-multiblock-i)
-  vmap ab <Plug>(textobj-multiblock-a)
-  vmap ib <Plug>(textobj-multiblock-i)
-'''
-[[plugins]] # いい感じにテキストオブジェクトを扱う
-repo = 'gcmt/wildfire.vim'
-hook_add = '''
-  " wildfire
-  let g:wildfire_objects = ["iw","is", "i'", 'i"', "i)", "i]", "i}", "ip", "it"]
-'''
 
 ## SNS, Network
 # [[plugins]]
@@ -266,9 +232,9 @@ hook_add = '''
 '''
 [[plugins]] #内容ごとにsyntaxを変える
 repo = 'Shougo/context_filetype.vim'
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-depends = ['Shougo/context_filetype.vim']
+# [[plugins]]
+# repo = 'osyo-manga/vim-precious'
+# depends = ['Shougo/context_filetype.vim']
 
 ## Git
 [[plugins]] # More Pleasant Editing on Commit message

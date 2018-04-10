@@ -1,6 +1,6 @@
-[[plugins]]
-repo = 'renamer.vim'
-on_cmd = 'Renamer'
+# [[plugins]]
+# repo = 'vim-sciprts/renamer.vim'
+# on_cmd = 'Renamer'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_cmd = 'QuickRun'
@@ -18,7 +18,7 @@ hook_add = '''
 repo = 'osyo-manga/vim-over'
 on_cmd = 'OverCommandLine'
 [[plugins]]
-repo = 'sudo.vim'
+repo = 'vim-scripts/sudo.vim'
 on_cmd = ['SudoWrite', 'SudoRead']
 [[plugins]]
 repo = 'Shougo/vimshell'
