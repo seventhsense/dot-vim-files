@@ -63,3 +63,14 @@ sudo apt-get install cmigemo
 ```
 brew install cmigemo
 ```
+
+## 7 searcher
+
+```
+sudo apt install silversearcher-ag
+```
+
+```
+brew install the_silver_searcher
+brew install ripgrep
+```

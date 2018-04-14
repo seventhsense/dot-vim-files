@@ -39,8 +39,7 @@ hook_add = '''
   endif
 '''
 [[plugins]]
-repo = 'seventhsense/nerdtree'
-rev  = 'development'
+repo = 'scrooloose/nerdtree'
 on_cmd = 'NERDTreeToggle'
 hook_add = '''
   "" NERD_tree.vim
@@ -104,12 +103,13 @@ on_if = 1
 on_source = ['unite.vim', 'denite.nvim']
 [[plugins]]
 repo = 'Shougo/unite-outline'
-on_source = 'unite.vim'
+on_source = ['unite.vim', 'denite.nvim']
 hook_add = '''
   ""unite-outline
   noremap :uo :<C-u>Unite outline<CR>
   noremap :uov :<C-u>Unite -vertical -winwidth=30 outline<CR>
   noremap :] :<C-u>Unite -vertical -winwidth=30 outline<CR>
+  "" noremap :] :<C-u>Denite unite:outline -split=vertical -winwidth=30<CR>
 '''
 
 [[plugins]] # 辞書を引く
@@ -122,8 +122,15 @@ on_source = ['unite.vim', 'denite.nvim']
 [[plugins]]
 repo = 'Shougo/unite.vim'
 depends = 'neomru.vim'
-on_cmd = 'Unite'
+on_event = 'BufRead'
+# on_cmd = 'Unite'
 hook_add = 'source ~/dot-vim-files/plugin_settings/unite_setting.vim'
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+depends = ['neomru.vim']
+on_event = 'BufRead'
+hook_add = 'source ~/dot-vim-files/plugin_settings/denite_setting.vim'
+hook_post_source = 'source ~/dot-vim-files/plugin_settings/denite_post_source.vim'
 
 # completion & snippets
 [[plugins]]

@@ -8,8 +8,7 @@ let g:unite_enable_smart_case = 1
 
 "mru,reg,buf
 noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-" noremap :: :<C-u>Unite neomru/file<CR>
+" noremap :: :<C-u>Unite file_mru -buffer-name=file_mru<CR>
 noremap :ur :<C-u>Unite register -buffer-name=register<CR>
 noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
 
@@ -19,7 +18,7 @@ noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
 
 "file file_current_dir
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
+" noremap :@ :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 
 "file_rec
@@ -30,7 +29,7 @@ nnoremap <silent> :[ :<C-u>Unite history/yank<CR>
 
 ""line
 noremap :ul :<C-u>Unite line<CR>
-noremap :; :<C-u>Unite line<CR>
+" noremap :; :<C-u>Unite line<CR>
 
 ""grep
 noremap :g :<C-u>Unite grep -buffer-name=search-buffern<CR>
