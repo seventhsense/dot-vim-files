@@ -2,18 +2,19 @@
 repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'Shougo/vimproc'
-hook_post_update = '''
-  if dein#util#_is_windows()
-    let cmd = 'tools\\update-dll-mingw'
-  elseif dein#util#_is_cygwin()
-    let cmd = 'make -f make_cygwin.mak'
-  elseif executable('gmake')
-    let cmd = 'gmake'
-  else
-    let cmd = 'make'
-  endif
-  let g:dein#plugin.build = cmd
-'''
+build = 'make'
+# hook_post_update = '''
+  # if dein#util#_is_windows()
+    # let cmd = 'tools\\update-dll-mingw'
+  # elseif dein#util#_is_cygwin()
+    # let cmd = 'make -f make_cygwin.mak'
+  # elseif executable('gmake')
+    # let cmd = 'gmake'
+  # else
+    # let cmd = 'make'
+  # endif
+  # let g:dein#plugin.build = cmd
+# '''
 [[plugins]]
 repo = 'thinca/vim-ref'
 hook_add = 'source ~/dot-vim-files/plugin_settings/vim-ref_setting.vim'
@@ -23,18 +24,19 @@ hook_add = 'source ~/dot-vim-files/plugin_settings/vim-ref_setting.vim'
 # repo = 'Source-Explorer-srcexpl.vim'
 # [[plugins]]
 # repo = 'ctags.vim'
-[[plugins]]
-repo = 'scrooloose/syntastic'
-hook_add = '''
-  ""syntastic
-  let g:syntastic_ruby_checkers = ['rubocop']
-  let g:syntastic_javascript_checkers = ['jshint']
-  let g:syntastic_python_checkers = ['pyflakes', 'pep8']
-  let g:syntastic_mode_map = { 'mode': 'active', 
-                \ 'active_filetypes': ['ruby'],
-                \ 'passive_filetypes': []}
-  " let g:syntastic_quiet_messages = {'levels': 'warnings'}
-'''
+# [[plugins]]
+# repo = 'scrooloose/syntastic'
+# hook_add = '''
+  # ""syntastic
+  # let g:syntastic_ruby_checkers = ['rubocop']
+  # let g:syntastic_javascript_checkers = ['jshint']
+  # let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+  # let g:syntastic_markdown_checkers = ['textlint']
+  # let g:syntastic_mode_map = { 'mode': 'active', 
+                # \ 'active_filetypes': ['ruby'],
+                # \ 'passive_filetypes': []}
+  # " let g:syntastic_quiet_messages = {'levels': 'warnings'}
+# '''
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 hook_post_update = '''
@@ -64,7 +66,13 @@ hook_add = '''
   nmap <C-n> <Plug>(yankround-next)
 '''
 [[plugins]]
-repo = 'rking/ag.vim'
+# repo = 'rking/ag.vim'
+repo = 'mileszs/ack.vim'
+hook_add = '''
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+'''
 [[plugins]]
 repo = 'tpope/vim-surround'
 hook_add = 'source ~/dot-vim-files/plugin_settings/surround_setting.vim'
@@ -164,8 +172,9 @@ repo = 'tpope/vim-markdown'
 repo = 'superbrothers/vim-vimperator'
 [[plugins]]
 repo = 'ekalinin/Dockerfile.vim'
-# [[plugins]]
+[[plugins]]
 # repo = 'evanmiller/nginx-vim-syntax'
+repo = 'chr4/nginx.vim'
 [[plugins]]
 repo = 'dzeban/vim-log-syntax'
 
@@ -230,8 +239,8 @@ hook_add = '''
   au FileType coffee,ruby,javascript,python IndentGuidesEnable
   nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 '''
-[[plugins]] #内容ごとにsyntaxを変える
-repo = 'Shougo/context_filetype.vim'
+# [[plugins]] #内容ごとにsyntaxを変える
+# repo = 'Shougo/context_filetype.vim'
 # [[plugins]]
 # repo = 'osyo-manga/vim-precious'
 # depends = ['Shougo/context_filetype.vim']
@@ -246,3 +255,66 @@ repo = 'tpope/vim-fugitive'
 repo = 'sgur/vim-gitgutter'
 
 # New Plugin
+# [[plugins]]
+# repo = 'roxma/nvim-yarp' 
+# [[plugins]]
+# repo = 'roxma/vim-hug-neovim-rpc' 
+
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# depends = ['roxma/nvim-yarp', 'roxma/vim-hug-neovim-rpc']
+# hook_add = '''
+  # let g:deoplete#enable_at_startup = 1
+# '''
+# [[plugins]]
+# repo = 'fishbullet/deoplete-ruby'
+[[plugins]]
+repo = 'majutsushi/tagbar'
+hook_add = '''
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_width = 26
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
+'''
+[[plugins]]
+repo = 'kannokanno/previm'
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'w0rp/ale'
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+set encoding=UTF-8
+'''
+[[plugins]]
+repo = 'delphinus/lightline-delphinus'
+hook_add = '''
+let g:lightline_delphinus_colorscheme='solarized_improved'
+
+let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
+let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
+let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
+let g:ale_echo_msg_format = '%severity%  %linter% - %s'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = g:ale_echo_msg_error_str
+let g:ale_sign_warning = g:ale_echo_msg_warning_str
+let g:ale_statusline_format = [
+      \ g:ale_echo_msg_error_str . ' %d',
+      \ g:ale_echo_msg_warning_str . ' %d',
+      \ nr2char(0xf4a1) . '  ']
+'''
+[[plugins]]
+repo = 'junegunn/goyo.vim'
+[[plugins]]
+repo = 'miyakogi/livemark.vim'
+hook_add = '''
+let g:livemark_python = '/Users/seventh/.pyenv/shims/python'
+'''

@@ -40,7 +40,7 @@ set hidden     " 保存されていないファイルがあるときでも別の
 set autoread   " 外部でファイルに変更がされた場合は読みなおす
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
-nmap <Esc><Esc> :nohlsearch<CR><Esc> " ESC2回押してハイライトを消す
+" nmap <Esc><Esc> :nohlsearch<CR><Esc> " ESC2回押してハイライトを消す
 ""set autochdir
 " マウス対応
 set mouse=a
@@ -79,6 +79,15 @@ endif
  " au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
  " au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')"
 
+" macでescで日本語入力off
+if has('mac')
+  let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
+  augroup MyIMEGroup
+    autocmd!
+    autocmd InsertLeave * :call system(g:imeoff)
+  augroup END
+endif
+
 " タブ機能
 nnoremap <S-Tab> gt
 nnoremap <Tab><Tab> gT
@@ -94,6 +103,12 @@ augroup END
 
 " C-pで0レジスタで貼り付け
 vnoremap <silent> <C-p> "0p<CR>
+
+"カーソルを表示行で移動する。物理行移動は<C-n>,<C-p>
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up>   gk
 
 " mkdir & ln
 if !isdirectory($HOME."/.vim/undo")

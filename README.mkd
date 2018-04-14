@@ -21,11 +21,11 @@ Just Launch `vim`
 
 and dein.vim and plugins will be automatically installed.
 
-## 4 for syntastic
+## 4 for ale
 ### Install jshint
 
 ```
-npm install jshint -g
+yarn global add jshint
 ```
 
 ### Install rubocop
@@ -40,6 +40,13 @@ gem install rubocop
 pip install pyflakes pep8
 ```
 
+### install textlint
+
+```
+yarn global add textlint
+```
+and settings you need...
+
 ## 5 for vim-ref
 
 ```
@@ -51,4 +58,8 @@ bitclust setup
 
 ```
 sudo apt-get install cmigemo
+```
+
+```
+brew install cmigemo
 ```

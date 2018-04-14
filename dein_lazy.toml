@@ -28,6 +28,10 @@ repo = 'sjl/gundo.vim'
 on_cmd = 'GundoToggle'
 hook_add = '''
   ""gundo.vim 
+  if has('python3')
+    let g:gundo_prefer_python3 = 1
+  endif
+  let g:gundo_width = 30
   nnoremap <F3> :GundoToggle<CR>
   if has('persistent_undo')
     set undofile
@@ -182,3 +186,7 @@ on_cmd = 'Bundle'
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
+
+[[plugins]]
+repo = 'deton/jasegment.vim'
+on_ft = ['markdown']
