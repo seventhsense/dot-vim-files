@@ -40,7 +40,7 @@ set hidden     " 保存されていないファイルがあるときでも別の
 set autoread   " 外部でファイルに変更がされた場合は読みなおす
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
-" nmap <Esc><Esc> :nohlsearch<CR><Esc> " ESC2回押してハイライトを消す
+nmap <Esc><Esc> :nohlsearch<CR><Esc> " ESC2回押してハイライトを消す
 ""set autochdir
 " マウス対応
 set mouse=a

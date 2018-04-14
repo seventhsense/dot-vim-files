@@ -4,6 +4,16 @@
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_cmd = 'QuickRun'
+hook_add = '''
+nnoremap <silent> <F8> :QuickRun<CR>
+'''
+hook_post_source = '''
+let g:quickrun_config = {
+      \'markdown': {
+      \   'outputter': 'browser'
+      \}
+    \}
+'''
 [[plugins]]
 repo = 'vim-scripts/VOoM'
 on_cmd = 'Voom'
