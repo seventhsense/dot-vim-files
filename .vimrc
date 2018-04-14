@@ -80,13 +80,13 @@ endif
  " au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')"
 
 " macでescで日本語入力off
-if has('mac')
-  let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
-  augroup MyIMEGroup
-    autocmd!
-    autocmd InsertLeave * :call system(g:imeoff)
-  augroup END
-endif
+" if has('mac')
+  " let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
+  " augroup MyIMEGroup
+    " autocmd!
+    " autocmd InsertLeave * :call system(g:imeoff)
+  " augroup END
+" endif
 
 " タブ機能
 nnoremap <S-Tab> gt

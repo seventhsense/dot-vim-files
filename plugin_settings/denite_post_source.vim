@@ -1,3 +1,5 @@
+call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
+
 call denite#custom#var('file_rec', 'command',
 \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
 " Ag command on grep source

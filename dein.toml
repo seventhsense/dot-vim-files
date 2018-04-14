@@ -173,30 +173,32 @@ repo = 'superbrothers/vim-vimperator'
 [[plugins]]
 repo = 'ekalinin/Dockerfile.vim'
 [[plugins]]
-# repo = 'evanmiller/nginx-vim-syntax'
 repo = 'chr4/nginx.vim'
 [[plugins]]
 repo = 'dzeban/vim-log-syntax'
 
 ## Theme
-# [[plugins]]
-# repo = 'tomasr/molokai'
-# [[plugins]]
-# repo = 'desert256.vim'
-# [[plugins]]
-# repo = 'jpo/vim-railscasts-theme'
-# [[plugins]]
-# repo = 'vim-scripts/pyte'
-# [[plugins]]
-# repo = 'davidkariuki/sexy-railscasts-256-theme'
+[[plugins]]
+repo = 'tomasr/molokai'
+[[plugins]]
+repo = 'vim-scripts/desert256.vim'
+[[plugins]]
+repo = 'jpo/vim-railscasts-theme'
+hook_add = '''
+au MyAutoCmd VimEnter * nested colorscheme railscasts
+'''
+[[plugins]]
+repo = 'vim-scripts/pyte'
+[[plugins]]
+repo = 'davidkariuki/sexy-railscasts-256-theme'
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
-hook_add = '''
-  set background=dark
-  " colorscheme 設定は source 後に行う必要があるので VimEnter で行う。
-  " 但し Colorscheme イベントの発生が抑制されないよう nested を付ける。
-  au MyAutoCmd VimEnter * nested colorscheme iceberg
-'''
+# hook_add = '''
+  # set background=dark
+  # " colorscheme 設定は source 後に行う必要があるので VimEnter で行う。
+  # " 但し Colorscheme イベントの発生が抑制されないよう nested を付ける。
+  # au MyAutoCmd VimEnter * nested colorscheme iceberg
+# '''
 
 ## text object
 
@@ -319,3 +321,6 @@ repo = 'miyakogi/livemark.vim'
 hook_add = '''
 let g:livemark_python = '/Users/seventh/.pyenv/shims/python'
 '''
+[[plugins]] # full speed matcher
+repo = 'nixprime/cpsm'
+build = 'env PY3=ON ./install.sh'

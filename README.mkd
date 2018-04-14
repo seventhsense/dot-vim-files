@@ -1,6 +1,6 @@
 # My vim files
 
-## 1 set .vimrc
+## 1 set .vimrc and dein.vim
 
 ```
 cd ~
@@ -60,6 +60,7 @@ bitclust setup
 sudo apt-get install cmigemo
 ```
 
+### for mac
 ```
 brew install cmigemo
 ```
@@ -70,7 +71,16 @@ brew install cmigemo
 sudo apt install silversearcher-ag
 ```
 
+### for mac
 ```
 brew install the_silver_searcher
 brew install ripgrep
+```
+
+## 8 for matcher cpsm
+
+### for mac
+```
+brew install boost
+brew install cmake
 ```
