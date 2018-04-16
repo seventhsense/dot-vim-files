@@ -34,7 +34,7 @@ abbr        { |var| }
         ${2}
     }
 
-snippet     edn
+snippet     end
 abbr        => end?
     end
 
@@ -47,20 +47,20 @@ snippet     en
     #encoding: utf-8
 
 snippet     validates_uniqueness
-abbr        validates :${1:field_name},:uniqueness => true
-  validates :${1:field_name},:uniqueness => true${2}
+abbr        validates :${1:field_name}, uniqueness: true
+  validates :${1:field_name}, uniqueness: true
 
 snippet     validates_uniqueness_not_case_sensitive
-abbr        validates :${1:field_name},:uniqueness => {:case_sensitive => false}
-  validates :${1:field_name},:uniqueness => {:case_sensitive => false}${2}
+abbr        validates :${1:field_name}, uniqueness: {:case_sensitive => false}
+  validates :${1:field_name}, uniqueness: {:case_sensitive => false}
 
 snippet     validates_presence
-abbr        validates :${1:field_name},:presence => true
-  validates :${1:field_name},:presence => true${2}
+abbr        validates :${1:field_name}, presence: true
+  validates :${1:field_name}, presence: true
 
 snippet     validates_numericality
 abbr        validates :${1:field_name},:numericality => params
-  validates :${1:field_name},:numericality => {
+  validates :${1:field_name}, numericality: {
     :only_integer => true,
     :greater_than => 0,
     :greater_than_or_equal_to => 0,
@@ -69,7 +69,7 @@ abbr        validates :${1:field_name},:numericality => params
     :less_than_equal_to => 0,
     :odd => true,
     :even => true
-  }${1}
+  }
 
 snippet     validates_length
 abbr        validates :${1:field_name},:length => params
@@ -101,8 +101,8 @@ abbr        skip_filter :${1:method_name},:only => [:index,:new,:create,:show,:d
   skip_filter :${1:method_name},:only => [:index,:new,:create,:show,:destroy]
 
 snippet     render_partial
-abbr        render :partial => "${1:partial_name}"
-  render :partial => "${1:partial_name}"
+abbr        render partial: "${1:partial_name}"
+  render partial: "${1:partial_name}"
 
 snippet     redirect_to
 abbr        redirect_to ${1:action_controller_url}

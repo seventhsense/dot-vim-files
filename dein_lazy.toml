@@ -207,3 +207,8 @@ on_ft = ['toml']
 [[plugins]]
 repo = 'deton/jasegment.vim'
 on_ft = ['markdown']
+
+[[plugins]]
+repo = 'ozelentok/denite-gtags'
+on_if = 1
+on_source = ['denite.nvim']

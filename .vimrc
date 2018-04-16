@@ -79,15 +79,6 @@ endif
  " au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
  " au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')"
 
-" macでescで日本語入力off
-" if has('mac')
-  " let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
-  " augroup MyIMEGroup
-    " autocmd!
-    " autocmd InsertLeave * :call system(g:imeoff)
-  " augroup END
-" endif
-
 " タブ機能
 nnoremap <S-Tab> gt
 nnoremap <Tab><Tab> gT
@@ -134,12 +125,16 @@ autocmd FileType python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
+" インサートモードでESCを押したあとカーソルキーの出力が異常なのをなおす
+if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
+  inoremap <silent> <C-[>OC <RIGHT>
+endif
+
 " 環境依存や非公開設定ファイルの読み込み
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
 
-" インデントオン
-filetype plugin indent on
+filetype plugin indent on " インデントオン
 filetype plugin on
 syntax on " シンタックス オン
