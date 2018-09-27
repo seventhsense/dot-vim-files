@@ -230,4 +230,4 @@ repo = 'millermedeiros/vim-esformatter'
 on_ft = ['javascript']
 [[plugins]]
 repo = 'elixir-editors/vim-elixir'
-on_ft = ['elixir']
+on_ft = ['elixir', 'eelixir']
