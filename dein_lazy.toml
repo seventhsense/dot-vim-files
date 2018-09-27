@@ -212,3 +212,22 @@ on_ft = ['markdown']
 repo = 'ozelentok/denite-gtags'
 on_if = 1
 on_source = ['denite.nvim']
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.vim'
+on_ft = ['markdown']
+[[plugins]]
+repo = 'othree/yajs.vim'
+on_ft = ['javascript']
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+on_ft = ['javascript']
+[[plugins]]
+repo = 'othree/es.next.syntax.vim'
+on_ft = ['javascript']
+[[plugins]]
+repo = 'millermedeiros/vim-esformatter'
+on_ft = ['javascript']
+[[plugins]]
+repo = 'elixir-editors/vim-elixir'
+on_ft = ['elixir']

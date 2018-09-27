@@ -324,3 +324,5 @@ let g:livemark_python = '/Users/seventh/.pyenv/shims/python'
 [[plugins]] # full speed matcher
 repo = 'nixprime/cpsm'
 build = 'env PY3=ON ./install.sh'
+[[plugins]]
+repo = 'git-time-metric/gtm-vim-plugin'
